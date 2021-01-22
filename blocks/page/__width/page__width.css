@@ -1,0 +1,4 @@
+.page__width {
+  max-width: calc(100% - 400px);
+  margin: auto;
+}

@@ -1,5 +1,4 @@
 .profile {
-  max-width: calc(100% - 400px);
   margin: auto;
   display: flex;
   justify-content: space-between;
