@@ -1,4 +1,8 @@
 .profile__user-specialization {
   margin: 0;
 
+  font-family: Inter, Arial, sans-serif;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
 }
