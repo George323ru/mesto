@@ -1,4 +1,4 @@
-.popup-form__close-buttom {
+.popup__close-buttom {
   width: 30px;
   height: 30px;
   position: fixed;
@@ -8,6 +8,6 @@
   transition: .2s ease;
 }
 
-.popup-form__close-buttom:hover {
+.popup__close-buttom:hover {
   opacity: .6;
 }

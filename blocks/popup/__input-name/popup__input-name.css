@@ -1,4 +1,4 @@
-.popup-form__input-name {
+.popup__input-name {
   width: calc(100% - 72px);
   margin-bottom: 30px;
 
@@ -7,6 +7,6 @@
   font-family: Inter, Arial, sans-serif;
 }
 
-.popup-form__input-name:last-of-type {
+.popup__input-name:last-of-type {
   margin-bottom: 0;
 }

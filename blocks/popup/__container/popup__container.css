@@ -1,4 +1,4 @@
-.popup-form {
+.popup__container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,5 +8,3 @@
   background: white;
   border-radius: 10px;
 }
-
-

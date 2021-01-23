@@ -1,4 +1,4 @@
-.popup-form__button {
+.popup__button {
   width: calc(100% - 72px);
   height: 50px;
   border: 0;
@@ -15,6 +15,6 @@
   transition: .2s ease;
 }
 
-.popup-form__button:hover {
+.popup__button:hover {
   opacity: .8;
 }
