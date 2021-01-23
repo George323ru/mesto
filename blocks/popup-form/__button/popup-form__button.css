@@ -11,7 +11,8 @@
   font-size: 18px;
   line-height: 22px;
   color: white;
-  transition: .3s ease;
+  cursor: pointer;
+  transition: .2s ease;
 }
 
 .popup-form__button:hover {

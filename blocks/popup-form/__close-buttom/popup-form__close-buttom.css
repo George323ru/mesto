@@ -1,0 +1,13 @@
+.popup-form__close-buttom {
+  width: 30px;
+  height: 30px;
+  position: fixed;
+  top: calc(50% - 200px);
+  right: calc(50% - 250px);
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.popup-form__close-buttom:hover {
+  opacity: .6;
+}
