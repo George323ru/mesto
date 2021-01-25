@@ -1,4 +1,6 @@
 .profile__user-description {
+  max-width: 400px;
+  /* min-width: 270px; */
   display: flex;
   justify-content: center;
   flex-direction: column;

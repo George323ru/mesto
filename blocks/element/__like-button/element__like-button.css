@@ -2,3 +2,7 @@
   width: 22px;
   margin-left: 16px;
 }
+
+.element__like-button:active {
+  background-color: black;
+}
