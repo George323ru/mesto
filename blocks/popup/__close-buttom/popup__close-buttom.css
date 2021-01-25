@@ -5,7 +5,7 @@
   top: calc(50% - 200px);
   right: calc(50% - 250px);
   cursor: pointer;
-  transition: .2s ease;
+  transition: .1s ease;
 }
 
 .popup__close-buttom:hover {
