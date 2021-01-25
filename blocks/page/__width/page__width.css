@@ -1,4 +1,21 @@
 .page__width {
-  max-width: calc(100% - 400px);
+  max-width: 880px;
+  /* max-width: calc(100% - 400px); */
   margin: auto;
+}
+
+@media screen and (max-width: 960px) {
+
+  .page__width {
+    max-width: 582px;
+  }
+
+}
+
+@media screen and (max-width: 660px) {
+
+  .page__width {
+    max-width: 282px;
+  }
+
 }

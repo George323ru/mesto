@@ -6,3 +6,11 @@
   background-size: contain;
   border-radius: 50%;
 }
+
+@media screen and (max-width: 660px) {
+
+  .profile__avatar {
+    margin-right: 0;
+  }
+
+}

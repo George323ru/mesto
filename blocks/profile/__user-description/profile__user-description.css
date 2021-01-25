@@ -7,3 +7,11 @@
   color: white;
   margin-right: 18px;
 }
+
+@media screen and (max-width: 660px) {
+
+  .profile__user-description {
+    margin-top: 28px;
+  }
+
+}

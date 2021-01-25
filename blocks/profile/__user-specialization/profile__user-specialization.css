@@ -11,3 +11,13 @@
   font-size: 18px;
   line-height: 22px;
 }
+
+@media screen and (max-width: 660px) {
+
+  .profile__user-specialization {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+  }
+
+}

@@ -4,5 +4,6 @@
 }
 
 .element__like-button:active {
-  background-color: black;
+  stroke: black;
+  fill: blue;
 }
