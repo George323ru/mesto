@@ -22,8 +22,8 @@ const popupSave = function () {
   // evt.preventDefault();
   popup.classList.toggle('popup_open');
 
-  userName.innerHTML = ` ${inputName.value} `;
-  userSpec.innerHTML = ` ${inputSpec.value} `;
+  userName.textContent = ` ${inputName.value} `;
+  userSpec.textContent = ` ${inputSpec.value} `;
 
 }
 // userName.insertAdjacentText('afterbegin', `
