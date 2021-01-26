@@ -1,16 +1,8 @@
 .element__like-button {
   width: 22px;
   margin-left: 16px;
-<<<<<<< HEAD
-  transition: .1s ease;
-}
-
-.element__like-button:hover {
-  opacity: .5;
-=======
   cursor: pointer;
   transition: .1s cubic-bezier(.18,.89,.32,1.28);
->>>>>>> hotfix
 }
 
 .element__like-button:hover {
@@ -19,9 +11,6 @@
 
 
 .element__like-button:active {
-<<<<<<< HEAD
-=======
   opacity: 1;
->>>>>>> hotfix
   background-image: url(../../../images/like-button-active.svg);
 }
