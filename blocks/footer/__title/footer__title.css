@@ -8,3 +8,12 @@
 
   color: #545454;
 }
+
+@media screen and (max-width: 660px) {
+
+  .footer__title {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+}
