@@ -7,3 +7,10 @@
   font-family: Inter, Arial, sans-serif;
 }
 
+@media screen and (max-width: 580px) {
+
+  .popup__input-name {
+    width: calc(100% - 44px);
+  }
+
+}

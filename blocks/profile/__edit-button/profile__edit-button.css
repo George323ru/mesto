@@ -6,3 +6,13 @@
   margin-left: 12px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 660px) {
+
+  .profile__edit-button {
+    width: 18px;
+    padding-bottom: 0px;
+    margin-left: 0px;
+  }
+
+}
