@@ -10,4 +10,4 @@
     CSS3;
     JS;
 
-**[Ссылка на мой проект](https://george323ru.github.io/russian-travel/)**
+**[Ссылка на мой проект](https://george323ru.github.io/mesto/index.html)**
