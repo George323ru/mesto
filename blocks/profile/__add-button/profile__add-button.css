@@ -9,6 +9,12 @@
   color: #ffffff;
   font-size: 36px;
   box-sizing: border-box;
+  cursor: pointer;
+  transition: .1s cubic-bezier(.18,.89,.32,1.28);
+}
+
+.profile__add-button:hover {
+  opacity: .6;
 }
 
 @media screen and (max-width: 960px) {
