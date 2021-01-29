@@ -11,7 +11,7 @@
 @media screen and (max-width: 660px) {
 
   .profile__user-description {
-    max-width: 210px;
+    max-width: 200px;
     margin-top: 28px;
   }
 

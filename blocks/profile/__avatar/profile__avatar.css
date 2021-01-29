@@ -2,7 +2,7 @@
   width: 120px;
   height: 120px;
   margin-right: 30px;
-  background: url(../../../images/User-avatar.jpg) no-repeat center;
+  background: url(../../../images/user-avatar.jpg) no-repeat center;
   background-size: contain;
   border-radius: 50%;
 }
