@@ -4,7 +4,8 @@
   align-self: center;
   margin-bottom: 26px;
   margin-left: 12px;
-  background: url(../../../images/edit-button.svg) top left no-repeat;
+  background: url(../../../images/edit-button.svg) no-repeat;
+  background-size: contain;
   border: none;
   outline: none;
   cursor: pointer;
@@ -21,6 +22,7 @@
     width: 18px;
     margin-bottom: 0px;
     margin-left: 0px;
+    background: url(../../../images/edit-button-660.svg) no-repeat;
   }
 
 }

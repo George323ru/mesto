@@ -1,14 +1,11 @@
 .profile__add-button {
   width: 150px;
   height: 50px;
-  border: 2px solid #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   align-self: center;
-  color: #ffffff;
+  background: url(../../../images/add-button.svg) no-repeat;
   font-size: 36px;
-  box-sizing: border-box;
+  border: none;
+  outline: none;
   cursor: pointer;
   transition: .1s cubic-bezier(.18,.89,.32,1.28);
 }
@@ -21,7 +18,7 @@
 
   .profile__add-button {
     margin-top: 36px;
-    width: 585px;
+    align-self: end;
   }
 
 }
@@ -30,6 +27,7 @@
 
   .profile__add-button {
     width: 282px;
+    background: url(../../../images/add-button-660.svg) no-repeat;
   }
 
 }
