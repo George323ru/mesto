@@ -20,8 +20,8 @@ function formSubmitHandler (evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
   // Меняем содержимое в профиле на новое содержимое из полей формы
-  userName.textContent = nameInput.value
-  userJob.textContent = jobInput.value
+  userName.textContent = nameInput.value;
+  userJob.textContent = jobInput.value;
 
   // Прячем "попап" удаляя у него модификатор ".popup_open" со свойством display:flex
   popup.classList.remove('popup_open');
