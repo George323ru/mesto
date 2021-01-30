@@ -26,51 +26,59 @@
               <h1 class="profile__user-name">Жак-Ив Кусто</h1>
               <p class="profile__user-specialization">Исследователь океана</p>
             </div>
-            <button class="profile__edit-button" type="button" name="edit-button"></button>
+            <button class="profile__edit-button" type="button"
+              name="edit-button"></button>
           </div>
         </div>
-        <button class="profile__add-button" type="button" name="add-button"></button>
+        <button class="profile__add-button" type="button"
+          name="add-button"></button>
       </section>
       <!-- Section Elements -->
       <section class="elements">
         <ul class="elements__element-list">
           <li class="element">
-            <img class="element__image" src="./images/karachaevsk.jpg" alt="Фото Карачаевска">
+            <img class="element__image" src="./images/karachaevsk.jpg"
+              alt="Фото Карачаевска">
             <div class="element__name">
               <h2 class="element__title">Карачаевск</h2>
               <button class="element__like-button" name="like-button"></button>
             </div>
           </li>
           <li class="element">
-            <img class="element__image" src="./images/gora-elbrus.jpg" alt="Фото горы Эльбрус">
+            <img class="element__image" src="./images/gora-elbrus.jpg"
+              alt="Фото горы Эльбрус">
             <div class="element__name">
               <h2 class="element__title">Гора Эльбрус</h2>
               <button class="element__like-button" name="like-button"></button>
             </div>
           </li>
           <li class="element">
-            <img class="element__image" src="./images/dombai.jpg" alt="Фото Домбая">
+            <img class="element__image" src="./images/dombai.jpg"
+              alt="Фото Домбая">
             <div class="element__name">
               <h2 class="element__title">Домбай</h2>
               <button class="element__like-button" name="like-button"></button>
             </div>
           </li>
           <li class="element">
-            <img class="element__image" src="./images/gora-elbrus.jpg" alt="Фото горы Эльбрус">
+            <img class="element__image" src="./images/gora-elbrus.jpg"
+              alt="Фото горы Эльбрус">
             <div class="element__name">
               <h2 class="element__title">Гора Эльбрус</h2>
               <button class="element__like-button" name="like-button"></button>
             </div>
           </li>
           <li class="element">
-            <img class="element__image" src="./images/dombai.jpg" alt="Фото Домбая">
+            <img class="element__image" src="./images/dombai.jpg"
+              alt="Фото Домбая">
             <div class="element__name">
               <h2 class="element__title">Домбай</h2>
               <button class="element__like-button" name="like-button"></button>
             </div>
           </li>
           <li class="element">
-            <img class="element__image" src="./images/karachaevsk.jpg" alt="Фото Карачаево-Черкессии">
+            <img class="element__image" src="./images/karachaevsk.jpg"
+              alt="Фото Карачаево-Черкессии">
             <div class="element__name">
               <h2 class="element__title">Карачаево-Черкессия</h2>
               <button class="element__like-button" name="like-button"></button>
@@ -80,19 +88,22 @@
       </section>
     </main>
     <!-- Section Popup -->
-    <section class="popup">
-      <form action="#" class="popup__container">
-        <h2 class="popup__title">
-          Редактировать профиль
-        </h2>
-        <input class="popup__input-name" type="text" name="name" required=""
-          value="" placeholder="Имя">
-        <input class="popup__input-specialization" type="text" name="name"
-          required="" value="" placeholder="О себе">
-        <button class="popup__save-button">Сохранить</button>
-        <img class="popup__close-button" src="./images/close-icon.svg" alt="Кнопка закрытия попапа">
-      </form>
-    </section>
+    <div class="popup">
+      <div class="popup__container">
+        <form class="popup__form" action="#" name="popup">
+          <h2 class="popup__title">
+            Редактировать профиль
+          </h2>
+          <input class="popup__input" type="text" name="input-name"
+            required="" value="" placeholder="Имя">
+          <input class="popup__input" type="text"
+            name="input-job" required="" value="" placeholder="О себе">
+          <button class="popup__save-button" type="submit"
+            name="save-button">Сохранить</button>
+        </form>
+        <button class="popup__close-button" type="button"></button>
+      </div>
+    </div>
     <!-- Footer -->
     <footer class="footer page__container">
       <h2 class="footer__title">&copy;&nbsp;2020 Mesto Russia</h2>
