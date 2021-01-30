@@ -5,6 +5,7 @@
   background: url(../../../images/add-button.svg) no-repeat;
   font-size: 36px;
   border: none;
+  border-radius: 2px;
   outline: none;
   cursor: pointer;
   transition: .1s cubic-bezier(.18,.89,.32,1.28);
