@@ -1,31 +1,52 @@
+// Находим контейнер у которого будем менять значение display
 const popup = document.querySelector('.popup');
+
+// Находим кнопки, при нажатии на которые "попап" будет открываться и закрываться
 const popupOpenButton = document.querySelector('.profile__edit-button');
 const popupCloseButton = popup.querySelector('.popup__close-button');
-const popupSaveButton = popup.querySelector('.popup__save-button');
 
+// Находим поля, куда будут подставлены новые значения из полей формы
 let userName = document.querySelector('.profile__user-name');
-let userSpec = document.querySelector('.profile__user-specialization');
-let inputName = popup.querySelector('.popup__input-name');
-let inputSpec = popup.querySelector('.popup__input-specialization');
+let userJob = document.querySelector('.profile__user-specialization');
 
-const popupToggle = function (evt) {
-  evt.preventDefault();
-  popup.classList.toggle('popup_open');
-  inputName.value = userName.textContent;
-  inputSpec.value = userSpec.textContent;
+// Находим форму в DOM
+let formElement = popup.querySelector('.popup__form');
+// Находим поля формы в DOM
+let nameInput = popup.querySelector('.popup__input_name');
+let jobInput = popup.querySelector('.popup__input_job');
+
+// Обработчик «отправки» формы
+function formSubmitHandler (evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+
+  // Меняем содержимое в профиле на новое содержимое из полей формы
+  userName.textContent = nameInput.value
+  userJob.textContent = jobInput.value
+
+  // Прячем "попап" удаляя у него модификатор ".popup_open" со свойством display:flex
+  popup.classList.remove('popup_open');
 }
 
-const popupSave = function (evt) {
-  evt.preventDefault();
-  popup.classList.toggle('popup_open');
+// Обработчик открытия "попапа"
+const popupOpen = function () {
+  // Открываем "попап" добавляя к нему модификатор ".popup_open" со свойством display:flex
+  popup.classList.add('popup_open');
 
-  userName.textContent = ` ${inputName.value} `;
-  userSpec.textContent = ` ${inputSpec.value} `;
+  // Добавляем в поля формы текст из профиля на странице
+  nameInput.value = userName.textContent;
+  jobInput.value = userJob.textContent;
 }
 
-popupOpenButton.addEventListener('click', popupToggle);
-popupCloseButton.addEventListener('click', popupToggle);
-popupSaveButton.addEventListener('click', popupSave);
+// Обработчик закрытия "попапа" без сохранения введеных данных
+const popupClose = function () {
+  // Прячем "попап" удаляя у него модификатор ".popup_open" со свойством display:flex
+  popup.classList.remove('popup_open');
+}
+
+// События, которые будут происходить при нажатии на кнопки
+popupOpenButton.addEventListener('click', popupOpen);
+popupCloseButton.addEventListener('click', popupClose);
+formElement.addEventListener('submit', formSubmitHandler);
 
 // console.log(inputName)
 
