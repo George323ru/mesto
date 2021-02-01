@@ -15,17 +15,6 @@ let formElement = popup.querySelector('.popup__form');
 let nameInput = popup.querySelector('.popup__input_name');
 let jobInput = popup.querySelector('.popup__input_job');
 
-// Обработчик «отправки» формы
-function formSubmitHandler (evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-
-  // Меняем содержимое в профиле на новое содержимое из полей формы
-  userName.textContent = nameInput.value;
-  userJob.textContent = jobInput.value;
-
-  // Прячем "попап" удаляя у него модификатор ".popup_open" со свойством display:flex
-  popup.classList.remove('popup_open');
-}
 
 // Обработчик открытия "попапа"
 const popupOpen = function () {
@@ -42,6 +31,19 @@ const popupClose = function () {
   // Прячем "попап" удаляя у него модификатор ".popup_open" со свойством display:flex
   popup.classList.remove('popup_open');
 }
+
+// Обработчик «отправки» формы
+function formSubmitHandler (evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+
+  // Меняем содержимое в профиле на новое содержимое из полей формы
+  userName.textContent = nameInput.value;
+  userJob.textContent = jobInput.value;
+
+  // Прячем "попап" удаляя у него модификатор ".popup_open" со свойством display:flex
+  popupClose();
+}
+
 
 // События, которые будут происходить при нажатии на кнопки
 popupOpenButton.addEventListener('click', popupOpen);

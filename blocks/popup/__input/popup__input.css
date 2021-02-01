@@ -16,7 +16,7 @@
 
 @media screen and (max-width: 580px) {
 
-  .popup__input-specialization {
+  .popup__input {
     width: calc(100% - 44px);
   }
 
