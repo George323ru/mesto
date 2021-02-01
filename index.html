@@ -10,12 +10,14 @@
 </head>
 
 <body class="body">
+  <!-- Page -->
   <div class="page">
     <!-- Header -->
     <header class="header section section_size_small page__container">
       <img class="header__logo" src="./images/mesto-logo.svg"
         alt="Логотип Место">
     </header>
+    <!-- /Header -->
     <main class="main page__container">
       <!-- Section Profile -->
       <section class="profile">
@@ -41,7 +43,8 @@
               alt="Фото Карачаевска">
             <div class="element__name">
               <h2 class="element__title">Карачаевск</h2>
-              <button class="element__like-button" type="button" name="likeButton"></button>
+              <button class="element__like-button" type="button"
+                name="likeButton"></button>
             </div>
           </li>
           <li class="element">
@@ -49,7 +52,8 @@
               alt="Фото горы Эльбрус">
             <div class="element__name">
               <h2 class="element__title">Гора Эльбрус</h2>
-              <button class="element__like-button" type="button" name="likeButton"></button>
+              <button class="element__like-button" type="button"
+                name="likeButton"></button>
             </div>
           </li>
           <li class="element">
@@ -57,7 +61,8 @@
               alt="Фото Домбая">
             <div class="element__name">
               <h2 class="element__title">Домбай</h2>
-              <button class="element__like-button" type="button" name="likeButton"></button>
+              <button class="element__like-button" type="button"
+                name="likeButton"></button>
             </div>
           </li>
           <li class="element">
@@ -65,7 +70,8 @@
               alt="Фото горы Эльбрус">
             <div class="element__name">
               <h2 class="element__title">Гора Эльбрус</h2>
-              <button class="element__like-button" type="button" name="likeButton"></button>
+              <button class="element__like-button" type="button"
+                name="likeButton"></button>
             </div>
           </li>
           <li class="element">
@@ -73,7 +79,8 @@
               alt="Фото Домбая">
             <div class="element__name">
               <h2 class="element__title">Домбай</h2>
-              <button class="element__like-button" type="button" name="likeButton"></button>
+              <button class="element__like-button" type="button"
+                name="likeButton"></button>
             </div>
           </li>
           <li class="element">
@@ -81,35 +88,40 @@
               alt="Фото Карачаево-Черкессии">
             <div class="element__name">
               <h2 class="element__title">Карачаево-Черкессия</h2>
-              <button class="element__like-button" type="button" name="likeButton"></button>
+              <button class="element__like-button" type="button"
+                name="likeButton"></button>
             </div>
           </li>
         </ul>
       </section>
+      <!-- /Section Profile -->
     </main>
-    <!-- Section Popup -->
+    <!-- Popup -->
     <div class="popup">
       <div class="popup__container">
         <form class="popup__form" action="#" name="popupMainForm">
           <h2 class="popup__title">
             Редактировать профиль
           </h2>
-          <input class="popup__input popup__input_name" type="text" name="inputName"
-            required="" value="" placeholder="Имя">
-          <input class="popup__input popup__input_job" type="text"
+          <input class="popup__input popup__input_type_name" type="text"
+            name="inputName" required="" value="" placeholder="Имя">
+          <input class="popup__input popup__input_type_job" type="text"
             name="inputJob" required="" value="" placeholder="О себе">
           <button class="popup__save-button" type="submit"
             name="saveButton">Сохранить</button>
         </form>
-        <button class="popup__close-button" type="button" name="closeButton"></button>
+        <button class="popup__close-button" type="button"
+          name="closeButton"></button>
       </div>
     </div>
+    <!-- /Popup -->
     <!-- Footer -->
     <footer class="footer page__container">
       <p class="footer__title">&copy;&nbsp;2020 Mesto Russia</p>
     </footer>
+    <!-- /Footer -->
   </div>
+  <!-- /Page -->
   <script src="./scripts/index.js"></script>
 </body>
-
 </html>

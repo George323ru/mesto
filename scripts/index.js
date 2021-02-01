@@ -12,8 +12,8 @@ let userJob = document.querySelector('.profile__user-specialization');
 // Находим форму в DOM
 let formElement = popup.querySelector('.popup__form');
 // Находим поля формы в DOM
-let nameInput = popup.querySelector('.popup__input_name');
-let jobInput = popup.querySelector('.popup__input_job');
+let nameInput = popup.querySelector('.popup__input_type_name');
+let jobInput = popup.querySelector('.popup__input_type_job');
 
 
 // Обработчик открытия "попапа"
