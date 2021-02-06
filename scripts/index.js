@@ -33,7 +33,7 @@ const popupClose = function () {
 }
 
 // Обработчик «отправки» формы
-function formSubmitHandler (evt) {
+function formSubmitHandler(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
   // Меняем содержимое в профиле на новое содержимое из полей формы
@@ -43,6 +43,38 @@ function formSubmitHandler (evt) {
   // Прячем "попап" удаляя у него модификатор ".popup_open" со свойством display:flex
   popupClose();
 }
+
+const initialCards = [{
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+  },
+  {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+  }
+];
+
+const listContainerEl = document.querySelector('.todo__list')
+const templateEl = document.querySelector('.template')
+const addButtonEl = document.querySelector('.button_add')
+const inputEl = document.querySelector('.input')
+
 
 
 // События, которые будут происходить при нажатии на кнопки
