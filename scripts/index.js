@@ -88,19 +88,24 @@ function render() {
   const renderHtml = initialCards
     .map(getItem) // Создаем новый массив из массива initialCards и добавляем к каждому элементу разметку
 
-    listContainerEl.append(...renderHtml)// Вставляем новую разметку в HTML
+  listContainerEl.append(...renderHtml) // Вставляем новую разметку в HTML
 
 }
 
-function getItem (item) {
+function getItem(item) {
   // Клонируем все элементы шаблона в константу
   const newItem = templateEl.content.cloneNode(true);
   // Ищем header и img в элементе шаблона
   const headerEl = newItem.querySelector('.element__title')
   const imgEl = newItem.querySelector('.element__image')
-  // Здесь мы добавляем в заголовок текст из массива
+  // Добавляем название заголовка и ссылку из массива
   headerEl.textContent = item.name;
   imgEl.src = item.link;
+  imgEl.alt = item.name;
+
+  // Получаем ссылку на кнопку удаления
+  const removeBtn = newItem.querySelector('#buttonDelete')
+  removeBtn.addEventListener('click', handleDelete)
 
   return newItem;
 }
@@ -111,21 +116,38 @@ function handleAdd() {
 
 function formAddSubmitHandler(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+
+  // Сохраняем значения, полученные из input в константы
   const inputText = inputNameLoc.value;
   const inputSrc = inputLinkLoc.value;
-  // Значение, полученное из инпута мы добавляем в заголовок создаваемого с помощью функции getItem() элемента
-  const listItem = getItem({name: inputText, link: inputSrc});
 
-  // Добавляем элемент в разметку
+  // Значение, полученное из input мы добавляем в поля name и link объектов массива
+  // создаваемого с помощью функции getItem() элемента
+  const listItem = getItem({
+    name: inputText,
+    link: inputSrc
+  });
+
+  // Добавляем создвнные по шаблону элементы в начало разметки блока elements__element-list
+  // с помощью метода prepend()
   listContainerEl.prepend(listItem)
 
-  // Очищаем инпут
+  // Очищаем input
   inputNameLoc.value = '';
   inputLinkLoc.value = '';
 
+  // Закрываем окно popup удаляя класс
   popapAdd.classList.remove('popup_open');
 }
 
+function handleDelete(event) {
+  const targetEl = event.target; // Это кнопка
+  // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
+  const targetItem = targetEl.closest('.element');
+  targetItem.remove() // Функция удаления элемента
+}
+
+// Вызываем функцию для вывода уже имеющихся на сервере карточек
 render();
 
 // События, которые будут происходить при нажатии на кнопки
