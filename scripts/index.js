@@ -49,6 +49,7 @@ popupOpenButton.addEventListener('click', popupOpen);
 popupCloseButton.addEventListener('click', popupClose);
 formElement.addEventListener('submit', formSubmitHandler);
 
+// Шесть карточек «из коробки», которые сразу добавляются на главную страницку при открытии сайта
 const initialCards = [{
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -63,7 +64,7 @@ const initialCards = [{
   },
   {
     name: 'Сургут',
-    link: 'http://dsl.msk.ru/images/projects/2016-12-08_surgut_sculpture/04_1.jpg'
+    link: 'https://barcaffe.ru/wp-content/uploads/2020/07/28_surgut2020.jpg'
   },
   {
     name: 'Холмогорский район',
@@ -75,15 +76,20 @@ const initialCards = [{
   }
 ];
 
+// Находим попап вместе с формой для добавления нового места
 const popapAdd = document.querySelector('#popupNewMesto')
 const formAddEl = document.querySelector('#popapAddForm')
+// Находим ту часть разметки, куда будем добавлять карточки из массива и новые карточки
 const listContainerEl = document.querySelector('.elements__element-list')
+// Находим шаблон, по которому будем создавать новые карточки
 const templateEl = document.querySelector('.template')
+//Находим кнопку добавления новой карточки
 const addButtonEl = document.querySelector('.profile__add-button')
+// Находим поля ввода названия и ссылки на картинку для новых карточек
 const inputNameLoc = document.querySelector('#popapMestoName')
 const inputLinkLoc = document.querySelector('#popapMestoLink')
 
-// В этой функции мы отрисовываем все элементы для пользователя на страницу
+// В этой функции мы отрисовываем все карточки из массива initialCards и новых карточек на страницу
 function render() {
   const renderHtml = initialCards
     .map(getItem) // Создаем новый массив из массива initialCards и добавляем к каждому элементу разметку
@@ -105,11 +111,15 @@ function getItem(item) {
 
   // Получаем ссылку на кнопку удаления
   const removeBtn = newItem.querySelector('#buttonDelete')
-  removeBtn.addEventListener('click', handleDelete)
+  removeBtn.addEventListener('click', handleDelete);
+
+  const likeButtonEl = newItem.querySelector('#likeButton')
+  likeButtonEl.addEventListener('click', handleBtnLike);
 
   return newItem;
 }
 
+// Код для открытия окошка добавления нового места
 function handleAdd() {
   popapAdd.classList.add('popup_open');
 }
@@ -154,8 +164,17 @@ render();
 addButtonEl.addEventListener('click', handleAdd)
 formAddEl.addEventListener('submit', formAddSubmitHandler)
 
+// const likeButtonEl = document.querySelector('#likeButton')
 
-// console.log(inputName)
+// Код для кнопки лайк
+function handleBtnLike (event) {
+  // Получаем кнопку, как елемент цель
+  const targetEl = event.target;
+  // Добавляем новый класс кнопке
+  const targetItem = targetEl.classList.toggle('element__likeButton_active');
+
+}
+
 
 // // Находим форму в DOM
 // let formElement = // Воспользуйтесь методом querySelector()
