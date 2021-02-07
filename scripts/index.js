@@ -44,6 +44,11 @@ function formSubmitHandler(evt) {
   popupClose();
 }
 
+// События, которые будут происходить при нажатии на кнопки
+popupOpenButton.addEventListener('click', popupOpen);
+popupCloseButton.addEventListener('click', popupClose);
+formElement.addEventListener('submit', formSubmitHandler);
+
 const initialCards = [{
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -53,12 +58,12 @@ const initialCards = [{
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
   },
   {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    name: 'Тюмень',
+    link: 'https://rebcentr72.ru/wp-content/uploads/2020/09/tumen.jpg'
   },
   {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    name: 'Сургут',
+    link: 'http://dsl.msk.ru/images/projects/2016-12-08_surgut_sculpture/04_1.jpg'
   },
   {
     name: 'Холмогорский район',
@@ -66,21 +71,67 @@ const initialCards = [{
   },
   {
     name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    link: 'https://im0-tub-ru.yandex.net/i?id=ba9010e38898e7d960c5374cc0f0d746-l&n=13'
   }
 ];
 
-const listContainerEl = document.querySelector('.todo__list')
+const popapAdd = document.querySelector('#popupNewMesto')
+const formAddEl = document.querySelector('#popapAddForm')
+const listContainerEl = document.querySelector('.elements__element-list')
 const templateEl = document.querySelector('.template')
-const addButtonEl = document.querySelector('.button_add')
-const inputEl = document.querySelector('.input')
+const addButtonEl = document.querySelector('.profile__add-button')
+const inputNameLoc = document.querySelector('#popapMestoName')
+const inputLinkLoc = document.querySelector('#popapMestoLink')
 
+// В этой функции мы отрисовываем все элементы для пользователя на страницу
+function render() {
+  const renderHtml = initialCards
+    .map(getItem) // Создаем новый массив из массива initialCards и добавляем к каждому элементу разметку
 
+    listContainerEl.append(...renderHtml)// Вставляем новую разметку в HTML
+
+}
+
+function getItem (item) {
+  // Клонируем все элементы шаблона в константу
+  const newItem = templateEl.content.cloneNode(true);
+  // Ищем header и img в элементе шаблона
+  const headerEl = newItem.querySelector('.element__title')
+  const imgEl = newItem.querySelector('.element__image')
+  // Здесь мы добавляем в заголовок текст из массива
+  headerEl.textContent = item.name;
+  imgEl.src = item.link;
+
+  return newItem;
+}
+
+function handleAdd() {
+  popapAdd.classList.add('popup_open');
+}
+
+function formAddSubmitHandler(evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  const inputText = inputNameLoc.value;
+  const inputSrc = inputLinkLoc.value;
+  // Значение, полученное из инпута мы добавляем в заголовок создаваемого с помощью функции getItem() элемента
+  const listItem = getItem({name: inputText, link: inputSrc});
+
+  // Добавляем элемент в разметку
+  listContainerEl.prepend(listItem)
+
+  // Очищаем инпут
+  inputNameLoc.value = '';
+  inputLinkLoc.value = '';
+
+  popapAdd.classList.remove('popup_open');
+}
+
+render();
 
 // События, которые будут происходить при нажатии на кнопки
-popupOpenButton.addEventListener('click', popupOpen);
-popupCloseButton.addEventListener('click', popupClose);
-formElement.addEventListener('submit', formSubmitHandler);
+addButtonEl.addEventListener('click', handleAdd)
+formAddEl.addEventListener('submit', formAddSubmitHandler)
+
 
 // console.log(inputName)
 

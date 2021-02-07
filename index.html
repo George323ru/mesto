@@ -115,6 +115,26 @@
       </div>
     </div>
     <!-- /Popup -->
+    <!-- Popup -->
+    <div class="popup" id="popupNewMesto">
+      <div class="popup__container">
+        <form class="popup__form" id="popapAddForm" action="#" name="popupMainForm">
+          <h2 class="popup__title">
+            Новое место
+          </h2>
+          <input class="popup__input" id="popapMestoName" type="text"
+            name="inputName" required="" value="" placeholder="Название">
+          <input class="popup__input popup__input_type_linkLocation" id="popapMestoLink" type="text"
+            name="inputJob" required="" value="" placeholder="Ссылка на картинку">
+          <button class="popup__save-button" id="popupAddSaveButton" type="submit"
+            name="saveButton">Создать</button>
+        </form>
+        <button class="popup__close-button" type="button"
+          name="closeButton"></button>
+      </div>
+    </div>
+    <!-- /Popup -->
+
     <!-- Footer -->
     <footer class="footer page__container">
       <p class="footer__title">&copy;&nbsp;2020 Mesto Russia</p>
@@ -124,16 +144,19 @@
   <!-- /Page -->
 
   <template class="template">
-    <li class="todo__list card">
-      <h2 class="card__title"></h2>
-        <div class="card__action">
-         <button type="button" class="button button__edit"></button>
-         <button type="button" class="button button__dublicate"></button>
-         <button type="button" class="button button__remove"></button>
-         </div>
+    <li class="element">
+      <img class="element__image" src="./images/dombai.jpg" alt="Фото Домбая">
+      <button class="element__buttonDelete" type="button"
+          name="buttonDelete"></button>
+      <div class="element__name">
+        <h2 class="element__title">Домбай</h2>
+        <button class="element__like-button" type="button"
+          name="likeButton"></button>
+      </div>
     </li>
   </template>
-  
+
   <script src="./scripts/index.js"></script>
 </body>
+
 </html>
