@@ -9,4 +9,9 @@
   border: none;
   outline: none;
   cursor: pointer;
+  transition: .1s cubic-bezier(.18,.89,.32,1.28);
+}
+
+.element__buttonDelete:hover {
+  opacity: .6;
 }
