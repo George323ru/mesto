@@ -88,15 +88,19 @@ const addButtonEl = document.querySelector('.profile__add-button')
 // Находим поля ввода названия и ссылки на картинку для новых карточек
 const inputNameLoc = document.querySelector('#popapMestoName')
 const inputLinkLoc = document.querySelector('#popapMestoLink')
+// Находим кнопку закртытия попапа
+const popupAddCloseBtn = popapAdd.querySelector('#closeButtonAdd')
 
 // В этой функции мы отрисовываем все карточки из массива initialCards и новых карточек на страницу
 function render() {
   const renderHtml = initialCards
     .map(getItem) // Создаем новый массив из массива initialCards и добавляем к каждому элементу разметку
 
-  listContainerEl.append(...renderHtml) // Вставляем новую разметку в HTML
-
+  listContainerEl.append(...renderHtml) // Вставляем созданную выше разметку в HTML после выбранного элемента
 }
+
+// Вызываем функцию для вывода уже имеющихся на сервере карточек
+render();
 
 function getItem(item) {
   // Клонируем все элементы шаблона в константу
@@ -112,17 +116,19 @@ function getItem(item) {
   // Получаем ссылку на кнопку удаления
   const removeBtn = newItem.querySelector('#buttonDelete')
   removeBtn.addEventListener('click', handleDelete);
-
+  // Оживляем у каждой карточки кнопку лайк
   const likeButtonEl = newItem.querySelector('#likeButton')
   likeButtonEl.addEventListener('click', handleBtnLike);
 
   return newItem;
 }
 
-// Код для открытия окошка добавления нового места
+// Открываем окно добавления нового места
 function handleAdd() {
   popapAdd.classList.add('popup_open');
 }
+
+addButtonEl.addEventListener('click', handleAdd)
 
 function formAddSubmitHandler(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
@@ -147,8 +153,10 @@ function formAddSubmitHandler(evt) {
   inputLinkLoc.value = '';
 
   // Закрываем окно popup удаляя класс
-  popapAdd.classList.remove('popup_open');
+  handlePopupAddCloseBtn()
 }
+
+formAddEl.addEventListener('submit', formAddSubmitHandler)
 
 function handleDelete(event) {
   const targetEl = event.target; // Это кнопка
@@ -157,14 +165,7 @@ function handleDelete(event) {
   targetItem.remove() // Функция удаления элемента
 }
 
-// Вызываем функцию для вывода уже имеющихся на сервере карточек
-render();
 
-// События, которые будут происходить при нажатии на кнопки
-addButtonEl.addEventListener('click', handleAdd)
-formAddEl.addEventListener('submit', formAddSubmitHandler)
-
-// const likeButtonEl = document.querySelector('#likeButton')
 
 // Код для кнопки лайк
 function handleBtnLike (event) {
@@ -172,8 +173,15 @@ function handleBtnLike (event) {
   const targetEl = event.target;
   // Добавляем новый класс кнопке
   const targetItem = targetEl.classList.toggle('element__likeButton_active');
-
 }
+
+function handlePopupAddCloseBtn() {
+  popapAdd.classList.remove('popup_open');
+}
+
+popupAddCloseBtn.addEventListener('click', handlePopupAddCloseBtn)
+
+
 
 
 // // Находим форму в DOM
