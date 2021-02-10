@@ -1,19 +1,19 @@
 // Находим контейнер с попапом
-const popup = document.querySelector('#popupProfile');
+const popupProfile = document.querySelector('#popupProfile');
 
 // Находим кнопки, при нажатии на которые попап будет открываться и закрываться
 const popupOpenButton = document.querySelector('#profileEditButton');
-const popupCloseButton = popup.querySelector('#popupProfileCloseBtn');
+const popupCloseButton = popupProfile.querySelector('#popupProfileCloseBtn');
 
 // Находим поля, куда будут подставлены новые значения из полей формы
 const userName = document.querySelector('#profileUserName');
 const userJob = document.querySelector('#profileUserJob');
 
 // Находим форму в DOM
-const formElement = popup.querySelector('#popupProfileForm');
+const formElement = popupProfile.querySelector('#popupProfileForm');
 // Находим поля формы в DOM
-const nameInput = popup.querySelector('#popupProfileInputTypeName');
-const jobInput = popup.querySelector('#popupProfileInputTypeJob');
+const nameInput = popupProfile.querySelector('#popupProfileInputTypeName');
+const jobInput = popupProfile.querySelector('#popupProfileInputTypeJob');
 
 
 // Обработчик открытия "попапа"
@@ -28,7 +28,7 @@ const handlePopupClose = function (element) {
 
 // Обработчик открытия формы
 const handlePopupProfileOpen = function () {
-  handlePopupOpen(popup);
+  handlePopupOpen(popupProfile);
 
   // Добавляем в поля формы текст из профиля на странице
   nameInput.value = userName.textContent;
@@ -44,12 +44,12 @@ function formSubmitHandler(evt) {
   userJob.textContent = jobInput.value;
 
   // Прячем "попап" удаляя у него модификатор ".popup_open" со свойством display:flex
-  handlePopupClose(popup);
+  handlePopupClose(popupProfile);
 }
 
 // События, которые будут происходить при нажатии на кнопки
 popupOpenButton.addEventListener('click', handlePopupProfileOpen);
-popupCloseButton.addEventListener('click', () => handlePopupClose(popup));
+popupCloseButton.addEventListener('click', () => handlePopupClose(popupProfile));
 formElement.addEventListener('submit', formSubmitHandler);
 
 // Шесть карточек «из коробки», которые сразу добавляются на главную страницу
