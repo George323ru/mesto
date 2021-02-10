@@ -1,9 +1,0 @@
-@media screen and (max-width: 580px) {
-
-  .popup__closeButton_position_over {
-    width: 22px;
-    top: -45px;
-    right: 6px;
-  }
-
-}

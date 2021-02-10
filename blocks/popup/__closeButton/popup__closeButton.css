@@ -20,8 +20,9 @@
 
   .popup__closeButton {
     width: 22px;
-    top: -34px;
-    right: -35px;
+    top: -45px;
+    right: 6px;
   }
 
 }
+
