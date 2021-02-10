@@ -10,26 +10,29 @@ let userName = document.querySelector('.profile__user-name');
 let userJob = document.querySelector('.profile__user-specialization');
 
 // Находим форму в DOM
-let formElement = popup.querySelector('.popup__form');
+let formElement = popup.querySelector('#popupUserProfileForm');
 // Находим поля формы в DOM
-let nameInput = popup.querySelector('.popup__input_type_name');
-let jobInput = popup.querySelector('.popup__input_type_job');
+let nameInput = popup.querySelector('#popupInputTypeName');
+let jobInput = popup.querySelector('#popupInputTypeJob');
 
 
 // Обработчик открытия "попапа"
-const popupOpen = function () {
+const handlePopupOpen = function (element) {
   // Открываем "попап" добавляя к нему модификатор ".popup_open" со свойством display:flex
-  popup.classList.add('popup_open');
+  element.classList.add('popup_open');
+}
+
+// Обработчик закрытия "попапа"
+const handlePopupClose = function (element) {
+  element.classList.remove('popup_open');
+}
+
+const handlePopupProfileOpen = function () {
+  handlePopupOpen(popup);
 
   // Добавляем в поля формы текст из профиля на странице
   nameInput.value = userName.textContent;
   jobInput.value = userJob.textContent;
-}
-
-// Обработчик закрытия "попапа" без сохранения введеных данных
-const popupClose = function () {
-  // Прячем "попап" удаляя у него модификатор ".popup_open" со свойством display:flex
-  popup.classList.remove('popup_open');
 }
 
 // Обработчик «отправки» формы
@@ -41,99 +44,129 @@ function formSubmitHandler(evt) {
   userJob.textContent = jobInput.value;
 
   // Прячем "попап" удаляя у него модификатор ".popup_open" со свойством display:flex
-  popupClose();
+  handlePopupClose(popup);
 }
 
 // События, которые будут происходить при нажатии на кнопки
-popupOpenButton.addEventListener('click', popupOpen);
-popupCloseButton.addEventListener('click', popupClose);
+popupOpenButton.addEventListener('click', handlePopupProfileOpen);
+popupCloseButton.addEventListener('click', () => handlePopupClose(popup));
 formElement.addEventListener('submit', formSubmitHandler);
 
-// Шесть карточек «из коробки», которые сразу добавляются на главную страницку при открытии сайта
+// Шесть карточек «из коробки», которые сразу добавляются на главную страницу
 const initialCards = [{
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Тюмень',
-    link: 'https://rebcentr72.ru/wp-content/uploads/2020/09/tumen.jpg'
-  },
-  {
-    name: 'Сургут',
-    link: 'https://barcaffe.ru/wp-content/uploads/2020/07/28_surgut2020.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://im0-tub-ru.yandex.net/i?id=ba9010e38898e7d960c5374cc0f0d746-l&n=13'
-  }
+  name: 'Архыз',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+},
+{
+  name: 'Челябинская область',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+},
+{
+  name: 'Тюмень',
+  link: 'https://sdelanounas.ru/i/a/w/1/f_aW1nLmdlbGlvcGhvdG8uY29tL3Rtbi81NV90dW1lbi5qcGc_X19pZD0xMTM2MjM=.jpeg'
+},
+{
+  name: 'Сургут',
+  link: 'https://barcaffe.ru/wp-content/uploads/2020/07/28_surgut2020.jpg'
+},
+{
+  name: 'Холмогорский район',
+  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+},
+{
+  name: 'Байкал',
+  link: 'https://im0-tub-ru.yandex.net/i?id=ba9010e38898e7d960c5374cc0f0d746-l&n=13'
+}
 ];
 
+// Находим кнопку открытия попапа добавления новой карточки
+const addButtonEl = document.querySelector('.profile__add-button')
 // Находим попап вместе с формой для добавления нового места
-const popapAdd = document.querySelector('#popupNewMesto')
-const formAddEl = document.querySelector('#popapAddForm')
-// Находим ту часть разметки, куда будем добавлять карточки из массива и новые карточки
+const popapAddMesto = document.querySelector('#popupNewMesto')
+const formAddEl = popapAddMesto.querySelector('#popapAddForm')
+// Находим поля для ввода названия и ссылки новой карточки
+const inputNameLoc = popapAddMesto.querySelector('#popapMestoName')
+const inputLinkLoc = popapAddMesto.querySelector('#popapMestoLink')
+// Находим кнопку закртытия попапа
+const popupAddCloseBtn = popapAddMesto.querySelector('#closeButtonAdd')
+
+// Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
 const listContainerEl = document.querySelector('.elements__element-list')
 // Находим шаблон, по которому будем создавать новые карточки
 const templateEl = document.querySelector('.template')
-//Находим кнопку добавления новой карточки
-const addButtonEl = document.querySelector('.profile__add-button')
-// Находим поля ввода названия и ссылки на картинку для новых карточек
-const inputNameLoc = document.querySelector('#popapMestoName')
-const inputLinkLoc = document.querySelector('#popapMestoLink')
-// Находим кнопку закртытия попапа
-const popupAddCloseBtn = popapAdd.querySelector('#closeButtonAdd')
 
-// В этой функции мы отрисовываем все карточки из массива initialCards и новых карточек на страницу
-function render() {
-  const renderHtml = initialCards
-    .map(getItem) // Создаем новый массив из массива initialCards и добавляем к каждому элементу разметку
+// Находим попап, в котором будет появлятся картинка в увеличенном виде
+const popupImg = document.querySelector('.popupImg')
+// Находим кнопку закрытия попапа с увеличенной картинкой
+const popupImgCloseBtn = popupImg.querySelector('.popupImg__closeButton')
+// Находим картинку и заголовок каждой карточки
+const popupImgPicEl = popupImg.querySelector('.popupImg__pic')
+const popupImgNameEl = popupImg.querySelector('.popupImg__name')
 
-  listContainerEl.append(...renderHtml) // Вставляем созданную выше разметку в HTML после выбранного элемента
+// Обработчик открытия "попапа" с увеличенной картинкой
+const handlePopupImgOpen = function (element) {
+  // Открываем "попап" добавляя к нему модификатор ".popup_open" со свойством display:flex
+  element.classList.add('popupImg_open');
 }
 
-// Вызываем функцию для вывода уже имеющихся на сервере карточек
+// Обработчик закрытия "попапа" с увеличенной картинкой
+const handlePopupImgClose = function (element) {
+  element.classList.remove('popupImg_open');
+}
+
+
+// Отрисовываем карточки из массива initialCards и новые карточки,
+// которые будут добавленны на страницу
+function render() {
+  // Создаем новый массив из массива initialCards,
+  // добавляем к каждому элементу разметку из шаблона templateEl
+  const renderHtml = initialCards.map(getItem)
+
+  // Вставляем созданные выше карточки в разметку HTML после выбранного элемента
+  listContainerEl.append(...renderHtml)
+}
+
+// Вызываем функцию для отрисовки карточек
 render();
 
+// Втавляем данные из массива initialCards в шаблон templateEl
 function getItem(item) {
   // Клонируем все элементы шаблона в константу
   const newItem = templateEl.content.cloneNode(true);
-  // Ищем header и img в элементе шаблона
-  const headerEl = newItem.querySelector('.element__title')
+  // Ищем header и img в элементах шаблона
+  const titleEl = newItem.querySelector('.element__title')
   const imgEl = newItem.querySelector('.element__image')
-  // Добавляем название заголовка и ссылку из массива
-  headerEl.textContent = item.name;
+  // Добавляем из массива название заголовка и ссылку в склонированный шаблон
+  titleEl.textContent = item.name;
   imgEl.src = item.link;
   imgEl.alt = item.name;
 
-  // Получаем ссылку на кнопку удаления
+  // Открываем попап с увеличенной картинкой при нажатии на изображение карточки
+  imgEl.addEventListener('click', function () {
+    handlePopupImgOpen(popupImg);
+    popupImgPicEl.src = item.link;
+    popupImgNameEl.textContent = item.name;
+  })
+
+  // Оживляем кнопку удаления
   const removeBtn = newItem.querySelector('#buttonDelete')
   removeBtn.addEventListener('click', handleDelete);
   // Оживляем у каждой карточки кнопку лайк
   const likeButtonEl = newItem.querySelector('#likeButton')
   likeButtonEl.addEventListener('click', handleBtnLike);
 
+  // Возращаем созданый шаблон
   return newItem;
 }
 
-// Открываем окно добавления нового места
-function handleAdd() {
-  popapAdd.classList.add('popup_open');
-}
+addButtonEl.addEventListener('click', () => handlePopupImgOpen(popapAddMesto))
 
-addButtonEl.addEventListener('click', handleAdd)
-
+// Форма добавления новой карточки на станицу,
+// которая появляется вместе с popup при нажатии на кнопку добавить(addButtonEl)
 function formAddSubmitHandler(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  evt.preventDefault(); // Отменяем стандартную отправку формы
 
-  // Сохраняем значения, полученные из input в константы
+  // Сохраняем значения, полученные из input'ов формы
   const inputText = inputNameLoc.value;
   const inputSrc = inputLinkLoc.value;
 
@@ -148,62 +181,35 @@ function formAddSubmitHandler(evt) {
   // с помощью метода prepend()
   listContainerEl.prepend(listItem)
 
-  // Очищаем input
+  // Очищаем input формы
   inputNameLoc.value = '';
   inputLinkLoc.value = '';
 
-  // Закрываем окно popup удаляя класс
-  handlePopupAddCloseBtn()
+  // Закрываем popup
+  handlePopupImgClose(popapAddMesto)
 }
 
+// Кнопка закрытия формы
 formAddEl.addEventListener('submit', formAddSubmitHandler)
 
+// Удаление выбраной карточки
 function handleDelete(event) {
-  const targetEl = event.target; // Это кнопка
+  const targetDeleteEl = event.target; // Выбираем кнопку через специальное свойство target
   // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
-  const targetItem = targetEl.closest('.element');
+  const targetItem = targetDeleteEl.closest('.element');
   targetItem.remove() // Функция удаления элемента
 }
 
-
-
 // Код для кнопки лайк
-function handleBtnLike (event) {
-  // Получаем кнопку, как елемент цель
-  const targetEl = event.target;
-  // Добавляем новый класс кнопке
-  const targetItem = targetEl.classList.toggle('element__likeButton_active');
+function handleBtnLike(event) {
+  // Получаем кнопку, как элемент цель
+  const targetBtnLikeEl = event.target;
+  // Добавляем переключатель класса
+  const targetItem = targetBtnLikeEl.classList.toggle('element__likeButton_active');
 }
 
-function handlePopupAddCloseBtn() {
-  popapAdd.classList.remove('popup_open');
-}
+// Кнопка закрытия попапа добавления нового места
+popupAddCloseBtn.addEventListener('click', () => handlePopupImgClose(popapAddMesto))
 
-popupAddCloseBtn.addEventListener('click', handlePopupAddCloseBtn)
-
-
-
-
-// // Находим форму в DOM
-// let formElement = // Воспользуйтесь методом querySelector()
-// // Находим поля формы в DOM
-// let nameInput = // Воспользуйтесь инструментом .querySelector()
-// let jobInput = // Воспользуйтесь инструментом .querySelector()
-
-// // Обработчик «отправки» формы, хотя пока
-// // она никуда отправляться не будет
-// function formSubmitHandler (evt) {
-//     evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-//                                                 // Так мы можем определить свою логику отправки.
-//                                                 // О том, как это делать, расскажем позже.
-
-//     // Получите значение полей jobInput и nameInput из свойства value
-
-//     // Выберите элементы, куда должны быть вставлены значения полей
-
-//     // Вставьте новые значения с помощью textContent
-// }
-
-// // Прикрепляем обработчик к форме:
-// // он будет следить за событием “submit” - «отправка»
-// formElement.addEventListener('submit', formSubmitHandler);
+// Кнопка закрытия попапа с картинкой
+popupImgCloseBtn.addEventListener('click', () => handlePopupImgClose(popupImg))

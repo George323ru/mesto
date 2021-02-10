@@ -14,8 +14,7 @@
   <div class="page">
     <!-- Header -->
     <header class="header section section_size_small page__container">
-      <img class="header__logo" src="./images/mesto-logo.svg"
-        alt="Логотип Место">
+      <img class="header__logo" src="./images/mesto-logo.svg" alt="Логотип Место">
     </header>
     <!-- /Header -->
     <main class="main page__container">
@@ -25,137 +24,90 @@
           <div class="profile__avatar"></div>
           <div class="profile__user-details">
             <div class="profile__user-description">
-              <h1 class="profile__user-name">Жак-Ив Кусто</h1>
+              <h1 class="profile__user-name" id="">Жак-Ив Кусто</h1>
               <p class="profile__user-specialization">Исследователь океана</p>
             </div>
-            <button class="profile__edit-button" type="button"
-              name="editButton"></button>
+            <button class="profile__edit-button" type="button" name="editButton"></button>
           </div>
         </div>
-        <button class="profile__add-button" type="button"
-          name="addButton"></button>
+        <button class="profile__add-button" type="button" name="addButton"></button>
       </section>
+      <!-- /Section Profile -->
       <!-- Section Elements -->
       <section class="elements">
         <ul class="elements__element-list">
-          <!-- <li class="element">
-            <img class="element__image" src="./images/karachaevsk.jpg"
-              alt="Фото Карачаевска">
-            <div class="element__name">
-              <h2 class="element__title">Карачаевск</h2>
-              <button class="element__like-button" type="button"
-                name="likeButton"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/gora-elbrus.jpg"
-              alt="Фото горы Эльбрус">
-            <div class="element__name">
-              <h2 class="element__title">Гора Эльбрус</h2>
-              <button class="element__like-button" type="button"
-                name="likeButton"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/dombai.jpg"
-              alt="Фото Домбая">
-            <div class="element__name">
-              <h2 class="element__title">Домбай</h2>
-              <button class="element__like-button" type="button"
-                name="likeButton"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/gora-elbrus.jpg"
-              alt="Фото горы Эльбрус">
-            <div class="element__name">
-              <h2 class="element__title">Гора Эльбрус</h2>
-              <button class="element__like-button" type="button"
-                name="likeButton"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/dombai.jpg"
-              alt="Фото Домбая">
-            <div class="element__name">
-              <h2 class="element__title">Домбай</h2>
-              <button class="element__like-button" type="button"
-                name="likeButton"></button>
-            </div>
-          </li>
-          <li class="element">
-            <img class="element__image" src="./images/karachaevsk.jpg"
-              alt="Фото Карачаево-Черкессии">
-            <div class="element__name">
-              <h2 class="element__title">Карачаево-Черкессия</h2>
-              <button class="element__like-button" type="button"
-                name="likeButton"></button>
-            </div>
-          </li> -->
         </ul>
       </section>
-      <!-- /Section Profile -->
+      <!-- /Section Elements -->
     </main>
+
     <!-- Popup -->
     <div class="popup">
       <div class="popup__container">
-        <form class="popup__form" action="#" name="popupMainForm">
+        <form class="popup__form" id="popupUserProfileForm" action="#" name="popupUserProfile">
           <h2 class="popup__title">
             Редактировать профиль
           </h2>
-          <input class="popup__input popup__input_type_name" type="text"
-            name="inputName" required="" value="" placeholder="Имя">
-          <input class="popup__input popup__input_type_job" type="text"
-            name="inputJob" required="" value="" placeholder="О себе">
-          <button class="popup__save-button" type="submit"
-            name="saveButton">Сохранить</button>
+          <input class="popup__input" id="popupInputTypeName" type="text" name="inputName" required="" value=""
+            placeholder="Имя">
+          <input class="popup__input" id="popupInputTypeJob" type="text" name="inputJob" required="" value=""
+            placeholder="О себе">
+          <button class="popup__save-button" type="submit" name="saveButton">Сохранить</button>
         </form>
-        <button class="popup__close-button" type="button"
-          name="closeButton"></button>
+        <button class="popup__close-button" type="button" name="closeButton"></button>
       </div>
     </div>
     <!-- /Popup -->
 
-    <!-- Popup Add -->
+    <!-- Popup Add New Place -->
     <div class="popup" id="popupNewMesto">
       <div class="popup__container">
         <form class="popup__form" id="popapAddForm" action="#" name="popupMainForm">
           <h2 class="popup__title">
             Новое место
           </h2>
-          <input class="popup__input" id="popapMestoName" type="text"
-            name="inputName" required="" value="" placeholder="Название">
-          <input class="popup__input popup__input_type_linkLocation" id="popapMestoLink" type="text"
-            name="inputJob" required="" value="" placeholder="Ссылка на картинку">
-          <button class="popup__save-button" id="popupAddSaveButton" type="submit"
-            name="saveButton">Создать</button>
+          <input class="popup__input" id="popapMestoName" type="text" name="inputName" required="" value=""
+            placeholder="Название">
+          <input class="popup__input popup__input_type_linkLocation" id="popapMestoLink" type="text" name="inputJob"
+            required="" value="" placeholder="Ссылка на картинку">
+          <button class="popup__save-button" id="popupAddSaveButton" type="submit" name="saveButton">Создать</button>
         </form>
-        <button class="popup__close-button" id="closeButtonAdd" type="button"
-          name="closeButton"></button>
+        <button class="popup__close-button" id="closeButtonAdd" type="button" name="closeButton"></button>
       </div>
     </div>
-    <!-- /Popup Add -->
+    <!-- /Popup Add New Place -->
+
+    <!-- Popup Img -->
+    <div class="popupImg">
+      <figure class="popupImg__figure">
+        <img class="popupImg__pic" src="" alt="">
+        <figcaption class="popupImg__name"></figcaption>
+        <button class="popupImg__closeButton"></button>
+      </figure>
+    </div>
+    <!-- /Popup Img -->
 
     <!-- Footer -->
     <footer class="footer page__container">
       <p class="footer__title">&copy;&nbsp;2020 Mesto Russia</p>
     </footer>
     <!-- /Footer -->
+
   </div>
   <!-- /Page -->
 
+  <!-- Template for block Element -->
   <template class="template">
     <li class="element">
-      <img class="element__image" src="./images/dombai.jpg" alt="Фото Домбая">
-      <button class="element__buttonDelete" id="buttonDelete" type="button"
-          name="buttonDelete"></button>
+      <img class="element__image" src="" alt="">
+      <button class="element__buttonDelete" id="buttonDelete" type="button" name="buttonDelete"></button>
       <div class="element__name">
-        <h2 class="element__title">Домбай</h2>
-        <button class="element__likeButton" id="likeButton" type="button"
-          name="likeButton"></button>
+        <h2 class="element__title"></h2>
+        <button class="element__likeButton" id="likeButton" type="button" name="likeButton"></button>
       </div>
     </li>
   </template>
+  <!-- /Template for block Element -->
 
   <script src="./scripts/index.js"></script>
 </body>
