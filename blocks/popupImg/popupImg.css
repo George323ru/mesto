@@ -8,11 +8,11 @@
   right: 0;
   bottom: 0;
 
-  display: flex;  
+  display: flex;
   justify-content: center;
   align-items: center;
 
-  visibility: hidden; 
+  visibility: hidden;
   opacity: 0;
-  transition: .2s linear;  
+  transition: .2s linear;
 }
