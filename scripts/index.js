@@ -2,18 +2,18 @@
 const popupProfile = document.querySelector('#popupProfile');
 
 // Находим кнопки, при нажатии на которые попап будет открываться и закрываться
-const popupOpenButton = document.querySelector('#profileEditButton');
-const popupCloseButton = popupProfile.querySelector('#popupProfileCloseBtn');
+const popupProfileOpenBtn = document.querySelector('#profileEditButton');
+const popupProfileCloseBtn = popupProfile.querySelector('#popupProfileCloseBtn');
 
 // Находим поля, куда будут подставлены новые значения из полей формы
-const userName = document.querySelector('#profileUserName');
-const userJob = document.querySelector('#profileUserJob');
+const profileUserName = document.querySelector('#profileUserName');
+const profileUserJob = document.querySelector('#profileUserJob');
 
 // Находим форму в DOM
-const formElement = popupProfile.querySelector('#popupProfileForm');
+const popupProfileFormEL = popupProfile.querySelector('#popupProfileForm');
 // Находим поля формы в DOM
-const nameInput = popupProfile.querySelector('#popupProfileInputTypeName');
-const jobInput = popupProfile.querySelector('#popupProfileInputTypeJob');
+const popupProfileInputTypeName = popupProfile.querySelector('#popupProfileInputTypeName');
+const popupProfileInputTypeJob = popupProfile.querySelector('#popupProfileInputTypeJob');
 
 
 // Обработчик открытия "попапа"
@@ -31,8 +31,8 @@ const handlePopupProfileOpen = function () {
   handlePopupOpen(popupProfile);
 
   // Добавляем в поля формы текст из профиля на странице
-  nameInput.value = userName.textContent;
-  jobInput.value = userJob.textContent;
+  popupProfileInputTypeName.value = profileUserName.textContent;
+  popupProfileInputTypeJob.value = profileUserJob.textContent;
 }
 
 // Обработчик «отправки» формы
@@ -40,17 +40,17 @@ function formSubmitHandler(evt) {
   evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
 
   // Меняем содержимое в профиле на новое содержимое из полей формы
-  userName.textContent = nameInput.value;
-  userJob.textContent = jobInput.value;
+  profileUserName.textContent = popupProfileInputTypeName.value;
+  profileUserJob.textContent = popupProfileInputTypeJob.value;
 
   // Прячем "попап" удаляя у него модификатор ".popup_open" со свойством display:flex
   handlePopupClose(popupProfile);
 }
 
 // События, которые будут происходить при нажатии на кнопки
-popupOpenButton.addEventListener('click', handlePopupProfileOpen);
-popupCloseButton.addEventListener('click', () => handlePopupClose(popupProfile));
-formElement.addEventListener('submit', formSubmitHandler);
+popupProfileOpenBtn.addEventListener('click', handlePopupProfileOpen);
+popupProfileCloseBtn.addEventListener('click', () => handlePopupClose(popupProfile));
+popupProfileFormEL.addEventListener('submit', formSubmitHandler);
 
 // Шесть карточек «из коробки», которые сразу добавляются на главную страницу
 const initialCards = [{
@@ -80,18 +80,18 @@ const initialCards = [{
 ];
 
 // Находим кнопку открытия попапа для добавления новго места
-const addButtonEl = document.querySelector('#profileAddButton')
+const popupNewPlaceAddBtn = document.querySelector('#profileAddButton')
 // Находим попап вместе с формой для добавления нового места
 const popupNewPlace = document.querySelector('#popupNewPlace')
-const formAddEl = popupNewPlace.querySelector('#popupNewPlaceForm')
+const popupNewPlaceForm = popupNewPlace.querySelector('#popupNewPlaceForm')
 // Находим поля ввода названия и ссылки новой карточки
 const popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputTypeName')
 const popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputTypeLink')
 // Находим кнопку закртытия попапа
-const popupAddCloseBtn = popupNewPlace.querySelector('#popupNewPlaceCloseBtn')
+const popupNewPlaceCloseBtn = popupNewPlace.querySelector('#popupNewPlaceCloseBtn')
 
 // Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
-const listContainerEl = document.querySelector('.elements__element-list')
+const elementListContainer = document.querySelector('.elements__element-list')
 // Находим шаблон, по которому будем создавать новые карточки
 const templateEl = document.querySelector('.template')
 
@@ -103,7 +103,7 @@ const popupImgCloseBtn = popupImg.querySelector('#popupImgCloseBtn')
 const popupImgPicEl = popupImg.querySelector('#popupImgPic')
 const popupImgNameEl = popupImg.querySelector('#popupImgName')
 
-// Отрисовываем карточки из массива initialCards и новые карточки,
+// Обработчик отрисовки карточек из массива initialCards и новых карточек,
 // которые будут добавленны на страницу
 function render() {
   // Преобразуем массив initialCards в новый массив renderHtml,
@@ -111,20 +111,20 @@ function render() {
   const renderHtml = initialCards.map(getItem)
 
   // Вставляем преобразовавшийся массив в разметку
-  listContainerEl.append(...renderHtml)
+  elementListContainer.append(...renderHtml)
 }
 
 // Вызываем функцию отрисовки карточек
 render();
 
-// Втавляем данные из массива initialCards в шаблон templateEl
+// Обработчик данных, который создает шаблоны карточек по templateEl
 function getItem(item) {
   // Клонируем все элементы шаблона в константу
   const newItems = templateEl.content.cloneNode(true);
-  // Ищем header и img в элементах шаблона
+  // Ищем header и img в склонированных элементах шаблона
   const titleEl = newItems.querySelector('.element__title')
   const imgEl = newItems.querySelector('.element__image')
-  // Добавляем из массива название заголовка и ссылку в склонированный шаблон
+  // Добавляем из массива initialCards название заголовка и ссылку в склонированный шаблон
   titleEl.textContent = item.name;
   imgEl.src = item.link;
   imgEl.alt = item.name;
@@ -147,10 +147,10 @@ function getItem(item) {
   return newItems;
 }
 
-addButtonEl.addEventListener('click', () => handlePopupOpen(popupNewPlace))
+popupNewPlaceAddBtn.addEventListener('click', () => handlePopupOpen(popupNewPlace))
 
 // Форма добавления новой карточки на станицу,
-// которая появляется вместе с popup при нажатии на кнопку добавить(addButtonEl)
+// которая появляется вместе с popup при нажатии на кнопку добавить(popupNewPlaceAddBtn)
 function formAddSubmitHandler(evt) {
   evt.preventDefault(); // Отменяем стандартную отправку формы
 
@@ -167,7 +167,7 @@ function formAddSubmitHandler(evt) {
 
   // Добавляем создвнные по шаблону элементы в начало разметки блока elements__element-list
   // с помощью метода prepend()
-  listContainerEl.prepend(listItem)
+  elementListContainer.prepend(listItem)
 
   // Очищаем input формы
   popupNewPlaceInputName.value = '';
@@ -178,7 +178,7 @@ function formAddSubmitHandler(evt) {
 }
 
 // Кнопка закрытия формы
-formAddEl.addEventListener('submit', formAddSubmitHandler)
+popupNewPlaceForm.addEventListener('submit', formAddSubmitHandler)
 
 // Удаление выбраной карточки
 function handleDeleteCard(event) {
@@ -197,7 +197,7 @@ function handleBtnLike(event) {
 }
 
 // Кнопка закрытия попапа нового места
-popupAddCloseBtn.addEventListener('click', () => handlePopupClose(popupNewPlace))
+popupNewPlaceCloseBtn.addEventListener('click', () => handlePopupClose(popupNewPlace))
 
 // Кнопка закрытия попапа с картинкой
 popupImgCloseBtn.addEventListener('click', () => handlePopupClose(popupImg))
