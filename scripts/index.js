@@ -103,17 +103,6 @@ const popupImgCloseBtn = popupImg.querySelector('#popupImgCloseBtn')
 const popupImgPicEl = popupImg.querySelector('#popupImgPic')
 const popupImgNameEl = popupImg.querySelector('#popupImgName')
 
-// Обработчик открытия "попапа" с увеличенной картинкой
-const handlePopupImgOpen = function (element) {
-  element.classList.add('popup_open');
-}
-
-// Обработчик закрытия "попапа" с увеличенной картинкой
-const handlePopupImgClose = function (element) {
-  element.classList.remove('popup_open');
-}
-
-
 // Отрисовываем карточки из массива initialCards и новые карточки,
 // которые будут добавленны на страницу
 function render() {
@@ -142,7 +131,7 @@ function getItem(item) {
 
   // Открываем попап с увеличенной картинкой при нажатии на изображение карточки
   imgEl.addEventListener('click', function () {
-    handlePopupImgOpen(popupImg);
+    handlePopupOpen(popupImg);
     popupImgPicEl.src = item.link;
     popupImgNameEl.textContent = item.name;
   })
@@ -158,7 +147,7 @@ function getItem(item) {
   return newItems;
 }
 
-addButtonEl.addEventListener('click', () => handlePopupImgOpen(popupNewPlace))
+addButtonEl.addEventListener('click', () => handlePopupOpen(popupNewPlace))
 
 // Форма добавления новой карточки на станицу,
 // которая появляется вместе с popup при нажатии на кнопку добавить(addButtonEl)
@@ -185,7 +174,7 @@ function formAddSubmitHandler(evt) {
   popupNewPlaceInputLink.value = '';
 
   // Закрываем popup
-  handlePopupImgClose(popupNewPlace)
+  handlePopupClose(popupNewPlace)
 }
 
 // Кнопка закрытия формы
@@ -208,7 +197,7 @@ function handleBtnLike(event) {
 }
 
 // Кнопка закрытия попапа добавления нового места
-popupAddCloseBtn.addEventListener('click', () => handlePopupImgClose(popupNewPlace))
+popupAddCloseBtn.addEventListener('click', () => handlePopupClose(popupNewPlace))
 
 // Кнопка закрытия попапа с картинкой
-popupImgCloseBtn.addEventListener('click', () => handlePopupImgClose(popupImg))
+popupImgCloseBtn.addEventListener('click', () => handlePopupClose(popupImg))
