@@ -14,7 +14,8 @@
   <div class="page">
     <!-- Header -->
     <header class="header section section_size_small page__container">
-      <img class="header__logo" src="./images/mesto-logo.svg" alt="Логотип Место">
+      <img class="header__logo" src="./images/mesto-logo.svg"
+        alt="Логотип Место">
     </header>
     <!-- /Header -->
     <main class="main page__container">
@@ -24,13 +25,17 @@
           <div class="profile__avatar"></div>
           <div class="profile__user-details">
             <div class="profile__user-description">
-              <h1 class="profile__user-name" id="profileUserName">Жак-Ив Кусто</h1>
-              <p class="profile__user-specialization" id="profilUserSpecialization">Исследователь океана</p>
+              <h1 class="profile__user-name" id="profileUserName">Жак-Ив Кусто
+              </h1>
+              <p class="profile__user-specialization"
+                id="profilUserSpecialization">Исследователь океана</p>
             </div>
-            <button class="profile__edit-button" id="profileEditButton" type="button" name="editButton"></button>
+            <button class="profile__edit-button" id="profileEditButton"
+              type="button" name="editButton"></button>
           </div>
         </div>
-        <button class="profile__add-button" id="profileAddButton" type="button" name="addButton"></button>
+        <button class="profile__add-button" id="profileAddButton" type="button"
+          name="addButton"></button>
       </section>
       <!-- /Section Profile -->
       <!-- Section Elements -->
@@ -44,17 +49,21 @@
     <!-- Popup UserProfile-->
     <div class="popup">
       <div class="popup__container">
-        <form class="popup__form" id="popupUserProfileForm" action="#" name="popupUserProfile">
+        <form class="popup__form" id="popupUserProfileForm" action="#"
+          name="popupUserProfile">
           <h2 class="popup__title">
             Редактировать профиль
           </h2>
-          <input class="popup__input" id="popupUserProfileInputTypeName" type="text" name="inputName" required="" value=""
-            placeholder="Имя">
-          <input class="popup__input" id="popupUserProfileInputTypeJob" type="text" name="inputJob" required="" value=""
+          <input class="popup__input" id="popupUserProfileInputTypeName"
+            type="text" name="inputName" required="" value="" placeholder="Имя">
+          <input class="popup__input" id="popupUserProfileInputTypeJob"
+            type="text" name="inputJob" required="" value=""
             placeholder="О себе">
-          <button class="popup__save-button" type="submit" name="saveButton">Сохранить</button>
+          <button class="popup__save-button" type="submit"
+            name="saveButton">Сохранить</button>
         </form>
-        <button class="popup__close-button" type="button" name="closeButton"></button>
+        <button class="popup__close-button" type="button"
+          name="closeButton"></button>
       </div>
     </div>
     <!-- /Popup UserProfile-->
@@ -62,17 +71,21 @@
     <!-- Popup Add New Place -->
     <div class="popup" id="popupNewPlace">
       <div class="popup__container">
-        <form class="popup__form" id="popupAddForm" action="#" name="popupMainForm">
+        <form class="popup__form" id="popupAddForm" action="#"
+          name="popupMainForm">
           <h2 class="popup__title">
             Новое место
           </h2>
-          <input class="popup__input" id="popupNewPlaceInputName" type="text" name="inputName" required="" value=""
-            placeholder="Название">
-          <input class="popup__input" id="popupNewPlaceInputLink" type="text" name="inputJob"
-            required="" value="" placeholder="Ссылка на картинку">
-          <button class="popup__save-button" id="popupNewPlaceSaveButton" type="submit" name="saveButton">Создать</button>
+          <input class="popup__input" id="popupNewPlaceInputName" type="text"
+            name="inputName" required="" value="" placeholder="Название">
+          <input class="popup__input" id="popupNewPlaceInputLink" type="text"
+            name="inputJob" required="" value=""
+            placeholder="Ссылка на картинку">
+          <button class="popup__save-button" id="popupNewPlaceSaveButton"
+            type="submit" name="saveButton">Создать</button>
         </form>
-        <button class="popup__close-button" id="popupNewPlaceCloseBtn" type="button" name="closeButton"></button>
+        <button class="popup__close-button" id="popupNewPlaceCloseBtn"
+          type="button" name="closeButton"></button>
       </div>
     </div>
     <!-- /Popup Add New Place -->
@@ -82,8 +95,8 @@
       <figure class="popupImg__figure">
         <img class="popupImg__pic" id="popupImgPic" src="#" alt="">
         <figcaption class="popupImg__name" id="popupImgName"></figcaption>
-        <button class="popupImg__closeButton" id="popupImgCloseBtn"></button>
       </figure>
+      <button class="popupImg__closeButton" id="popupImgCloseBtn"></button>
     </div>
     <!-- /Popup Img -->
 
@@ -100,10 +113,12 @@
   <template class="template">
     <li class="element">
       <img class="element__image" src="#" alt="">
-      <button class="element__buttonDelete" id="buttonDelete" type="button" name="buttonDelete"></button>
+      <button class="element__buttonDelete" id="buttonDelete" type="button"
+        name="buttonDelete"></button>
       <div class="element__name">
         <h2 class="element__title"></h2>
-        <button class="element__likeButton" id="likeButton" type="button" name="likeButton"></button>
+        <button class="element__likeButton" id="likeButton" type="button"
+          name="likeButton"></button>
       </div>
     </li>
   </template>
