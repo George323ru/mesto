@@ -71,7 +71,7 @@
     <!-- Popup Add New Place -->
     <div class="popup" id="popupNewPlace">
       <div class="popup__container">
-        <form class="popup__form" id="popupAddForm" action="#"
+        <form class="popup__form" id="popupNewPlaceForm" action="#"
           name="popupMainForm">
           <h2 class="popup__title">
             Новое место
@@ -81,8 +81,8 @@
           <input class="popup__input" id="popupNewPlaceInputLink" type="text"
             name="inputJob" required="" value=""
             placeholder="Ссылка на картинку">
-          <button class="popup__save-button" id="popupNewPlaceSaveButton"
-            type="submit" name="saveButton">Создать</button>
+          <button class="popup__save-button" type="submit"
+            name="saveButton">Создать</button>
         </form>
         <button class="popup__closeButton" id="popupNewPlaceCloseBtn"
           type="button" name="closeButton"></button>
@@ -91,13 +91,13 @@
     <!-- /Popup Add New Place -->
 
     <!-- Popup Img -->
-    <div class="popupImg" id="popupImgZoom">
-      <div class="popupImg__figure">
-        <img class="popupImg__pic" id="popupImgPic" src="#" alt="#">
-        <p class="popupImg__name" id="popupImgName"></p>
-        <button class="popup__closeButton popupImg__closeButton" id="popupImgCloseBtn"></button>
+    <div class="popup" id="popupImgZoom">
+      <div class="popup__wrap">
+        <img class="popup__picture" id="popupImgPic" src="#" alt="#">
+        <p class="popup__placeName" id="popupImgName"></p>
+        <button class="popup__closeButton popup__closeButton_position_img"
+          id="popupImgCloseBtn"></button>
       </div>
-
     </div>
     <!-- /Popup Img -->
 

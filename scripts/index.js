@@ -83,7 +83,7 @@ const initialCards = [{
 const addButtonEl = document.querySelector('#profileAddButton')
 // Находим попап вместе с формой для добавления нового места
 const popupNewPlace = document.querySelector('#popupNewPlace')
-const formAddEl = popupNewPlace.querySelector('#popupAddForm')
+const formAddEl = popupNewPlace.querySelector('#popupNewPlaceForm')
 // Находим поля ввода названия и ссылки новой карточки
 const popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputName')
 const popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputLink')
@@ -105,12 +105,12 @@ const popupImgNameEl = popupImg.querySelector('#popupImgName')
 
 // Обработчик открытия "попапа" с увеличенной картинкой
 const handlePopupImgOpen = function (element) {
-  element.classList.add('popupImg_open');
+  element.classList.add('popup_open');
 }
 
 // Обработчик закрытия "попапа" с увеличенной картинкой
 const handlePopupImgClose = function (element) {
-  element.classList.remove('popupImg_open');
+  element.classList.remove('popup_open');
 }
 
 
