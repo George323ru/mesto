@@ -10,7 +10,7 @@ let userName = document.querySelector('#profileUserName');
 let userJob = document.querySelector('#profilUserSpecialization');
 
 // Находим форму в DOM
-let formElement = popup.querySelector('#popupUserProfileForm');
+const formElement = popup.querySelector('#popupUserProfileForm');
 // Находим поля формы в DOM
 let nameInput = popup.querySelector('#popupUserProfileInputTypeName');
 let jobInput = popup.querySelector('#popupUserProfileInputTypeJob');
@@ -85,8 +85,8 @@ const addButtonEl = document.querySelector('#profileAddButton')
 const popupNewPlace = document.querySelector('#popupNewPlace')
 const formAddEl = popupNewPlace.querySelector('#popupAddForm')
 // Находим поля ввода названия и ссылки новой карточки
-const popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputName')
-const popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputLink')
+let popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputName')
+let popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputLink')
 // Находим кнопку закртытия попапа
 const popupAddCloseBtn = popupNewPlace.querySelector('#popupNewPlaceCloseBtn')
 
@@ -131,10 +131,10 @@ render();
 // Втавляем данные из массива initialCards в шаблон templateEl
 function getItem(item) {
   // Клонируем все элементы шаблона в константу
-  const newItem = templateEl.content.cloneNode(true);
+  const newItems = templateEl.content.cloneNode(true);
   // Ищем header и img в элементах шаблона
-  const titleEl = newItem.querySelector('.element__title')
-  const imgEl = newItem.querySelector('.element__image')
+  const titleEl = newItems.querySelector('.element__title')
+  const imgEl = newItems.querySelector('.element__image')
   // Добавляем из массива название заголовка и ссылку в склонированный шаблон
   titleEl.textContent = item.name;
   imgEl.src = item.link;
@@ -148,14 +148,14 @@ function getItem(item) {
   })
 
   // Оживляем кнопку удаления
-  const removeBtn = newItem.querySelector('#buttonDelete')
-  removeBtn.addEventListener('click', handleDelete);
+  const removeBtn = newItems.querySelector('#buttonDelete')
+  removeBtn.addEventListener('click', handleDeleteCard);
   // Оживляем у каждой карточки кнопку лайк
-  const likeButtonEl = newItem.querySelector('#likeButton')
+  const likeButtonEl = newItems.querySelector('#likeButton')
   likeButtonEl.addEventListener('click', handleBtnLike);
 
   // Возращаем созданый шаблон
-  return newItem;
+  return newItems;
 }
 
 addButtonEl.addEventListener('click', () => handlePopupImgOpen(popupNewPlace))
@@ -192,7 +192,7 @@ function formAddSubmitHandler(evt) {
 formAddEl.addEventListener('submit', formAddSubmitHandler)
 
 // Удаление выбраной карточки
-function handleDelete(event) {
+function handleDeleteCard(event) {
   const targetDeleteEl = event.target; // Выбираем кнопку через специальное свойство target
   // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
   const targetItem = targetDeleteEl.closest('.element');
