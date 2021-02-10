@@ -24,13 +24,13 @@
           <div class="profile__avatar"></div>
           <div class="profile__user-details">
             <div class="profile__user-description">
-              <h1 class="profile__user-name" id="">Жак-Ив Кусто</h1>
-              <p class="profile__user-specialization">Исследователь океана</p>
+              <h1 class="profile__user-name" id="profileUserName">Жак-Ив Кусто</h1>
+              <p class="profile__user-specialization" id="profilUserSpecialization">Исследователь океана</p>
             </div>
-            <button class="profile__edit-button" type="button" name="editButton"></button>
+            <button class="profile__edit-button" id="profileEditButton" type="button" name="editButton"></button>
           </div>
         </div>
-        <button class="profile__add-button" type="button" name="addButton"></button>
+        <button class="profile__add-button" id="profileAddButton" type="button" name="addButton"></button>
       </section>
       <!-- /Section Profile -->
       <!-- Section Elements -->
@@ -41,34 +41,34 @@
       <!-- /Section Elements -->
     </main>
 
-    <!-- Popup -->
+    <!-- Popup UserProfile-->
     <div class="popup">
       <div class="popup__container">
         <form class="popup__form" id="popupUserProfileForm" action="#" name="popupUserProfile">
           <h2 class="popup__title">
             Редактировать профиль
           </h2>
-          <input class="popup__input" id="popupInputTypeName" type="text" name="inputName" required="" value=""
+          <input class="popup__input" id="popupUserProfileInputTypeName" type="text" name="inputName" required="" value=""
             placeholder="Имя">
-          <input class="popup__input" id="popupInputTypeJob" type="text" name="inputJob" required="" value=""
+          <input class="popup__input" id="popupUserProfileInputTypeJob" type="text" name="inputJob" required="" value=""
             placeholder="О себе">
           <button class="popup__save-button" type="submit" name="saveButton">Сохранить</button>
         </form>
         <button class="popup__close-button" type="button" name="closeButton"></button>
       </div>
     </div>
-    <!-- /Popup -->
+    <!-- /Popup UserProfile-->
 
     <!-- Popup Add New Place -->
     <div class="popup" id="popupNewMesto">
       <div class="popup__container">
-        <form class="popup__form" id="popapAddForm" action="#" name="popupMainForm">
+        <form class="popup__form" id="popupAddForm" action="#" name="popupMainForm">
           <h2 class="popup__title">
             Новое место
           </h2>
-          <input class="popup__input" id="popapMestoName" type="text" name="inputName" required="" value=""
+          <input class="popup__input" id="popupMestoName" type="text" name="inputName" required="" value=""
             placeholder="Название">
-          <input class="popup__input popup__input_type_linkLocation" id="popapMestoLink" type="text" name="inputJob"
+          <input class="popup__input popup__input_type_linkLocation" id="popupMestoLink" type="text" name="inputJob"
             required="" value="" placeholder="Ссылка на картинку">
           <button class="popup__save-button" id="popupAddSaveButton" type="submit" name="saveButton">Создать</button>
         </form>
@@ -78,11 +78,11 @@
     <!-- /Popup Add New Place -->
 
     <!-- Popup Img -->
-    <div class="popupImg">
+    <div class="popupImg" id="popupImgZoom">
       <figure class="popupImg__figure">
-        <img class="popupImg__pic" src="" alt="">
-        <figcaption class="popupImg__name"></figcaption>
-        <button class="popupImg__closeButton"></button>
+        <img class="popupImg__pic" id="popupImgPic" src="" alt="">
+        <figcaption class="popupImg__name" id="popupImgName"></figcaption>
+        <button class="popupImg__closeButton" id="popupImgCloseBtn"></button>
       </figure>
     </div>
     <!-- /Popup Img -->

@@ -1,19 +1,19 @@
-// Находим контейнер у которого будем менять значение display
+// Находим контейнер с попапом
 const popup = document.querySelector('.popup');
 
-// Находим кнопки, при нажатии на которые "попап" будет открываться и закрываться
-const popupOpenButton = document.querySelector('.profile__edit-button');
+// Находим кнопки, при нажатии на которые попап будет открываться и закрываться
+const popupOpenButton = document.querySelector('#profileEditButton');
 const popupCloseButton = popup.querySelector('.popup__close-button');
 
 // Находим поля, куда будут подставлены новые значения из полей формы
-let userName = document.querySelector('.profile__user-name');
-let userJob = document.querySelector('.profile__user-specialization');
+let userName = document.querySelector('#profileUserName');
+let userJob = document.querySelector('#profilUserSpecialization');
 
 // Находим форму в DOM
 let formElement = popup.querySelector('#popupUserProfileForm');
 // Находим поля формы в DOM
-let nameInput = popup.querySelector('#popupInputTypeName');
-let jobInput = popup.querySelector('#popupInputTypeJob');
+let nameInput = popup.querySelector('#popupUserProfileInputTypeName');
+let jobInput = popup.querySelector('#popupUserProfileInputTypeJob');
 
 
 // Обработчик открытия "попапа"
@@ -79,16 +79,16 @@ const initialCards = [{
 }
 ];
 
-// Находим кнопку открытия попапа добавления новой карточки
-const addButtonEl = document.querySelector('.profile__add-button')
+// Находим кнопку открытия попапа для добавления новго места
+const addButtonEl = document.querySelector('#profileAddButton')
 // Находим попап вместе с формой для добавления нового места
-const popapAddMesto = document.querySelector('#popupNewMesto')
-const formAddEl = popapAddMesto.querySelector('#popapAddForm')
-// Находим поля для ввода названия и ссылки новой карточки
-const inputNameLoc = popapAddMesto.querySelector('#popapMestoName')
-const inputLinkLoc = popapAddMesto.querySelector('#popapMestoLink')
+const popupAddMesto = document.querySelector('#popupNewMesto')
+const formAddEl = popupAddMesto.querySelector('#popupAddForm')
+// Находим поля ввода названия и ссылки новой карточки
+const popupImgInputName = popupAddMesto.querySelector('#popupMestoName')
+const popupImgInputLink = popupAddMesto.querySelector('#popupMestoLink')
 // Находим кнопку закртытия попапа
-const popupAddCloseBtn = popapAddMesto.querySelector('#closeButtonAdd')
+const popupAddCloseBtn = popupAddMesto.querySelector('#closeButtonAdd')
 
 // Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
 const listContainerEl = document.querySelector('.elements__element-list')
@@ -96,16 +96,15 @@ const listContainerEl = document.querySelector('.elements__element-list')
 const templateEl = document.querySelector('.template')
 
 // Находим попап, в котором будет появлятся картинка в увеличенном виде
-const popupImg = document.querySelector('.popupImg')
+const popupImg = document.querySelector('#popupImgZoom')
 // Находим кнопку закрытия попапа с увеличенной картинкой
-const popupImgCloseBtn = popupImg.querySelector('.popupImg__closeButton')
-// Находим картинку и заголовок каждой карточки
-const popupImgPicEl = popupImg.querySelector('.popupImg__pic')
-const popupImgNameEl = popupImg.querySelector('.popupImg__name')
+const popupImgCloseBtn = popupImg.querySelector('#popupImgCloseBtn')
+// Находим картинку и заголовок карточки, которая будет увеличена
+const popupImgPicEl = popupImg.querySelector('#popupImgPic')
+const popupImgNameEl = popupImg.querySelector('#popupImgName')
 
 // Обработчик открытия "попапа" с увеличенной картинкой
 const handlePopupImgOpen = function (element) {
-  // Открываем "попап" добавляя к нему модификатор ".popup_open" со свойством display:flex
   element.classList.add('popupImg_open');
 }
 
@@ -118,15 +117,15 @@ const handlePopupImgClose = function (element) {
 // Отрисовываем карточки из массива initialCards и новые карточки,
 // которые будут добавленны на страницу
 function render() {
-  // Создаем новый массив из массива initialCards,
+  // Преобразуем массив initialCards в новый массив renderHtml,
   // добавляем к каждому элементу разметку из шаблона templateEl
   const renderHtml = initialCards.map(getItem)
 
-  // Вставляем созданные выше карточки в разметку HTML после выбранного элемента
+  // Вставляем преобразовавшийся массив в разметку
   listContainerEl.append(...renderHtml)
 }
 
-// Вызываем функцию для отрисовки карточек
+// Вызываем функцию отрисовки карточек
 render();
 
 // Втавляем данные из массива initialCards в шаблон templateEl
@@ -159,7 +158,7 @@ function getItem(item) {
   return newItem;
 }
 
-addButtonEl.addEventListener('click', () => handlePopupImgOpen(popapAddMesto))
+addButtonEl.addEventListener('click', () => handlePopupImgOpen(popupAddMesto))
 
 // Форма добавления новой карточки на станицу,
 // которая появляется вместе с popup при нажатии на кнопку добавить(addButtonEl)
@@ -167,8 +166,8 @@ function formAddSubmitHandler(evt) {
   evt.preventDefault(); // Отменяем стандартную отправку формы
 
   // Сохраняем значения, полученные из input'ов формы
-  const inputText = inputNameLoc.value;
-  const inputSrc = inputLinkLoc.value;
+  const inputText = popupImgInputName.value;
+  const inputSrc = popupImgInputLink.value;
 
   // Значение, полученное из input мы добавляем в поля name и link объектов массива
   // создаваемого с помощью функции getItem() элемента
@@ -182,11 +181,11 @@ function formAddSubmitHandler(evt) {
   listContainerEl.prepend(listItem)
 
   // Очищаем input формы
-  inputNameLoc.value = '';
-  inputLinkLoc.value = '';
+  popupImgInputName.value = '';
+  popupImgInputLink.value = '';
 
   // Закрываем popup
-  handlePopupImgClose(popapAddMesto)
+  handlePopupImgClose(popupAddMesto)
 }
 
 // Кнопка закрытия формы
@@ -209,7 +208,7 @@ function handleBtnLike(event) {
 }
 
 // Кнопка закрытия попапа добавления нового места
-popupAddCloseBtn.addEventListener('click', () => handlePopupImgClose(popapAddMesto))
+popupAddCloseBtn.addEventListener('click', () => handlePopupImgClose(popupAddMesto))
 
 // Кнопка закрытия попапа с картинкой
 popupImgCloseBtn.addEventListener('click', () => handlePopupImgClose(popupImg))
