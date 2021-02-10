@@ -1,4 +1,4 @@
-.profile__user-specialization {
+.profile__userJob {
   margin: 0;
   padding-top: 12px;
 
@@ -14,7 +14,7 @@
 
 @media screen and (max-width: 660px) {
 
-  .profile__user-specialization {
+  .profile__userJob {
     font-size: 14px;
     line-height: 17px;
     text-align: center;

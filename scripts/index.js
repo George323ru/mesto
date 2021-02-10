@@ -1,19 +1,19 @@
 // Находим контейнер с попапом
-const popup = document.querySelector('#popupUserProfile');
+const popup = document.querySelector('#popupProfile');
 
 // Находим кнопки, при нажатии на которые попап будет открываться и закрываться
 const popupOpenButton = document.querySelector('#profileEditButton');
-const popupCloseButton = popup.querySelector('.popup__closeButton');
+const popupCloseButton = popup.querySelector('#popupProfileCloseBtn');
 
 // Находим поля, куда будут подставлены новые значения из полей формы
 const userName = document.querySelector('#profileUserName');
-const userJob = document.querySelector('#profilUserSpecialization');
+const userJob = document.querySelector('#profileUserJob');
 
 // Находим форму в DOM
-const formElement = popup.querySelector('#popupUserProfileForm');
+const formElement = popup.querySelector('#popupProfileForm');
 // Находим поля формы в DOM
-const nameInput = popup.querySelector('#popupUserProfileInputTypeName');
-const jobInput = popup.querySelector('#popupUserProfileInputTypeJob');
+const nameInput = popup.querySelector('#popupProfileInputTypeName');
+const jobInput = popup.querySelector('#popupProfileInputTypeJob');
 
 
 // Обработчик открытия "попапа"
@@ -85,8 +85,8 @@ const addButtonEl = document.querySelector('#profileAddButton')
 const popupNewPlace = document.querySelector('#popupNewPlace')
 const formAddEl = popupNewPlace.querySelector('#popupNewPlaceForm')
 // Находим поля ввода названия и ссылки новой карточки
-const popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputName')
-const popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputLink')
+const popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputTypeName')
+const popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputTypeLink')
 // Находим кнопку закртытия попапа
 const popupAddCloseBtn = popupNewPlace.querySelector('#popupNewPlaceCloseBtn')
 
@@ -196,7 +196,7 @@ function handleBtnLike(event) {
   const targetItem = targetBtnLikeEl.classList.toggle('element__likeButton_active');
 }
 
-// Кнопка закрытия попапа добавления нового места
+// Кнопка закрытия попапа нового места
 popupAddCloseBtn.addEventListener('click', () => handlePopupClose(popupNewPlace))
 
 // Кнопка закрытия попапа с картинкой

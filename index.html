@@ -27,8 +27,8 @@
             <div class="profile__user-description">
               <h1 class="profile__user-name" id="profileUserName">Жак-Ив Кусто
               </h1>
-              <p class="profile__user-specialization"
-                id="profilUserSpecialization">Исследователь океана</p>
+              <p class="profile__userJob"
+                id="profileUserJob">Исследователь океана</p>
             </div>
             <button class="profile__edit-button" id="profileEditButton"
               type="button" name="editButton"></button>
@@ -47,22 +47,22 @@
     </main>
 
     <!-- Popup UserProfile-->
-    <div class="popup" id="popupUserProfile">
+    <div class="popup" id="popupProfile">
       <div class="popup__container">
-        <form class="popup__form" id="popupUserProfileForm" action="#"
-          name="popupUserProfile">
+        <form class="popup__form" id="popupProfileForm" action="#"
+          name="popupProfile">
           <h2 class="popup__title">
             Редактировать профиль
           </h2>
-          <input class="popup__input" id="popupUserProfileInputTypeName"
+          <input class="popup__input" id="popupProfileInputTypeName"
             type="text" name="inputName" required="" value="" placeholder="Имя">
-          <input class="popup__input" id="popupUserProfileInputTypeJob"
+          <input class="popup__input" id="popupProfileInputTypeJob"
             type="text" name="inputJob" required="" value=""
             placeholder="О себе">
           <button class="popup__save-button" type="submit"
             name="saveButton">Сохранить</button>
         </form>
-        <button class="popup__closeButton" type="button"
+        <button class="popup__closeButton" id="popupProfileCloseBtn" type="button"
           name="closeButton"></button>
       </div>
     </div>
@@ -76,9 +76,9 @@
           <h2 class="popup__title">
             Новое место
           </h2>
-          <input class="popup__input" id="popupNewPlaceInputName" type="text"
+          <input class="popup__input" id="popupNewPlaceInputTypeName" type="text"
             name="inputName" required="" value="" placeholder="Название">
-          <input class="popup__input" id="popupNewPlaceInputLink" type="text"
+          <input class="popup__input" id="popupNewPlaceInputTypeLink" type="text"
             name="inputJob" required="" value=""
             placeholder="Ссылка на картинку">
           <button class="popup__save-button" type="submit"
