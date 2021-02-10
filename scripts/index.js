@@ -1,24 +1,23 @@
 // Находим контейнер с попапом
-const popup = document.querySelector('.popup');
+const popup = document.querySelector('#popupUserProfile');
 
 // Находим кнопки, при нажатии на которые попап будет открываться и закрываться
 const popupOpenButton = document.querySelector('#profileEditButton');
-const popupCloseButton = popup.querySelector('.popup__close-button');
+const popupCloseButton = popup.querySelector('.popup__closeButton');
 
 // Находим поля, куда будут подставлены новые значения из полей формы
-let userName = document.querySelector('#profileUserName');
-let userJob = document.querySelector('#profilUserSpecialization');
+const userName = document.querySelector('#profileUserName');
+const userJob = document.querySelector('#profilUserSpecialization');
 
 // Находим форму в DOM
 const formElement = popup.querySelector('#popupUserProfileForm');
 // Находим поля формы в DOM
-let nameInput = popup.querySelector('#popupUserProfileInputTypeName');
-let jobInput = popup.querySelector('#popupUserProfileInputTypeJob');
+const nameInput = popup.querySelector('#popupUserProfileInputTypeName');
+const jobInput = popup.querySelector('#popupUserProfileInputTypeJob');
 
 
 // Обработчик открытия "попапа"
 const handlePopupOpen = function (element) {
-  // Открываем "попап" добавляя к нему модификатор ".popup_open" со свойством display:flex
   element.classList.add('popup_open');
 }
 
@@ -27,6 +26,7 @@ const handlePopupClose = function (element) {
   element.classList.remove('popup_open');
 }
 
+// Обработчик открытия формы
 const handlePopupProfileOpen = function () {
   handlePopupOpen(popup);
 
@@ -85,8 +85,8 @@ const addButtonEl = document.querySelector('#profileAddButton')
 const popupNewPlace = document.querySelector('#popupNewPlace')
 const formAddEl = popupNewPlace.querySelector('#popupAddForm')
 // Находим поля ввода названия и ссылки новой карточки
-let popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputName')
-let popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputLink')
+const popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputName')
+const popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputLink')
 // Находим кнопку закртытия попапа
 const popupAddCloseBtn = popupNewPlace.querySelector('#popupNewPlaceCloseBtn')
 
