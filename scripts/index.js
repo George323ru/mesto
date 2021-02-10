@@ -82,13 +82,13 @@ const initialCards = [{
 // Находим кнопку открытия попапа для добавления новго места
 const addButtonEl = document.querySelector('#profileAddButton')
 // Находим попап вместе с формой для добавления нового места
-const popupAddMesto = document.querySelector('#popupNewMesto')
-const formAddEl = popupAddMesto.querySelector('#popupAddForm')
+const popupNewPlace = document.querySelector('#popupNewPlace')
+const formAddEl = popupNewPlace.querySelector('#popupAddForm')
 // Находим поля ввода названия и ссылки новой карточки
-const popupImgInputName = popupAddMesto.querySelector('#popupMestoName')
-const popupImgInputLink = popupAddMesto.querySelector('#popupMestoLink')
+const popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputName')
+const popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputLink')
 // Находим кнопку закртытия попапа
-const popupAddCloseBtn = popupAddMesto.querySelector('#closeButtonAdd')
+const popupAddCloseBtn = popupNewPlace.querySelector('#popupNewPlaceCloseBtn')
 
 // Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
 const listContainerEl = document.querySelector('.elements__element-list')
@@ -158,7 +158,7 @@ function getItem(item) {
   return newItem;
 }
 
-addButtonEl.addEventListener('click', () => handlePopupImgOpen(popupAddMesto))
+addButtonEl.addEventListener('click', () => handlePopupImgOpen(popupNewPlace))
 
 // Форма добавления новой карточки на станицу,
 // которая появляется вместе с popup при нажатии на кнопку добавить(addButtonEl)
@@ -166,8 +166,8 @@ function formAddSubmitHandler(evt) {
   evt.preventDefault(); // Отменяем стандартную отправку формы
 
   // Сохраняем значения, полученные из input'ов формы
-  const inputText = popupImgInputName.value;
-  const inputSrc = popupImgInputLink.value;
+  const inputText = popupNewPlaceInputName.value;
+  const inputSrc = popupNewPlaceInputLink.value;
 
   // Значение, полученное из input мы добавляем в поля name и link объектов массива
   // создаваемого с помощью функции getItem() элемента
@@ -181,11 +181,11 @@ function formAddSubmitHandler(evt) {
   listContainerEl.prepend(listItem)
 
   // Очищаем input формы
-  popupImgInputName.value = '';
-  popupImgInputLink.value = '';
+  popupNewPlaceInputName.value = '';
+  popupNewPlaceInputLink.value = '';
 
   // Закрываем popup
-  handlePopupImgClose(popupAddMesto)
+  handlePopupImgClose(popupNewPlace)
 }
 
 // Кнопка закрытия формы
@@ -208,7 +208,7 @@ function handleBtnLike(event) {
 }
 
 // Кнопка закрытия попапа добавления нового места
-popupAddCloseBtn.addEventListener('click', () => handlePopupImgClose(popupAddMesto))
+popupAddCloseBtn.addEventListener('click', () => handlePopupImgClose(popupNewPlace))
 
 // Кнопка закрытия попапа с картинкой
 popupImgCloseBtn.addEventListener('click', () => handlePopupImgClose(popupImg))
