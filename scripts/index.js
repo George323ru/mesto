@@ -33,8 +33,6 @@ const handlePopupOpen = function (element) {
   })
 }
 
-
-
 // Обработчик закрытия "попапа"
 const handlePopupClose = function (element) {
   element.classList.remove('popup_open');
