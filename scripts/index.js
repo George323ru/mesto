@@ -19,6 +19,12 @@ const popupProfileInputTypeJob = popupProfile.querySelector('#popupProfileInputT
 // Обработчик открытия "попапа"
 const handlePopupOpen = function (element) {
   element.classList.add('popup_open');
+
+  element.addEventListener('click', e => {
+    if (e.target.classList.contains('popup')) {
+      e.target.classList.remove('popup_open');
+    }
+  })
 }
 
 // Обработчик закрытия "попапа"
@@ -54,29 +60,29 @@ popupProfileFormEL.addEventListener('submit', formSubmitHandler);
 
 // Шесть карточек «из коробки», которые сразу добавляются на главную страницу
 const initialCards = [{
-  name: 'Архыз',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-},
-{
-  name: 'Челябинская область',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-},
-{
-  name: 'Тюмень',
-  link: 'https://sdelanounas.ru/i/a/w/1/f_aW1nLmdlbGlvcGhvdG8uY29tL3Rtbi81NV90dW1lbi5qcGc_X19pZD0xMTM2MjM=.jpeg'
-},
-{
-  name: 'Сургут',
-  link: 'https://barcaffe.ru/wp-content/uploads/2020/07/28_surgut2020.jpg'
-},
-{
-  name: 'Холмогорский район',
-  link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-},
-{
-  name: 'Байкал',
-  link: 'https://im0-tub-ru.yandex.net/i?id=ba9010e38898e7d960c5374cc0f0d746-l&n=13'
-}
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Тюмень',
+    link: 'https://sdelanounas.ru/i/a/w/1/f_aW1nLmdlbGlvcGhvdG8uY29tL3Rtbi81NV90dW1lbi5qcGc_X19pZD0xMTM2MjM=.jpeg'
+  },
+  {
+    name: 'Сургут',
+    link: 'https://barcaffe.ru/wp-content/uploads/2020/07/28_surgut2020.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://im0-tub-ru.yandex.net/i?id=ba9010e38898e7d960c5374cc0f0d746-l&n=13'
+  }
 ];
 
 // Находим кнопку открытия попапа для добавления новго места
@@ -93,7 +99,7 @@ const popupNewPlaceCloseBtn = popupNewPlace.querySelector('#popupNewPlaceCloseBt
 // Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
 const elementListContainer = document.querySelector('.elements__element-list')
 // Находим шаблон, по которому будем создавать новые карточки
-const templateEl = document.querySelector('.template')
+const templateEl = document.querySelector('#elementTemplate')
 
 // Находим попап, в котором будет появлятся картинка в увеличенном виде
 const popupImg = document.querySelector('#popupImgZoom')
@@ -137,11 +143,11 @@ function getItem(item) {
   })
 
   // Оживляем кнопку удаления
-  const removeBtn = newItems.querySelector('#buttonDelete')
-  removeBtn.addEventListener('click', handleDeleteCard);
+  const elementDeleteBtn = newItems.querySelector('#elementDeleteBtn')
+  elementDeleteBtn.addEventListener('click', handleDeleteCard);
   // Оживляем у каждой карточки кнопку лайк
-  const likeButtonEl = newItems.querySelector('#likeButton')
-  likeButtonEl.addEventListener('click', handleBtnLike);
+  const elementLikeBtn = newItems.querySelector('#elementLikeBtn')
+  elementLikeBtn.addEventListener('click', handleBtnLike);
 
   // Возращаем созданый шаблон
   return newItems;
@@ -184,7 +190,7 @@ popupNewPlaceForm.addEventListener('submit', formAddSubmitHandler)
 function handleDeleteCard(event) {
   const targetDeleteEl = event.target; // Выбираем кнопку через специальное свойство target
   // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
-  const targetItem = targetDeleteEl.closest('.element');
+  const targetItem = targetDeleteEl.closest('#element');
   targetItem.remove() // Функция удаления элемента
 }
 
