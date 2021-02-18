@@ -15,11 +15,20 @@ const popupProfileFormEL = popupProfile.querySelector('#popupProfileForm');
 const popupProfileInputTypeName = popupProfile.querySelector('#popupProfileInputTypeName');
 const popupProfileInputTypeJob = popupProfile.querySelector('#popupProfileInputTypeJob');
 
-
 // Обработчик открытия "попапа"
 const handlePopupOpen = function (element) {
   element.classList.add('popup_open');
 
+  handlePopupCloseOverlayEsc(element);
+}
+
+// Обработчик закрытия "попапа"
+const handlePopupClose = function (element) {
+  element.classList.remove('popup_open');
+}
+
+// Обработчик закрытия попапа через Overlay и Esc
+const handlePopupCloseOverlayAndEsc = (element) => {
   element.addEventListener('click', e => {
     if (e.target.classList.contains('popup')) {
       e.target.classList.remove('popup_open');
@@ -31,11 +40,6 @@ const handlePopupOpen = function (element) {
       element.classList.remove('popup_open');
     }
   })
-}
-
-// Обработчик закрытия "попапа"
-const handlePopupClose = function (element) {
-  element.classList.remove('popup_open');
 }
 
 // Обработчик открытия формы
