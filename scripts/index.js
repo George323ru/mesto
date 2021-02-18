@@ -25,7 +25,15 @@ const handlePopupOpen = function (element) {
       e.target.classList.remove('popup_open');
     }
   })
+
+  document.addEventListener('keydown', e => {
+    if (e.key == 'Escape') {
+      element.classList.remove('popup_open');
+    }
+  })
 }
+
+
 
 // Обработчик закрытия "попапа"
 const handlePopupClose = function (element) {
