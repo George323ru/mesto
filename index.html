@@ -52,7 +52,7 @@
             required value="" placeholder="Имя" minlength="7">
           <span class="popup__input_error" id="popupProfileInputTypeName-error"></span>
           <input class="popup__input" id="popupProfileInputTypeJob" type="text" name="popupProfileInputTypeJob"
-            required="" value="" placeholder="О себе" minlength="3">
+            required="" value="" placeholder="О себе" minlength="5">
           <span class="popup__input-error popup__form-error" id="popupProfileInputTypeJob-error"></span>
           <button class="popup__save-button" type="submit" name="saveButton">Сохранить</button>
         </form>
@@ -69,9 +69,11 @@
             Новое место
           </h2>
           <input class="popup__input" id="popupNewPlaceInputTypeName" type="text" name="popupNewPlaceInputTypeName"
-            required="" value="" placeholder="Название">
+            required="" value="" placeholder="Название" minlength="5">
+          <span class="popup__input_error" id="popupNewPlaceInputTypeName-error"></span>
           <input class="popup__input" id="popupNewPlaceInputTypeLink" type="text" name="popupNewPlaceInputTypeLink"
-            required="" value="" placeholder="Ссылка на картинку">
+            required="" value="" placeholder="Ссылка на картинку" minlength="5">
+          <span class="popup__input_error" id="popupNewPlaceInputTypeLink-error"></span>
           <button class="popup__save-button" type="submit" name="saveButton">Создать</button>
         </form>
         <button class="popup__closeButton" id="popupNewPlaceCloseBtn" type="button" name="closeButton"></button>
