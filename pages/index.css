@@ -37,3 +37,4 @@
 @import url(../blocks/popup/__placeName/popup__placeName.css);
 @import url(../blocks/popup/__wrapPic/popup__wrapPic.css);
 @import url(../blocks/section/_size/section_size_small.css);
+@import url(../blocks/popup/__input-error/popup__input-error.css)

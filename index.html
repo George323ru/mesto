@@ -8,6 +8,7 @@
   <link rel="icon" href="./favicon.ico">
   <link rel="stylesheet" href="./pages/index.css">
   <script defer src="./scripts/index.js"></script>
+  <script defer src="./scripts/validate.js"></script>
 </head>
 
 <body class="body">
@@ -45,14 +46,14 @@
     <!-- Popup UserProfile-->
     <div class="popup" id="popupProfile">
       <div class="popup__container">
-        <form class="popup__form" id="popupProfileForm" action="#" name="popupProfile">
+        <form class="popup__form" id="popupProfileForm" action="#" name="popupProfile" novalidate>
           <h2 class="popup__title">Редактировать профиль</h2>
-          <input class="popup__input" id="popupProfileInputTypeName" type="text" name="inputName" required value=""
-            placeholder="Имя" minlength="7">
-          <span class="popup__form_type_error"></span>
-          <input class="popup__input" id="popupProfileInputTypeJob" type="text" name="inputJob" required="" value=""
-            placeholder="О себе">
-          <span class="popup__form-error popup__form-error"></span>
+          <input class="popup__input" id="popupProfileInputTypeName" type="text" name="popupProfileInputTypeName"
+            required value="" placeholder="Имя" minlength="7">
+          <span class="popup__input_error" id="popupProfileInputTypeName-error"></span>
+          <input class="popup__input" id="popupProfileInputTypeJob" type="text" name="popupProfileInputTypeJob"
+            required="" value="" placeholder="О себе" minlength="3">
+          <span class="popup__input-error popup__form-error" id="popupProfileInputTypeJob-error"></span>
           <button class="popup__save-button" type="submit" name="saveButton">Сохранить</button>
         </form>
         <button class="popup__closeButton" id="popupProfileCloseBtn" type="button" name="closeButton"></button>
@@ -63,14 +64,14 @@
     <!-- Popup Add New Place -->
     <div class="popup" id="popupNewPlace">
       <div class="popup__container">
-        <form class="popup__form" id="popupNewPlaceForm" action="#" name="popupMainForm">
+        <form class="popup__form" id="popupNewPlaceForm" action="#" name="popupMainForm" novalidate>
           <h2 class="popup__title">
             Новое место
           </h2>
-          <input class="popup__input" id="popupNewPlaceInputTypeName" type="text" name="inputName" required="" value=""
-            placeholder="Название">
-          <input class="popup__input" id="popupNewPlaceInputTypeLink" type="text" name="inputJob" required="" value=""
-            placeholder="Ссылка на картинку">
+          <input class="popup__input" id="popupNewPlaceInputTypeName" type="text" name="popupNewPlaceInputTypeName"
+            required="" value="" placeholder="Название">
+          <input class="popup__input" id="popupNewPlaceInputTypeLink" type="text" name="popupNewPlaceInputTypeLink"
+            required="" value="" placeholder="Ссылка на картинку">
           <button class="popup__save-button" type="submit" name="saveButton">Создать</button>
         </form>
         <button class="popup__closeButton" id="popupNewPlaceCloseBtn" type="button" name="closeButton"></button>
@@ -109,8 +110,6 @@
     </li>
   </template>
   <!-- /Template for block Element -->
-
-
 </body>
 
 </html>
