@@ -3,7 +3,7 @@
 // Показываем сообщение с ошибкой
 const showInputError = (formElement, inputElement, errorMessage) => {
   // console.log(errorMessage)
-  // Находим элемент для текста ошибки
+  // Находим элемент span для текста ошибки
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add('form__input_type_error');
   errorElement.textContent = errorMessage;
@@ -20,10 +20,8 @@ const hideInputError = (formElement, inputElement) => {
 
 // Проверяем "инпуты" на валидность
 const checkInputValidity = (formElement, inputElement) => {
-  const isInputElNotValid = !inputElement.validity.valid;
-
-  // Условия, при которых будет показана ошибка
-  if (isInputElNotValid) {
+  // Условие, при которых будет показана ошибка
+  if (!inputElement.validity.valid) {
     showInputError(formElement, inputElement, inputElement.validationMessage);
   } else {
     hideInputError(formElement, inputElement);
@@ -70,7 +68,7 @@ const enableValidation = () => {
   // Создаем массив из всех форм
   const formList = Array.from(document.querySelectorAll('.popup__form'));
 
-  // На каждую форму навешиваем событие
+  // На элементы каждой формы навешиваем событие
   formList.forEach(setEventListeners)
 }
 
