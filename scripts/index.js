@@ -95,7 +95,7 @@ const initialCards = [{
   }
 ];
 
-// Находим кнопку открытия попапа для добавления новго места
+// Находим кнопку открытия попапа для добавления нового места
 const popupNewPlaceAddBtn = document.querySelector('#profileAddButton')
 // Находим попап вместе с формой для добавления нового места
 const popupNewPlace = document.querySelector('#popupNewPlace')
@@ -103,7 +103,7 @@ const popupNewPlaceForm = popupNewPlace.querySelector('#popupNewPlaceForm')
 // Находим поля ввода названия и ссылки новой карточки
 const popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputTypeName')
 const popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputTypeLink')
-// Находим кнопку закртытия попапа
+// Находим кнопку закрытия попапа
 const popupNewPlaceCloseBtn = popupNewPlace.querySelector('#popupNewPlaceCloseBtn')
 
 // Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
@@ -111,7 +111,7 @@ const elementListContainer = document.querySelector('.elements__element-list')
 // Находим шаблон, по которому будем создавать новые карточки
 const templateEl = document.querySelector('#elementTemplate')
 
-// Находим попап, в котором будет появлятся картинка в увеличенном виде
+// Находим попап, в котором будет появляться картинка в увеличенном виде
 const popupImg = document.querySelector('#popupImgZoom')
 // Находим кнопку закрытия попапа с увеличенной картинкой
 const popupImgCloseBtn = popupImg.querySelector('#popupImgCloseBtn')
@@ -120,7 +120,7 @@ const popupImgPicEl = popupImg.querySelector('#popupImgPic')
 const popupImgNameEl = popupImg.querySelector('#popupImgName')
 
 // Обработчик отрисовки карточек из массива initialCards и новых карточек,
-// которые будут добавленны на страницу
+// которые будут добавлены на страницу
 function render() {
   // Преобразуем массив initialCards в новый массив renderHtml,
   // добавляем к каждому элементу разметку из шаблона templateEl
@@ -137,10 +137,10 @@ render();
 function getItem(item) {
   // Клонируем все элементы шаблона в константу
   const newItems = templateEl.content.cloneNode(true);
-  // Ищем header и img в склонированных элементах шаблона
+  // Ищем header и img в клонированных элементах шаблона
   const titleEl = newItems.querySelector('.element__title')
   const imgEl = newItems.querySelector('.element__image')
-  // Добавляем из массива initialCards название заголовка и ссылку в склонированный шаблон
+  // Добавляем из массива initialCards название заголовка и ссылку в клонированный шаблон
   titleEl.textContent = item.name;
   imgEl.src = item.link;
   imgEl.alt = item.name;
@@ -159,7 +159,7 @@ function getItem(item) {
   const elementLikeBtn = newItems.querySelector('#elementLikeBtn')
   elementLikeBtn.addEventListener('click', handleBtnLike);
 
-  // Возращаем созданый шаблон
+  // Возвращаем созданный шаблон
   return newItems;
 }
 
@@ -181,7 +181,7 @@ function formAddSubmitHandler(evt) {
     link: inputSrc
   });
 
-  // Добавляем создвнные по шаблону элементы в начало разметки блока elements__element-list
+  // Добавляем созданные по шаблону элементы в начало разметки блока elements__element-list
   // с помощью метода prepend()
   elementListContainer.prepend(listItem)
 
@@ -196,7 +196,7 @@ function formAddSubmitHandler(evt) {
 // Кнопка закрытия формы добавления нового места
 popupNewPlaceForm.addEventListener('submit', formAddSubmitHandler)
 
-// Удаление выбраной карточки
+// Удаление выбранной карточки
 function handleDeleteCard(event) {
   const targetDeleteEl = event.target; // Выбираем кнопку через специальное свойство target
   // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
