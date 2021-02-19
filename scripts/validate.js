@@ -3,6 +3,7 @@
 // Показываем сообщение с ошибкой
 const showInputError = (formElement, inputElement, errorMessage) => {
   // console.log(errorMessage)
+  // Находим элемент для текста ошибки
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   inputElement.classList.add('form__input_type_error');
   errorElement.textContent = errorMessage;
@@ -37,11 +38,11 @@ const checkInputValidity = (formElement, inputElement) => {
 //   }
 // }
 
-const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
-    return !inputElement.validity.valid;
-  })
-}
+// const hasInvalidInput = (inputList) => {
+//   return inputList.some((inputElement) => {
+//     return !inputElement.validity.valid;
+//   })
+// }
 
 const setEventListeners = (formElement) => {
   // Отменяем стандартную отправку формы
