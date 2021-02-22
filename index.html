@@ -49,10 +49,10 @@
         <form class="popup__form" id="popupProfileForm" action="#" name="popupProfile" novalidate>
           <h2 class="popup__title">Редактировать профиль</h2>
           <input class="popup__input" id="popupProfileInputTypeName" type="text" name="popupProfileInputTypeName"
-            required value="" placeholder="Имя" minlength="7">
+            required value="" placeholder="Имя" minlength="2" maxlength="40">
           <span class="popup__input-error" id="popupProfileInputTypeName-error"></span>
-          <input class="popup__input" id="popupProfileInputTypeJob" type="text" name="popupProfileInputTypeJob"
-            required="" value="" placeholder="О себе" minlength="5">
+          <input class="popup__input" id="popupProfileInputTypeJob" type="text" name="popupProfileInputTypeJob" required
+            value="" placeholder="О себе" minlength="2" maxlength="200">
           <span class="popup__input-error popup__form-error" id="popupProfileInputTypeJob-error"></span>
           <button class="popup__saveBtn" type="submit" name="saveButton">Сохранить</button>
         </form>
@@ -69,10 +69,10 @@
             Новое место
           </h2>
           <input class="popup__input" id="popupNewPlaceInputTypeName" type="text" name="popupNewPlaceInputTypeName"
-            required="" value="" placeholder="Название" minlength="5">
+            required value="" placeholder="Название" minlength="2" maxlength="30">
           <span class="popup__input-error" id="popupNewPlaceInputTypeName-error"></span>
-          <input class="popup__input" id="popupNewPlaceInputTypeLink" type="text" name="popupNewPlaceInputTypeLink"
-            required="" value="" placeholder="Ссылка на картинку">
+          <input class="popup__input" id="popupNewPlaceInputTypeLink" type="url" name="popupNewPlaceInputTypeLink"
+            required value="" placeholder="Ссылка на картинку">
           <span class="popup__input-error" id="popupNewPlaceInputTypeLink-error"></span>
           <button class="popup__saveBtn" type="submit" name="saveButton">Создать</button>
         </form>
