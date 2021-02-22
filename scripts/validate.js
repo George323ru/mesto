@@ -22,12 +22,15 @@ const hideInputError = (formElement, inputElement) => {
 // Обработчик состояния кнопки
 const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
-    buttonElement.classList.add('popup__submit_inactive');
+    buttonElement.setAttribute('disabled', true);
+    buttonElement.classList.add('popup__saveBtn_inactive');
   } else {
-    buttonElement.classList.remove('popup__submit_inactive');
+    buttonElement.removeAttribute('disabled');
+    buttonElement.classList.remove('popup__saveBtn_inactive');
   }
 }
 
+// Проверяем инпуты на валидность
 const hasInvalidInput = (inputList) => {
   return inputList.some((inputElement) => {
     return !inputElement.validity.valid;
@@ -61,7 +64,7 @@ const setEventListeners = (formElement) => {
     inputElement.addEventListener('input', (evt) => {
 
       checkInputValidity(formElement, inputElement);
-      // toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement);
     });
   });
 };
