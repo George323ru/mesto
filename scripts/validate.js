@@ -1,32 +1,31 @@
 // Валидация формы
 
 // Показываем сообщение с ошибкой
-const showInputError = (formElement, inputElement, errorMessage) => {
-  // console.log(errorMessage)
+const showInputError = (formElement, inputElement, errorMessage, options) => {
   // Находим элемент span с id как у инпута для текста ошибки
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.add('popup__input_type_error');
+  inputElement.classList.add(options.inputErrorClass);
   errorElement.textContent = errorMessage;
   // Добавляем класс для появления ошибки
-  errorElement.classList.add('popup__input-error_active');
+  errorElement.classList.add(options.errorClass);
 };
 
 // Прячем сообщение с ошибкой
-const hideInputError = (formElement, inputElement) => {
+const hideInputError = (formElement, inputElement, options) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__input-error_active');
+  inputElement.classList.remove(options.inputErrorClass);
+  errorElement.classList.remove(options.errorClass);
   errorElement.textContent = '';
 };
 
 // Обработчик состояния кнопки
-const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement, options) => {
   if (hasInvalidInput(inputList)) {
     buttonElement.setAttribute('disabled', true);
-    buttonElement.classList.add('popup__saveBtn_inactive');
+    buttonElement.classList.add(options.inactiveButtonClass);
   } else {
     buttonElement.removeAttribute('disabled');
-    buttonElement.classList.remove('popup__saveBtn_inactive');
+    buttonElement.classList.remove(options.inactiveButtonClass);
   }
 }
 
@@ -38,44 +37,57 @@ const hasInvalidInput = (inputList) => {
 }
 
 // Проверяем все "инпуты" на валидность для показа сообщения об ошибке
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, options) => {
   // Условие, при которых будет показана ошибка
   if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+    showInputError(formElement, inputElement, inputElement.validationMessage, options);
   } else {
-    hideInputError(formElement, inputElement);
+    hideInputError(formElement, inputElement, options);
   }
 };
 
-const setEventListeners = (formElement) => {
-  // Отменяем стандартную отправку формы
-  formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-  });
+// События для формы
+const setEventListeners = (formElement, options) => {
 
   // Создаем массив из всех "инпутов"
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
-  const buttonElement = formElement.querySelector('.popup__saveBtn')
+  const inputList = Array.from(formElement.querySelectorAll(options.inputSelector));
+  const buttonElement = formElement.querySelector(options.submitButtonSelector)
 
-  toggleButtonState(inputList, buttonElement);
+  toggleButtonState(inputList, buttonElement, options);
 
   // На каждый "инпут" навешиваем событие
   inputList.forEach(inputElement => {
     inputElement.addEventListener('input', (evt) => {
       // Проверка инпута на валидность
-      checkInputValidity(formElement, inputElement);
+      checkInputValidity(formElement, inputElement, options);
       // Блокировка кнопки sumbit в случае не валидности одного из полей ввода
-      toggleButtonState(inputList, buttonElement);
+      toggleButtonState(inputList, buttonElement, options);
     });
   });
 };
 
-const enableValidation = () => {
+const enableValidation = (options) => {
   // Создаем массив из всех форм
-  const formList = Array.from(document.querySelectorAll('.popup__form'));
+  const formList = Array.from(document.querySelectorAll(options.formSelector));
 
   // На элементы каждой формы навешиваем событие
-  formList.forEach(setEventListeners)
+  formList.forEach((formElement) => {
+    // Отменяем стандартную отправку формы
+    formElement.addEventListener('submit', (evt) => {
+      evt.preventDefault();
+    });
+
+    setEventListeners(formElement, options);
+  });
 }
 
-enableValidation();
+// enableValidation();
+
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__saveBtn',
+  inactiveButtonClass: 'popup__saveBtn_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+});
