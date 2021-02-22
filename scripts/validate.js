@@ -37,7 +37,7 @@ const hasInvalidInput = (inputList) => {
   })
 }
 
-// Проверяем "инпуты" на валидность
+// Проверяем все "инпуты" на валидность для показа сообщения об ошибке
 const checkInputValidity = (formElement, inputElement) => {
   // Условие, при которых будет показана ошибка
   if (!inputElement.validity.valid) {
@@ -62,8 +62,9 @@ const setEventListeners = (formElement) => {
   // На каждый "инпут" навешиваем событие
   inputList.forEach(inputElement => {
     inputElement.addEventListener('input', (evt) => {
-
+      // Проверка инпута на валидность
       checkInputValidity(formElement, inputElement);
+      // Блокировка кнопки sumbit в случае не валидности одного из полей ввода
       toggleButtonState(inputList, buttonElement);
     });
   });
