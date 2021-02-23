@@ -48,6 +48,10 @@ const checkInputValidity = (formElement, inputElement, options) => {
 
 // События для формы
 const setEventListeners = (formElement, options) => {
+  // Отменяем стандартную отправку формы
+  formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+  });
 
   // Создаем массив из всех "инпутов"
   const inputList = Array.from(formElement.querySelectorAll(options.inputSelector));
@@ -72,11 +76,6 @@ const enableValidation = (options) => {
 
   // На элементы каждой формы навешиваем событие
   formList.forEach((formElement) => {
-    // Отменяем стандартную отправку формы
-    formElement.addEventListener('submit', (evt) => {
-      evt.preventDefault();
-    });
-
     setEventListeners(formElement, options);
   });
 }

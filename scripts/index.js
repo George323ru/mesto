@@ -119,8 +119,7 @@ const popupImgCloseBtn = popupImg.querySelector('#popupImgCloseBtn')
 const popupImgPicEl = popupImg.querySelector('#popupImgPic')
 const popupImgNameEl = popupImg.querySelector('#popupImgName')
 
-// Обработчик отрисовки карточек из массива initialCards и новых карточек,
-// которые будут добавлены на страницу
+// Обработчик отрисовки карточек из массива initialCards
 function render() {
   // Преобразуем массив initialCards в новый массив renderHtml,
   // добавляем к каждому элементу разметку из шаблона templateEl
@@ -129,6 +128,8 @@ function render() {
   // Вставляем преобразовавшийся массив в разметку
   elementListContainer.append(...renderHtml)
 }
+
+
 
 // Вызываем функцию отрисовки карточек
 render();
@@ -151,6 +152,7 @@ function getItem(item) {
     popupImgPicEl.src = item.link;
     popupImgNameEl.textContent = item.name;
   })
+
 
   // Оживляем кнопку удаления
   const elementDeleteBtn = newItems.querySelector('#elementDeleteBtn')
