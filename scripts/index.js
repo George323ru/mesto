@@ -29,46 +29,46 @@ const initialCards = [{
 const popup = document.querySelectorAll('.popup')
 
 // Находим контейнер с попапом
-const popupProfile = document.querySelector('#popupProfile');
+const popupProfile = document.querySelector('.popup_type_profile');
 
 // Находим кнопки, при нажатии на которые попап будет открываться и закрываться
-const popupProfileOpenBtn = document.querySelector('#profileEditButton');
-const popupProfileCloseBtn = popupProfile.querySelector('#popupProfileCloseBtn');
+const popupProfileOpenBtn = document.querySelector('.profile__editBtn');
+const popupProfileCloseBtn = popupProfile.querySelector('.popup__closeButton_type_profile');
 
 // Находим поля, куда будут подставлены новые значения из полей формы
-const profileUserName = document.querySelector('#profileUserName');
-const profileUserJob = document.querySelector('#profileUserJob');
+const profileUserName = document.querySelector('.profile__user-name');
+const profileUserJob = document.querySelector('.profile__userJob');
 
 // Находим форму в DOM
-const popupProfileFormEL = popupProfile.querySelector('#popupProfileForm');
+const popupProfileFormEL = popupProfile.querySelector('.popup__form_type_profile');
 // Находим поля формы в DOM
-const popupProfileInputTypeName = popupProfile.querySelector('#popupProfileInputTypeName');
-const popupProfileInputTypeJob = popupProfile.querySelector('#popupProfileInputTypeJob');
+const popupProfileInputTypeName = popupProfile.querySelector('.popup__input_type_profileName');
+const popupProfileInputTypeJob = popupProfile.querySelector('.popup__input_type_profileJob');
 
 // Находим кнопку открытия попапа для добавления нового места
-const popupNewPlaceAddBtn = document.querySelector('#profileAddButton')
-// Находим попап вместе с формой для добавления нового места
-const popupNewPlace = document.querySelector('#popupNewPlace')
-const popupNewPlaceForm = popupNewPlace.querySelector('#popupNewPlaceForm')
+const popupNewPlaceAddBtn = document.querySelector('.profile__add-button')
+// Находим попап добавления нового места вместе с формой
+const popupNewPlace = document.querySelector('.popup_type_newPlace')
+const popupNewPlaceForm = popupNewPlace.querySelector('.popup__form_type_newPlace')
 // Находим поля ввода названия и ссылки новой карточки
-const popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputTypeName')
-const popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputTypeLink')
+const popupNewPlaceInputName = popupNewPlace.querySelector('.popup__input_type_newPlaceTypeName')
+const popupNewPlaceInputLink = popupNewPlace.querySelector('.popup__input_type_newPlaceTypeLink')
 // Находим кнопку закрытия и отправки формы попапа
-const popupNewPlaceCloseBtn = popupNewPlace.querySelector('#popupNewPlaceCloseBtn')
+const popupNewPlaceCloseBtn = popupNewPlace.querySelector('.popup__closeButton_type_newPlace')
 const submitBtn = popupNewPlaceForm.querySelector('.popup__saveBtn')
 
 // Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
 const elementListContainer = document.querySelector('.elements__element-list')
 // Находим шаблон, по которому будем создавать новые карточки
-const templateEl = document.querySelector('#elementTemplate')
+const templateEl = document.querySelector('.templateEl')
 
 // Находим попап, в котором будет появляться картинка в увеличенном виде
-const popupImg = document.querySelector('#popupImgZoom')
+const popupImg = document.querySelector('.popup_type_img')
 // Находим кнопку закрытия попапа с увеличенной картинкой
-const popupImgCloseBtn = popupImg.querySelector('#popupImgCloseBtn')
+const popupImgCloseBtn = popupImg.querySelector('.popup__closeButton_type_img')
 // Находим картинку и заголовок карточки, которая будет увеличена
-const popupImgPicEl = popupImg.querySelector('#popupImgPic')
-const popupImgNameEl = popupImg.querySelector('#popupImgName')
+const popupImgPicEl = popupImg.querySelector('.popup__picture_type_img')
+const popupImgNameEl = popupImg.querySelector('.popup__placeName_type_img')
 // Код клавиши Escape
 const escCode = 'Escape';
 
@@ -162,10 +162,10 @@ function getItem(item) {
 
 
   // Оживляем кнопку удаления
-  const elementDeleteBtn = newItems.querySelector('#elementDeleteBtn')
+  const elementDeleteBtn = newItems.querySelector('.element__buttonDelete')
   elementDeleteBtn.addEventListener('click', handleDeleteCard);
   // Оживляем у каждой карточки кнопку лайк
-  const elementLikeBtn = newItems.querySelector('#elementLikeBtn')
+  const elementLikeBtn = newItems.querySelector('.element__likeButton')
   elementLikeBtn.addEventListener('click', handleBtnLike);
 
   // Возвращаем созданный шаблон
