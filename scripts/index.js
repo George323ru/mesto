@@ -105,6 +105,7 @@ const popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputT
 const popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputTypeLink')
 // Находим кнопку закрытия попапа
 const popupNewPlaceCloseBtn = popupNewPlace.querySelector('#popupNewPlaceCloseBtn')
+const submitBtn = popupNewPlaceForm.querySelector('.popup__saveBtn')
 
 // Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
 const elementListContainer = document.querySelector('.elements__element-list')
@@ -183,12 +184,14 @@ function formAddSubmitHandler(evt) {
   });
 
   // Добавляем созданные по шаблону элементы в начало разметки блока elements__element-list
-  // с помощью метода prepend()
   elementListContainer.prepend(listItem)
 
   // Очищаем input формы
   popupNewPlaceInputName.value = '';
   popupNewPlaceInputLink.value = '';
+
+  // Деактивация кнопки submit
+  handleBtnInactive(submitBtn)
 
   // Закрываем popup
   handlePopupClose(popupNewPlace)
@@ -196,6 +199,12 @@ function formAddSubmitHandler(evt) {
 
 // Кнопка закрытия формы добавления нового места
 popupNewPlaceForm.addEventListener('submit', formAddSubmitHandler)
+
+// Обработчик блокировки кнопки
+function handleBtnInactive(buttonEl) {
+  buttonEl.setAttribute('disabled', true);
+  buttonEl.classList.add('popup__saveBtn_inactive');
+}
 
 // Удаление выбранной карточки
 function handleDeleteCard(event) {
