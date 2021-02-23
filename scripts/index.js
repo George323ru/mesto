@@ -129,8 +129,6 @@ function render() {
   elementListContainer.append(...renderHtml)
 }
 
-
-
 // Вызываем функцию отрисовки карточек
 render();
 
@@ -150,6 +148,7 @@ function getItem(item) {
   imgEl.addEventListener('click', function () {
     handlePopupOpen(popupImg);
     popupImgPicEl.src = item.link;
+    popupImgPicEl.alt = item.name;
     popupImgNameEl.textContent = item.name;
   })
 
