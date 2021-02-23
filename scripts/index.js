@@ -201,7 +201,7 @@ popupNewPlaceForm.addEventListener('submit', formAddSubmitHandler)
 function handleDeleteCard(event) {
   const targetDeleteEl = event.target; // Выбираем кнопку через специальное свойство target
   // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
-  const targetItem = targetDeleteEl.closest('#element');
+  const targetItem = targetDeleteEl.closest('.element');
   targetItem.remove() // Функция удаления элемента
 }
 
