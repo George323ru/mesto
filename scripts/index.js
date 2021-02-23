@@ -1,3 +1,30 @@
+// Шесть карточек «из коробки», которые сразу добавляются на главную страницу
+const initialCards = [{
+    name: 'Архыз',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+  },
+  {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    name: 'Тюмень',
+    link: 'https://sdelanounas.ru/i/a/w/1/f_aW1nLmdlbGlvcGhvdG8uY29tL3Rtbi81NV90dW1lbi5qcGc_X19pZD0xMTM2MjM=.jpeg'
+  },
+  {
+    name: 'Сургут',
+    link: 'https://barcaffe.ru/wp-content/uploads/2020/07/28_surgut2020.jpg'
+  },
+  {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    name: 'Байкал',
+    link: 'https://im0-tub-ru.yandex.net/i?id=ba9010e38898e7d960c5374cc0f0d746-l&n=13'
+  }
+];
+
 // Находим контейнер с попапом
 const popupProfile = document.querySelector('#popupProfile');
 
@@ -67,33 +94,6 @@ function formSubmitHandler(evt) {
 popupProfileOpenBtn.addEventListener('click', handlePopupProfileOpen);
 popupProfileCloseBtn.addEventListener('click', () => handlePopupClose(popupProfile));
 popupProfileFormEL.addEventListener('submit', formSubmitHandler);
-
-// Шесть карточек «из коробки», которые сразу добавляются на главную страницу
-const initialCards = [{
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Тюмень',
-    link: 'https://sdelanounas.ru/i/a/w/1/f_aW1nLmdlbGlvcGhvdG8uY29tL3Rtbi81NV90dW1lbi5qcGc_X19pZD0xMTM2MjM=.jpeg'
-  },
-  {
-    name: 'Сургут',
-    link: 'https://barcaffe.ru/wp-content/uploads/2020/07/28_surgut2020.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://im0-tub-ru.yandex.net/i?id=ba9010e38898e7d960c5374cc0f0d746-l&n=13'
-  }
-];
 
 // Находим кнопку открытия попапа для добавления нового места
 const popupNewPlaceAddBtn = document.querySelector('#profileAddButton')
