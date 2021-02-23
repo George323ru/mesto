@@ -25,6 +25,9 @@ const initialCards = [{
   }
 ];
 
+// Находим все попапы
+const popup = document.querySelectorAll('.popup')
+
 // Находим контейнер с попапом
 const popupProfile = document.querySelector('#popupProfile');
 
@@ -42,31 +45,60 @@ const popupProfileFormEL = popupProfile.querySelector('#popupProfileForm');
 const popupProfileInputTypeName = popupProfile.querySelector('#popupProfileInputTypeName');
 const popupProfileInputTypeJob = popupProfile.querySelector('#popupProfileInputTypeJob');
 
+// Находим кнопку открытия попапа для добавления нового места
+const popupNewPlaceAddBtn = document.querySelector('#profileAddButton')
+// Находим попап вместе с формой для добавления нового места
+const popupNewPlace = document.querySelector('#popupNewPlace')
+const popupNewPlaceForm = popupNewPlace.querySelector('#popupNewPlaceForm')
+// Находим поля ввода названия и ссылки новой карточки
+const popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputTypeName')
+const popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputTypeLink')
+// Находим кнопку закрытия и отправки формы попапа
+const popupNewPlaceCloseBtn = popupNewPlace.querySelector('#popupNewPlaceCloseBtn')
+const submitBtn = popupNewPlaceForm.querySelector('.popup__saveBtn')
+
+// Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
+const elementListContainer = document.querySelector('.elements__element-list')
+// Находим шаблон, по которому будем создавать новые карточки
+const templateEl = document.querySelector('#elementTemplate')
+
+// Находим попап, в котором будет появляться картинка в увеличенном виде
+const popupImg = document.querySelector('#popupImgZoom')
+// Находим кнопку закрытия попапа с увеличенной картинкой
+const popupImgCloseBtn = popupImg.querySelector('#popupImgCloseBtn')
+// Находим картинку и заголовок карточки, которая будет увеличена
+const popupImgPicEl = popupImg.querySelector('#popupImgPic')
+const popupImgNameEl = popupImg.querySelector('#popupImgName')
+// Код клавиши Escape
+const escCode = 'Escape';
+
 // Обработчик открытия "попапа"
 const handlePopupOpen = function (element) {
   element.classList.add('popup_opened');
 
-  handlePopupCloseOverlayEsc(element);
+  document.addEventListener('keydown', closeByEsc)
 }
 
 // Обработчик закрытия "попапа"
 const handlePopupClose = function (element) {
   element.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closeByEsc)
 }
 
-// Обработчик закрытия "попапа" через Overlay и Esc
-const handlePopupCloseOverlayEsc = (element) => {
-  element.addEventListener('click', e => {
+// Обработчик закрытия "попапа" через Overlay
+popup.forEach((popupElement) => {
+  addEventListener('click', e => {
     if (e.target.classList.contains('popup')) {
-      handlePopupClose(element);
+      handlePopupClose(popupElement);
     }
   })
+})
 
-  document.addEventListener('keydown', e => {
-    if (e.key == 'Escape') {
-      handlePopupClose(element);
-    }
-  })
+function closeByEsc(evt) {
+  if (evt.key === escCode) {
+    const openedPopup = document.querySelector('.popup_opened');
+    handlePopupClose(openedPopup);
+  }
 }
 
 // Обработчик открытия формы
@@ -94,31 +126,6 @@ function formSubmitHandler(evt) {
 popupProfileOpenBtn.addEventListener('click', handlePopupProfileOpen);
 popupProfileCloseBtn.addEventListener('click', () => handlePopupClose(popupProfile));
 popupProfileFormEL.addEventListener('submit', formSubmitHandler);
-
-// Находим кнопку открытия попапа для добавления нового места
-const popupNewPlaceAddBtn = document.querySelector('#profileAddButton')
-// Находим попап вместе с формой для добавления нового места
-const popupNewPlace = document.querySelector('#popupNewPlace')
-const popupNewPlaceForm = popupNewPlace.querySelector('#popupNewPlaceForm')
-// Находим поля ввода названия и ссылки новой карточки
-const popupNewPlaceInputName = popupNewPlace.querySelector('#popupNewPlaceInputTypeName')
-const popupNewPlaceInputLink = popupNewPlace.querySelector('#popupNewPlaceInputTypeLink')
-// Находим кнопку закрытия попапа
-const popupNewPlaceCloseBtn = popupNewPlace.querySelector('#popupNewPlaceCloseBtn')
-const submitBtn = popupNewPlaceForm.querySelector('.popup__saveBtn')
-
-// Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
-const elementListContainer = document.querySelector('.elements__element-list')
-// Находим шаблон, по которому будем создавать новые карточки
-const templateEl = document.querySelector('#elementTemplate')
-
-// Находим попап, в котором будет появляться картинка в увеличенном виде
-const popupImg = document.querySelector('#popupImgZoom')
-// Находим кнопку закрытия попапа с увеличенной картинкой
-const popupImgCloseBtn = popupImg.querySelector('#popupImgCloseBtn')
-// Находим картинку и заголовок карточки, которая будет увеличена
-const popupImgPicEl = popupImg.querySelector('#popupImgPic')
-const popupImgNameEl = popupImg.querySelector('#popupImgName')
 
 // Обработчик отрисовки карточек из массива initialCards
 function render() {
