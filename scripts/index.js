@@ -17,14 +17,14 @@ const popupProfileInputTypeJob = popupProfile.querySelector('#popupProfileInputT
 
 // Обработчик открытия "попапа"
 const handlePopupOpen = function (element) {
-  element.classList.add('popup_open');
+  element.classList.add('popup_opened');
 
   handlePopupCloseOverlayEsc(element);
 }
 
 // Обработчик закрытия "попапа"
 const handlePopupClose = function (element) {
-  element.classList.remove('popup_open');
+  element.classList.remove('popup_opened');
 }
 
 // Обработчик закрытия "попапа" через Overlay и Esc
@@ -59,7 +59,7 @@ function formSubmitHandler(evt) {
   profileUserName.textContent = popupProfileInputTypeName.value;
   profileUserJob.textContent = popupProfileInputTypeJob.value;
 
-  // Прячем "попап" удаляя у него модификатор ".popup_open" со свойством display:flex
+  // Прячем "попап" удаляя у него модификатор ".popup_opened" со свойством display:flex
   handlePopupClose(popupProfile);
 }
 
