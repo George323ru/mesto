@@ -59,6 +59,8 @@ const submitBtn = popupNewPlaceForm.querySelector('.popup__saveBtn')
 
 // Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
 const elementListContainer = document.querySelector('.elements__element-list')
+const elementsMsgNoElements = document.querySelector('.elements__msgNoElements')
+
 // Находим шаблон, по которому будем создавать новые карточки
 const templateEl = document.querySelector('.templateEl')
 
@@ -109,6 +111,8 @@ const handlePopupProfileOpen = function () {
   popupProfileInputTypeName.value = profileUserName.textContent;
   popupProfileInputTypeJob.value = profileUserJob.textContent;
 }
+
+
 
 // Обработчик «отправки» формы
 function formSubmitHandler(evt) {
@@ -193,6 +197,9 @@ function formAddSubmitHandler(evt) {
   // Добавляем созданные по шаблону элементы в начало разметки блока elements__element-list
   elementListContainer.prepend(listItem)
 
+  // Убираем надпись "Нет элементов"
+  handleAddMsgNoElements()
+
   // Очищаем input формы
   popupNewPlaceInputName.value = '';
   popupNewPlaceInputLink.value = '';
@@ -219,6 +226,18 @@ function handleDeleteCard(event) {
   // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
   const targetItem = targetDeleteEl.closest('.element');
   targetItem.remove() // Функция удаления элемента
+
+  // Добавляем надпись "Нет элементов"
+  handleAddMsgNoElements()
+}
+
+// Обработчик добавления сообщения "Нет элементов"
+function handleAddMsgNoElements() {
+  if (elementListContainer.children.length === 0) {
+    elementsMsgNoElements.classList.add('elements__msgNoElements_active')
+  } else {
+    elementsMsgNoElements.classList.remove('elements__msgNoElements_active')
+  }
 }
 
 // Код для кнопки лайк
