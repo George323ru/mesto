@@ -144,19 +144,19 @@ function render() {
 // Вызываем функцию отрисовки карточек
 render();
 
-// Обработчик данных, который создает шаблоны карточек по templateEl
+// Функция, которая создает карточки по шаблону templateEl
 function getItem(item) {
   // Клонируем все элементы шаблона в константу
   const newItems = templateEl.content.cloneNode(true);
   // Ищем header и img в клонированных элементах шаблона
   const titleEl = newItems.querySelector('.element__title')
   const imgEl = newItems.querySelector('.element__image')
-  // Добавляем из массива initialCards название заголовка и ссылку в клонированный шаблон
+  // Добавляем данные для новой карточки из параметра функции item
   titleEl.textContent = item.name;
   imgEl.src = item.link;
   imgEl.alt = item.name;
 
-  // Открываем попап с увеличенной картинкой при нажатии на изображение карточки
+  // Событие, которое будет происходить при нажатии на изображение в карточке
   imgEl.addEventListener('click', function () {
     handlePopupOpen(popupImg);
     popupImgPicEl.src = item.link;
@@ -178,8 +178,7 @@ function getItem(item) {
 
 popupNewPlaceAddBtn.addEventListener('click', () => handlePopupOpen(popupNewPlace))
 
-// Форма добавления новой карточки на станицу,
-// которая появляется вместе с popup при нажатии на кнопку добавить(popupNewPlaceAddBtn)
+// Форма добавления новой карточки на станицу
 function formAddSubmitHandler(evt) {
   evt.preventDefault(); // Отменяем стандартную отправку формы
 
@@ -187,8 +186,7 @@ function formAddSubmitHandler(evt) {
   const inputText = popupNewPlaceInputName.value;
   const inputSrc = popupNewPlaceInputLink.value;
 
-  // Значение, полученное из input мы добавляем в поля name и link объектов массива
-  // создаваемого с помощью функции getItem() элемента
+  // Значения из полей формы передаем как аргументы функции getItem
   const listItem = getItem({
     name: inputText,
     link: inputSrc
@@ -197,12 +195,12 @@ function formAddSubmitHandler(evt) {
   // Добавляем созданные по шаблону элементы в начало разметки блока elements__element-list
   elementListContainer.prepend(listItem)
 
-  // Убираем надпись "Нет элементов"
+  // Проверяем, есть ли надпись "Нет элементов"
+  // Если есть, то убираем ее
   handleAddMsgNoElements()
 
   // Очищаем input формы
-  popupNewPlaceInputName.value = '';
-  popupNewPlaceInputLink.value = '';
+  popupNewPlaceForm.reset();
 
   // Деактивация кнопки submit
   handleBtnInactive(submitBtn)
@@ -228,6 +226,7 @@ function handleDeleteCard(event) {
   targetItem.remove() // Функция удаления элемента
 
   // Добавляем надпись "Нет элементов"
+  // Если все карточки были удалены
   handleAddMsgNoElements()
 }
 
@@ -240,7 +239,7 @@ function handleAddMsgNoElements() {
   }
 }
 
-// Код для кнопки лайк
+// Обработчик кнопки лайк
 function handleBtnLike(event) {
   // Получаем кнопку, как элемент цель
   const targetBtnLikeEl = event.target;
