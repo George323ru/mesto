@@ -77,7 +77,6 @@ const escCode = 'Escape';
 // Обработчик открытия "попапа"
 const handlePopupOpen = function (element) {
   element.classList.add('popup_opened');
-
   document.addEventListener('keydown', closeByEsc)
 }
 
@@ -116,7 +115,7 @@ const handlePopupProfileOpen = function () {
 
 // Обработчик «отправки» формы
 function formSubmitHandler(evt) {
-  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  evt.preventDefault(); // Отменяем стандартную отправку формы
 
   // Меняем содержимое в профиле на новое содержимое из полей формы
   profileUserName.textContent = popupProfileInputTypeName.value;
@@ -131,20 +130,20 @@ popupProfileOpenBtn.addEventListener('click', handlePopupProfileOpen);
 popupProfileCloseBtn.addEventListener('click', () => handlePopupClose(popupProfile));
 popupProfileFormEL.addEventListener('submit', formSubmitHandler);
 
-// Обработчик отрисовки карточек из массива initialCards
-function render() {
-  // Преобразуем массив initialCards в новый массив renderHtml,
-  // добавляем к каждому элементу разметку из шаблона templateEl
-  const renderHtml = initialCards.map(getItem)
+// // Обработчик отрисовки карточек из массива initialCards
+// function render() {
+//   // Преобразуем массив initialCards в новый массив renderHtml,
+//   // добавляем к каждому элементу разметку из шаблона templateEl
+//   const renderHtml = initialCards.map(getItem)
 
-  // Вставляем преобразовавшийся массив в разметку
-  elementListContainer.append(...renderHtml)
-}
+//   // Вставляем преобразовавшийся массив в разметку
+//   elementListContainer.append(...renderHtml)
+// }
 
-// Вызываем функцию отрисовки карточек
-render();
+// // Вызываем функцию отрисовки карточек
+// render();
 
-// Функция, которая создает карточки по шаблону templateEl
+// Создаем карточки по шаблону templateEl
 function getItem(item) {
   // Клонируем все элементы шаблона в константу
   const newItems = templateEl.content.cloneNode(true);
@@ -163,7 +162,6 @@ function getItem(item) {
     popupImgPicEl.alt = item.name;
     popupImgNameEl.textContent = item.name;
   })
-
 
   // Оживляем кнопку удаления
   const elementDeleteBtn = newItems.querySelector('.element__buttonDelete')
@@ -212,23 +210,23 @@ function formAddSubmitHandler(evt) {
 // Кнопка закрытия формы добавления нового места
 popupNewPlaceForm.addEventListener('submit', formAddSubmitHandler)
 
-// Обработчик блокировки кнопки
+// Обработчик блокировки кнопки sumbit
 function handleBtnInactive(buttonEl) {
   buttonEl.setAttribute('disabled', true);
   buttonEl.classList.add('popup__saveBtn_inactive');
 }
 
-// Удаление выбранной карточки
-function handleDeleteCard(event) {
-  const targetDeleteEl = event.target; // Выбираем кнопку через специальное свойство target
-  // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
-  const targetItem = targetDeleteEl.closest('.element');
-  targetItem.remove() // Функция удаления элемента
+// // Удаление выбранной карточки
+// function handleDeleteCard(event) {
+//   const targetDeleteEl = event.target; // Выбираем кнопку через специальное свойство target
+//   // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
+//   const targetItem = targetDeleteEl.closest('.element');
+//   targetItem.remove() // Функция удаления элемента
 
-  // Добавляем надпись "Нет элементов"
-  // Если все карточки были удалены
-  handleAddMsgNoElements()
-}
+//   // Добавляем надпись "Нет элементов"
+//   // Если все карточки были удалены
+//   handleAddMsgNoElements()
+// }
 
 // Обработчик добавления сообщения "Нет элементов"
 function handleAddMsgNoElements() {
@@ -239,16 +237,93 @@ function handleAddMsgNoElements() {
   }
 }
 
-// Обработчик кнопки лайк
-function handleBtnLike(event) {
-  // Получаем кнопку, как элемент цель
-  const targetBtnLikeEl = event.target;
-  // Добавляем переключатель класса
-  const targetItem = targetBtnLikeEl.classList.toggle('element__likeButton_active');
-}
+// // Обработчик кнопки лайк
+// function handleBtnLike(event) {
+//   // Получаем кнопку, как элемент цель
+//   const targetBtnLikeEl = event.target;
+//   // Добавляем переключатель класса
+//   const targetItem = targetBtnLikeEl.classList.toggle('element__likeButton_active');
+// }
 
 // Кнопка закрытия попапа нового места
 popupNewPlaceCloseBtn.addEventListener('click', () => handlePopupClose(popupNewPlace))
 
 // Кнопка закрытия попапа с картинкой
 popupImgCloseBtn.addEventListener('click', () => handlePopupClose(popupImg))
+
+
+class Card {
+  // в конструкторе будут динамические данные,
+  // для каждого экземпляра свои
+  constructor(data) {
+    // Создаем приватные поля
+    this._name = data.name;
+    this._link = data.link;
+  }
+
+  _getTemplate() {
+    // здесь выполним все необходимые операции, чтобы вернуть разметку
+    const newItems = templateEl.content.cloneNode(true);
+    // вернём DOM-элемент карточки
+    return newItems;
+  }
+
+  _setEventListeners() {
+    this._element.querySelector('.element__image').addEventListener('click', () => {
+      handlePopupOpen(popupImg);
+      popupImgPicEl.src = this._link;
+      popupImgPicEl.alt = this._name;
+      popupImgNameEl.textContent = this._name;
+    })
+
+    this._element.querySelector('.element__buttonDelete').addEventListener('click', (event) => {
+      const targetDeleteEl = event.target; // Выбираем кнопку через специальное свойство target
+      // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
+      const targetItem = targetDeleteEl.closest('.element');
+      targetItem.remove() // Функция удаления элемента
+
+      // Добавляем надпись "Нет элементов"
+      // Если все карточки были удалены
+      handleAddMsgNoElements()
+    })
+
+    this._element.querySelector('.element__likeButton').addEventListener('click', (event) => {
+      // Получаем кнопку, как элемент цель
+      const targetBtnLikeEl = event.target;
+      // Добавляем переключатель класса
+      const targetItem = targetBtnLikeEl.classList.toggle('element__likeButton_active');
+    })
+  }
+
+
+  _handlePopupImg() {
+
+  }
+
+  generateCard() {
+    // Запишем разметку в приватное поле _element.
+    // Так у других элементов появится доступ к ней.
+    this._element = this._getTemplate();
+    this._setEventListeners();
+
+    // Добавим данные
+    this._element.querySelector('.element__title').textContent = this._name;
+    this._element.querySelector('.element__image').src = this._link;
+
+    // Вернём элемент наружу
+    return this._element;
+  }
+}
+
+initialCards.forEach((item) => {
+  // Создадим экземпляр карточки
+  const card = new Card(item); // item - передаем данные в виде объекта
+  // Создаём карточку и возвращаем наружу
+  const cardElement = card.generateCard();
+
+  // Добавляем в DOM
+  elementListContainer.append(cardElement);
+});
+
+// // создадим экземпляр карточки с уникальным текстом и аватаром пользователя
+// const card = new Card('Привет! Как дела?', 'userpic.jpg');
