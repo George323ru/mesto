@@ -144,35 +144,35 @@ popupProfileFormEL.addEventListener('submit', formSubmitHandler);
 // render();
 
 // Создаем карточки по шаблону templateEl
-function getItem(item) {
-  // Клонируем все элементы шаблона в константу
-  const newItems = templateEl.content.cloneNode(true);
-  // Ищем header и img в клонированных элементах шаблона
-  const titleEl = newItems.querySelector('.element__title')
-  const imgEl = newItems.querySelector('.element__image')
-  // Добавляем данные для новой карточки из параметра функции item
-  titleEl.textContent = item.name;
-  imgEl.src = item.link;
-  imgEl.alt = item.name;
+// function getItem(item) {
+//   // Клонируем все элементы шаблона в константу
+//   const newItems = templateEl.content.cloneNode(true);
+//   // Ищем header и img в клонированных элементах шаблона
+//   const titleEl = newItems.querySelector('.element__title')
+//   const imgEl = newItems.querySelector('.element__image')
+//   // Добавляем данные для новой карточки из параметра функции item
+//   titleEl.textContent = item.name;
+//   imgEl.src = item.link;
+//   imgEl.alt = item.name;
 
-  // Событие, которое будет происходить при нажатии на изображение в карточке
-  imgEl.addEventListener('click', function () {
-    handlePopupOpen(popupImg);
-    popupImgPicEl.src = item.link;
-    popupImgPicEl.alt = item.name;
-    popupImgNameEl.textContent = item.name;
-  })
+//   // Событие, которое будет происходить при нажатии на изображение в карточке
+//   imgEl.addEventListener('click', function () {
+//     handlePopupOpen(popupImg);
+//     popupImgPicEl.src = item.link;
+//     popupImgPicEl.alt = item.name;
+//     popupImgNameEl.textContent = item.name;
+//   })
 
-  // Оживляем кнопку удаления
-  const elementDeleteBtn = newItems.querySelector('.element__buttonDelete')
-  elementDeleteBtn.addEventListener('click', handleDeleteCard);
-  // Оживляем у каждой карточки кнопку лайк
-  const elementLikeBtn = newItems.querySelector('.element__likeButton')
-  elementLikeBtn.addEventListener('click', handleBtnLike);
+//   // Оживляем кнопку удаления
+//   const elementDeleteBtn = newItems.querySelector('.element__buttonDelete')
+//   elementDeleteBtn.addEventListener('click', handleDeleteCard);
+//   // Оживляем у каждой карточки кнопку лайк
+//   const elementLikeBtn = newItems.querySelector('.element__likeButton')
+//   elementLikeBtn.addEventListener('click', handleBtnLike);
 
-  // Возвращаем созданный шаблон
-  return newItems;
-}
+//   // Возвращаем созданный шаблон
+//   return newItems;
+// }
 
 popupNewPlaceAddBtn.addEventListener('click', () => handlePopupOpen(popupNewPlace))
 
@@ -184,14 +184,24 @@ function formAddSubmitHandler(evt) {
   const inputText = popupNewPlaceInputName.value;
   const inputSrc = popupNewPlaceInputLink.value;
 
-  // Значения из полей формы передаем как аргументы функции getItem
-  const listItem = getItem({
+  // // Значения из полей формы передаем как аргументы функции getItem
+  // const listItem = getItem({
+  //   name: inputText,
+  //   link: inputSrc
+  // });
+
+  const cardEl = new Card({
     name: inputText,
     link: inputSrc
-  });
+  }); // item - передаем данные в виде объекта
+  // Создаём карточку и возвращаем наружу
+  const listItem = cardEl.generateCard();
 
-  // Добавляем созданные по шаблону элементы в начало разметки блока elements__element-list
-  elementListContainer.prepend(listItem)
+  // Добавляем в DOM
+  elementListContainer.prepend(listItem);
+
+  // // Добавляем созданные по шаблону элементы в начало разметки блока elements__element-list
+  // elementListContainer.prepend(listItem)
 
   // Проверяем, есть ли надпись "Нет элементов"
   // Если есть, то убираем ее
