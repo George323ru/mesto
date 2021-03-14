@@ -1,9 +1,9 @@
 import Card from './Card.js';
-import FormValidator from './validate.js'
+import FormValidator from './FormValidator.js'
 import {
   enableValidation
 }
-from './validate.js'
+from './FormValidator.js'
 
 // Шесть карточек «из коробки», которые сразу добавляются на главную страницу
 const initialCards = [{
@@ -74,7 +74,7 @@ export const popupImgNameEl = popupImg.querySelector('.popup__placeName_type_img
 const escCode = 'Escape';
 
 const formPopupProfile = document.querySelector('.popup__form_type_profile')
-console.log(formPopupProfile)
+
 
 // Обработчик открытия "попапа"
 export const handlePopupOpen = function (element) {
@@ -140,9 +140,9 @@ function formAddSubmitHandler(evt) {
   const cardEl = new Card(inputList, templateEl); // item - передаем данные в виде объекта
   // Создаём карточку и возвращаем наружу
   const listItem = cardEl.generateCard();
-
   // Добавляем новую карточку в DOM
   elementListContainer.prepend(listItem);
+
   // Проверяем, есть ли надпись "Нет элементов"
   handleMsgNoElements()
   // Очищаем input формы
@@ -183,7 +183,7 @@ popupImgCloseBtn.addEventListener('click', () => handlePopupClose(popupImg))
 // Перебираем исходный массив с данными
 initialCards.forEach((item) => {
   // Наполняем данными шаблон класса Card
-  const card = new Card(item, templateEl); // item - передаем данные в виде объекта
+  const card = new Card(item, templateEl);
   // Вызываем метод в созданном выше экземпляре для создания новой карточки
   const cardElement = card.generateCard();
 
@@ -193,8 +193,8 @@ initialCards.forEach((item) => {
 
 // Перебираем исходный массив с данными формы
 enableValidation.forEach((item) => {
-  // Наполняем данными шаблон класса Card
-  const valid = new FormValidator(item, formPopupProfile); // item - передаем данные в виде объекта
+  // Наполняем данными шаблон класса FormValidator
+  const valid = new FormValidator(item, formPopupProfile);
   // Вызываем метод в созданном выше экземпляре для создания новой карточки
   valid.enableValidation();
 });
