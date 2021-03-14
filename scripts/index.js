@@ -72,8 +72,9 @@ export const popupImgPicEl = popupImg.querySelector('.popup__picture_type_img')
 export const popupImgNameEl = popupImg.querySelector('.popup__placeName_type_img')
 // Код клавиши Escape
 const escCode = 'Escape';
-
-const formPopupProfile = document.querySelector('.popup__form_type_profile')
+// Находим формы
+// const formPopupProfile = document.querySelector('.popup__form_type_profile')
+// const formPopupNewPlace = document.querySelector('.popup__form_type_newPlace')
 
 
 // Обработчик открытия "попапа"
@@ -194,9 +195,11 @@ initialCards.forEach((item) => {
 // Перебираем исходный массив с данными формы
 enableValidation.forEach((item) => {
   // Наполняем данными шаблон класса FormValidator
-  const valid = new FormValidator(item, formPopupProfile);
+  const validFormPopupProfile = new FormValidator(item, popupProfileFormEL);
+  const validFormPopupNewPlace = new FormValidator(item, popupNewPlaceForm);
   // Вызываем метод в созданном выше экземпляре для создания новой карточки
-  valid.enableValidation();
+  validFormPopupProfile.enableValidation();
+  validFormPopupNewPlace.enableValidation();
 });
 
 

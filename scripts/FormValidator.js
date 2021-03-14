@@ -1,5 +1,5 @@
 export const enableValidation = [{
-  formSelector: '.popup__form',
+  // formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__saveBtn',
   inactiveButtonClass: 'popup__saveBtn_inactive',
@@ -10,13 +10,13 @@ export const enableValidation = [{
 // Валидация формы
 export default class FormValidator {
   constructor(options, formSelector) {
-    this._formSelector = options.formSelector;
+    // this._formSelector = options.formSelector;
     this._inputSelector = options.inputSelector;
     this._submitButtonSelector = options.submitButtonSelector;
     this._inactiveButtonClass = options.inactiveButtonClass;
     this._inputErrorClass = options.inputErrorClass;
     this._errorClass = options.errorClass;
-    // this._formSelector = formSelector;
+    this._formSelector = formSelector;
   }
 
   // Показываем сообщение с ошибкой
@@ -70,7 +70,7 @@ export default class FormValidator {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-    console.log(formElement)
+
     // Создаем массив из всех "инпутов"
     const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
     const buttonElement = formElement.querySelector(this._submitButtonSelector)
@@ -89,14 +89,14 @@ export default class FormValidator {
   }
 
   enableValidation() {
-    // Создаем массив из всех форм
-    const formList = Array.from(document.querySelectorAll(this._formSelector));
-    // На элементы каждой формы навешиваем событие
-    formList.forEach((formElement) => {
-      this._setEventListeners(formElement)
-    });
+    // // Создаем массив из всех форм
+    // const formList = Array.from(document.querySelectorAll(this._formSelector));
+    // // На элементы каждой формы навешиваем событие
+    // formList.forEach((formElement) => {
+    //   this._setEventListeners(formElement)
+    // });
 
-    // this._setEventListeners(this._formSelector)
+    this._setEventListeners(this._formSelector)
   }
 }
 
