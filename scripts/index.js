@@ -111,8 +111,6 @@ const handlePopupProfileOpen = function () {
   popupProfileInputTypeJob.value = profileUserJob.textContent;
 }
 
-
-
 // Обработчик «отправки» формы
 function formSubmitHandler(evt) {
   evt.preventDefault(); // Отменяем стандартную отправку формы
@@ -129,51 +127,6 @@ function formSubmitHandler(evt) {
 popupProfileOpenBtn.addEventListener('click', handlePopupProfileOpen);
 popupProfileCloseBtn.addEventListener('click', () => handlePopupClose(popupProfile));
 popupProfileFormEL.addEventListener('submit', formSubmitHandler);
-
-// // Обработчик отрисовки карточек из массива initialCards
-// function render() {
-//   // Преобразуем массив initialCards в новый массив renderHtml,
-//   // добавляем к каждому элементу разметку из шаблона templateEl
-//   const renderHtml = initialCards.map(getItem)
-
-//   // Вставляем преобразовавшийся массив в разметку
-//   elementListContainer.append(...renderHtml)
-// }
-
-// // Вызываем функцию отрисовки карточек
-// render();
-
-// Создаем карточки по шаблону templateEl
-// function getItem(item) {
-//   // Клонируем все элементы шаблона в константу
-//   const newItems = templateEl.content.cloneNode(true);
-//   // Ищем header и img в клонированных элементах шаблона
-//   const titleEl = newItems.querySelector('.element__title')
-//   const imgEl = newItems.querySelector('.element__image')
-//   // Добавляем данные для новой карточки из параметра функции item
-//   titleEl.textContent = item.name;
-//   imgEl.src = item.link;
-//   imgEl.alt = item.name;
-
-//   // Событие, которое будет происходить при нажатии на изображение в карточке
-//   imgEl.addEventListener('click', function () {
-//     handlePopupOpen(popupImg);
-//     popupImgPicEl.src = item.link;
-//     popupImgPicEl.alt = item.name;
-//     popupImgNameEl.textContent = item.name;
-//   })
-
-//   // Оживляем кнопку удаления
-//   const elementDeleteBtn = newItems.querySelector('.element__buttonDelete')
-//   elementDeleteBtn.addEventListener('click', handleDeleteCard);
-//   // Оживляем у каждой карточки кнопку лайк
-//   const elementLikeBtn = newItems.querySelector('.element__likeButton')
-//   elementLikeBtn.addEventListener('click', handleBtnLike);
-
-//   // Возвращаем созданный шаблон
-//   return newItems;
-// }
-
 popupNewPlaceAddBtn.addEventListener('click', () => handlePopupOpen(popupNewPlace))
 
 // Форма добавления новой карточки на станицу
@@ -226,18 +179,6 @@ function handleBtnInactive(buttonEl) {
   buttonEl.classList.add('popup__saveBtn_inactive');
 }
 
-// // Удаление выбранной карточки
-// function handleDeleteCard(event) {
-//   const targetDeleteEl = event.target; // Выбираем кнопку через специальное свойство target
-//   // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
-//   const targetItem = targetDeleteEl.closest('.element');
-//   targetItem.remove() // Функция удаления элемента
-
-//   // Добавляем надпись "Нет элементов"
-//   // Если все карточки были удалены
-//   handleAddMsgNoElements()
-// }
-
 // Обработчик добавления сообщения "Нет элементов"
 function handleAddMsgNoElements() {
   if (elementListContainer.children.length === 0) {
@@ -247,20 +188,10 @@ function handleAddMsgNoElements() {
   }
 }
 
-// // Обработчик кнопки лайк
-// function handleBtnLike(event) {
-//   // Получаем кнопку, как элемент цель
-//   const targetBtnLikeEl = event.target;
-//   // Добавляем переключатель класса
-//   const targetItem = targetBtnLikeEl.classList.toggle('element__likeButton_active');
-// }
-
 // Кнопка закрытия попапа нового места
 popupNewPlaceCloseBtn.addEventListener('click', () => handlePopupClose(popupNewPlace))
-
 // Кнопка закрытия попапа с картинкой
 popupImgCloseBtn.addEventListener('click', () => handlePopupClose(popupImg))
-
 
 class Card {
   // в конструкторе будут динамические данные,
@@ -280,34 +211,42 @@ class Card {
 
   _setEventListeners() {
     this._element.querySelector('.element__image').addEventListener('click', () => {
-      handlePopupOpen(popupImg);
-      popupImgPicEl.src = this._link;
-      popupImgPicEl.alt = this._name;
-      popupImgNameEl.textContent = this._name;
+      this._handlePopupImg()
     })
 
     this._element.querySelector('.element__buttonDelete').addEventListener('click', (event) => {
-      const targetDeleteEl = event.target; // Выбираем кнопку через специальное свойство target
-      // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
-      const targetItem = targetDeleteEl.closest('.element');
-      targetItem.remove() // Функция удаления элемента
-
-      // Добавляем надпись "Нет элементов"
-      // Если все карточки были удалены
-      handleAddMsgNoElements()
+      this._handleDelBtn(event)
     })
 
     this._element.querySelector('.element__likeButton').addEventListener('click', (event) => {
-      // Получаем кнопку, как элемент цель
-      const targetBtnLikeEl = event.target;
-      // Добавляем переключатель класса
-      const targetItem = targetBtnLikeEl.classList.toggle('element__likeButton_active');
+      this._handleLikeBtn(event)
     })
   }
 
 
   _handlePopupImg() {
+    handlePopupOpen(popupImg);
+    popupImgPicEl.src = this._link;
+    popupImgPicEl.alt = this._name;
+    popupImgNameEl.textContent = this._name;
+  }
 
+  _handleDelBtn(event) {
+    // Выбираем кнопку через специальное свойство target
+    const targetDeleteEl = event.target;
+    // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
+    const targetItem = targetDeleteEl.closest('.element');
+    targetItem.remove() // Функция удаления элемента
+    // Добавляем надпись "Нет элементов"
+    // Если все карточки были удалены
+    handleAddMsgNoElements()
+  }
+
+  _handleLikeBtn(event) {
+    // Получаем кнопку, как элемент цель
+    const targetBtnLikeEl = event.target;
+    // Добавляем переключатель класса
+    const targetItem = targetBtnLikeEl.classList.toggle('element__likeButton_active');
   }
 
   generateCard() {
@@ -337,3 +276,68 @@ initialCards.forEach((item) => {
 
 // // создадим экземпляр карточки с уникальным текстом и аватаром пользователя
 // const card = new Card('Привет! Как дела?', 'userpic.jpg');
+
+// // Обработчик кнопки лайк
+// function handleBtnLike(event) {
+//   // Получаем кнопку, как элемент цель
+//   const targetBtnLikeEl = event.target;
+//   // Добавляем переключатель класса
+//   const targetItem = targetBtnLikeEl.classList.toggle('element__likeButton_active');
+// }
+
+// // Удаление выбранной карточки
+// function handleDeleteCard(event) {
+//   const targetDeleteEl = event.target; // Выбираем кнопку через специальное свойство target
+//   // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
+//   const targetItem = targetDeleteEl.closest('.element');
+//   targetItem.remove() // Функция удаления элемента
+
+//   // Добавляем надпись "Нет элементов"
+//   // Если все карточки были удалены
+//   handleAddMsgNoElements()
+// }
+
+
+// // Обработчик отрисовки карточек из массива initialCards
+// function render() {
+//   // Преобразуем массив initialCards в новый массив renderHtml,
+//   // добавляем к каждому элементу разметку из шаблона templateEl
+//   const renderHtml = initialCards.map(getItem)
+
+//   // Вставляем преобразовавшийся массив в разметку
+//   elementListContainer.append(...renderHtml)
+// }
+
+// // Вызываем функцию отрисовки карточек
+// render();
+
+// Создаем карточки по шаблону templateEl
+// function getItem(item) {
+//   // Клонируем все элементы шаблона в константу
+//   const newItems = templateEl.content.cloneNode(true);
+//   // Ищем header и img в клонированных элементах шаблона
+//   const titleEl = newItems.querySelector('.element__title')
+//   const imgEl = newItems.querySelector('.element__image')
+//   // Добавляем данные для новой карточки из параметра функции item
+//   titleEl.textContent = item.name;
+//   imgEl.src = item.link;
+//   imgEl.alt = item.name;
+
+//   // Событие, которое будет происходить при нажатии на изображение в карточке
+//   imgEl.addEventListener('click', function () {
+//     handlePopupOpen(popupImg);
+//     popupImgPicEl.src = item.link;
+//     popupImgPicEl.alt = item.name;
+//     popupImgNameEl.textContent = item.name;
+//   })
+
+//   // Оживляем кнопку удаления
+//   const elementDeleteBtn = newItems.querySelector('.element__buttonDelete')
+//   elementDeleteBtn.addEventListener('click', handleDeleteCard);
+//   // Оживляем у каждой карточки кнопку лайк
+//   const elementLikeBtn = newItems.querySelector('.element__likeButton')
+//   elementLikeBtn.addEventListener('click', handleBtnLike);
+
+//   // Возвращаем созданный шаблон
+//   return newItems;
+// }
