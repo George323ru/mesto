@@ -27,24 +27,19 @@ const initialCards = [{
 
 // Находим все попапы
 const popup = document.querySelectorAll('.popup')
-
 // Находим контейнер с попапом
 const popupProfile = document.querySelector('.popup_type_profile');
-
 // Находим кнопки, при нажатии на которые попап будет открываться и закрываться
 const popupProfileOpenBtn = document.querySelector('.profile__editBtn');
 const popupProfileCloseBtn = popupProfile.querySelector('.popup__closeButton_type_profile');
-
 // Находим поля, куда будут подставлены новые значения из полей формы
 const profileUserName = document.querySelector('.profile__user-name');
 const profileUserJob = document.querySelector('.profile__userJob');
-
 // Находим форму в DOM
 const popupProfileFormEL = popupProfile.querySelector('.popup__form_type_profile');
 // Находим поля формы в DOM
 const popupProfileInputTypeName = popupProfile.querySelector('.popup__input_type_profileName');
 const popupProfileInputTypeJob = popupProfile.querySelector('.popup__input_type_profileJob');
-
 // Находим кнопку открытия попапа для добавления нового места
 const popupNewPlaceAddBtn = document.querySelector('.profile__add-button')
 // Находим попап добавления нового места вместе с формой
@@ -56,14 +51,11 @@ const popupNewPlaceInputLink = popupNewPlace.querySelector('.popup__input_type_n
 // Находим кнопку закрытия и отправки формы попапа
 const popupNewPlaceCloseBtn = popupNewPlace.querySelector('.popup__closeButton_type_newPlace')
 const submitBtn = popupNewPlaceForm.querySelector('.popup__saveBtn')
-
 // Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
 const elementListContainer = document.querySelector('.elements__element-list')
 const elementsMsgNoElements = document.querySelector('.elements__msgNoElements')
-
-// Находим шаблон, по которому будем создавать новые карточки
-const templateEl = document.querySelector('.templateEl')
-
+// Находим код шаблона, по которому будем создавать новые карточки
+const templateEl = '.templateEl';
 // Находим попап, в котором будет появляться картинка в увеличенном виде
 const popupImg = document.querySelector('.popup_type_img')
 // Находим кнопку закрытия попапа с увеличенной картинкой
@@ -123,12 +115,6 @@ function formSubmitHandler(evt) {
   handlePopupClose(popupProfile);
 }
 
-// События, которые будут происходить при нажатии на кнопки
-popupProfileOpenBtn.addEventListener('click', handlePopupProfileOpen);
-popupProfileCloseBtn.addEventListener('click', () => handlePopupClose(popupProfile));
-popupProfileFormEL.addEventListener('submit', formSubmitHandler);
-popupNewPlaceAddBtn.addEventListener('click', () => handlePopupOpen(popupNewPlace))
-
 // Форма добавления новой карточки на станицу
 function formAddSubmitHandler(evt) {
   evt.preventDefault(); // Отменяем стандартную отправку формы
@@ -136,42 +122,26 @@ function formAddSubmitHandler(evt) {
   // Сохраняем значения, полученные из input'ов формы
   const inputText = popupNewPlaceInputName.value;
   const inputSrc = popupNewPlaceInputLink.value;
-
-  // // Значения из полей формы передаем как аргументы функции getItem
-  // const listItem = getItem({
-  //   name: inputText,
-  //   link: inputSrc
-  // });
-
-  const cardEl = new Card({
+  const inputList = {
     name: inputText,
     link: inputSrc
-  }); // item - передаем данные в виде объекта
+  }
+
+  const cardEl = new Card(inputList, templateEl); // item - передаем данные в виде объекта
   // Создаём карточку и возвращаем наружу
   const listItem = cardEl.generateCard();
 
-  // Добавляем в DOM
+  // Добавляем новую карточку в DOM
   elementListContainer.prepend(listItem);
-
-  // // Добавляем созданные по шаблону элементы в начало разметки блока elements__element-list
-  // elementListContainer.prepend(listItem)
-
   // Проверяем, есть ли надпись "Нет элементов"
-  // Если есть, то убираем ее
   handleAddMsgNoElements()
-
   // Очищаем input формы
   popupNewPlaceForm.reset();
-
   // Деактивация кнопки submit
   handleBtnInactive(submitBtn)
-
   // Закрываем popup
   handlePopupClose(popupNewPlace)
 }
-
-// Кнопка закрытия формы добавления нового места
-popupNewPlaceForm.addEventListener('submit', formAddSubmitHandler)
 
 // Обработчик блокировки кнопки sumbit
 function handleBtnInactive(buttonEl) {
@@ -188,6 +158,13 @@ function handleAddMsgNoElements() {
   }
 }
 
+// События, которые будут происходить при нажатии на кнопки
+popupProfileOpenBtn.addEventListener('click', handlePopupProfileOpen);
+popupProfileCloseBtn.addEventListener('click', () => handlePopupClose(popupProfile));
+popupProfileFormEL.addEventListener('submit', formSubmitHandler);
+popupNewPlaceAddBtn.addEventListener('click', () => handlePopupOpen(popupNewPlace))
+// Кнопка закрытия формы добавления нового места
+popupNewPlaceForm.addEventListener('submit', formAddSubmitHandler)
 // Кнопка закрытия попапа нового места
 popupNewPlaceCloseBtn.addEventListener('click', () => handlePopupClose(popupNewPlace))
 // Кнопка закрытия попапа с картинкой
@@ -196,17 +173,22 @@ popupImgCloseBtn.addEventListener('click', () => handlePopupClose(popupImg))
 class Card {
   // в конструкторе будут динамические данные,
   // для каждого экземпляра свои
-  constructor(data) {
+  constructor(data, cardSelector) {
     // Создаем приватные поля
     this._name = data.name;
     this._link = data.link;
+    this._cardSelector = cardSelector;
   }
 
   _getTemplate() {
     // здесь выполним все необходимые операции, чтобы вернуть разметку
-    const newItems = templateEl.content.cloneNode(true);
+    const cardElement = document
+      .querySelector(this._cardSelector)
+      .content
+      .querySelector('.element')
+      .cloneNode(true);
     // вернём DOM-элемент карточки
-    return newItems;
+    return cardElement;
   }
 
   _setEventListeners() {
@@ -222,7 +204,6 @@ class Card {
       this._handleLikeBtn(event)
     })
   }
-
 
   _handlePopupImg() {
     handlePopupOpen(popupImg);
@@ -251,7 +232,6 @@ class Card {
 
   generateCard() {
     // Запишем разметку в приватное поле _element.
-    // Так у других элементов появится доступ к ней.
     this._element = this._getTemplate();
     this._setEventListeners();
 
@@ -264,13 +244,14 @@ class Card {
   }
 }
 
+// Перебираем исходный массив с данными
 initialCards.forEach((item) => {
-  // Создадим экземпляр карточки
-  const card = new Card(item); // item - передаем данные в виде объекта
-  // Создаём карточку и возвращаем наружу
+  // Наполняем данными шаблон класса Card
+  const card = new Card(item, templateEl); // item - передаем данные в виде объекта
+  // Вызываем метод в созданном выше экземпляре для создания новой карточки
   const cardElement = card.generateCard();
 
-  // Добавляем в DOM
+  // Вставляем новую карточку в разметку DOM
   elementListContainer.append(cardElement);
 });
 
