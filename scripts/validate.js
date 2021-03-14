@@ -1,4 +1,4 @@
-const enableValidation = [{
+export const enableValidation = [{
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__saveBtn',
@@ -8,14 +8,15 @@ const enableValidation = [{
 }];
 
 // Валидация формы
-class FormValidator {
-  constructor(options) {
-    this._formSelector = options.formSelector;
+export default class FormValidator {
+  constructor(options, formSelector) {
+    // this._formSelector = options.formSelector;
     this._inputSelector = options.inputSelector;
     this._submitButtonSelector = options.submitButtonSelector;
     this._inactiveButtonClass = options.inactiveButtonClass;
     this._inputErrorClass = options.inputErrorClass;
     this._errorClass = options.errorClass;
+    this._formSelector = formSelector;
   }
 
   // Показываем сообщение с ошибкой
@@ -69,7 +70,7 @@ class FormValidator {
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
-
+    console.log(formElement)
     // Создаем массив из всех "инпутов"
     const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
     const buttonElement = formElement.querySelector(this._submitButtonSelector)
@@ -88,24 +89,24 @@ class FormValidator {
   }
 
   enableValidation() {
-    // Создаем массив из всех форм
-    const formList = Array.from(document.querySelectorAll(this._formSelector));
+    // // Создаем массив из всех форм
+    // const formList = Array.from(document.querySelectorAll(this._formSelector));
+    // // На элементы каждой формы навешиваем событие
+    // formList.forEach((formElement) => {
+    //   this._setEventListeners(formElement)
+    // });
 
-    // На элементы каждой формы навешиваем событие
-    formList.forEach((formElement) => {
-      this._setEventListeners(formElement)
-    });
-
+    this._setEventListeners(this._formSelector)
   }
 }
 
-// Перебираем исходный массив с данными
-enableValidation.forEach((item) => {
-  // Наполняем данными шаблон класса Card
-  const valid = new FormValidator(item); // item - передаем данные в виде объекта
-  // Вызываем метод в созданном выше экземпляре для создания новой карточки
-  valid.enableValidation();
-});
+// // Перебираем исходный массив с данными
+// enableValidation.forEach((item) => {
+//   // Наполняем данными шаблон класса Card
+//   const valid = new FormValidator(item, formPopupProfile); // item - передаем данные в виде объекта
+//   // Вызываем метод в созданном выше экземпляре для создания новой карточки
+//   valid.enableValidation();
+// });
 
 // // Показываем сообщение с ошибкой
 // const showInputError = (formElement, inputElement, errorMessage, options) => {

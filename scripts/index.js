@@ -1,3 +1,10 @@
+import Card from './Card.js';
+import FormValidator from './validate.js'
+import {
+  enableValidation
+}
+from './validate.js'
+
 // Шесть карточек «из коробки», которые сразу добавляются на главную страницу
 const initialCards = [{
     name: 'Архыз',
@@ -57,17 +64,20 @@ const elementsMsgNoElements = document.querySelector('.elements__msgNoElements')
 // Находим код шаблона, по которому будем создавать новые карточки
 const templateEl = '.templateEl';
 // Находим попап, в котором будет появляться картинка в увеличенном виде
-const popupImg = document.querySelector('.popup_type_img')
+export const popupImg = document.querySelector('.popup_type_img')
 // Находим кнопку закрытия попапа с увеличенной картинкой
 const popupImgCloseBtn = popupImg.querySelector('.popup__closeButton_type_img')
 // Находим картинку и заголовок карточки, которая будет увеличена
-const popupImgPicEl = popupImg.querySelector('.popup__picture_type_img')
-const popupImgNameEl = popupImg.querySelector('.popup__placeName_type_img')
+export const popupImgPicEl = popupImg.querySelector('.popup__picture_type_img')
+export const popupImgNameEl = popupImg.querySelector('.popup__placeName_type_img')
 // Код клавиши Escape
 const escCode = 'Escape';
 
+const formPopupProfile = document.querySelector('.popup__form_type_profile')
+console.log(formPopupProfile)
+
 // Обработчик открытия "попапа"
-const handlePopupOpen = function (element) {
+export const handlePopupOpen = function (element) {
   element.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEsc)
 }
@@ -134,7 +144,7 @@ function formAddSubmitHandler(evt) {
   // Добавляем новую карточку в DOM
   elementListContainer.prepend(listItem);
   // Проверяем, есть ли надпись "Нет элементов"
-  handleAddMsgNoElements()
+  handleMsgNoElements()
   // Очищаем input формы
   popupNewPlaceForm.reset();
   // Деактивация кнопки submit
@@ -150,7 +160,7 @@ function handleBtnInactive(buttonEl) {
 }
 
 // Обработчик добавления сообщения "Нет элементов"
-function handleAddMsgNoElements() {
+export function handleMsgNoElements() {
   if (elementListContainer.children.length === 0) {
     elementsMsgNoElements.classList.add('elements__msgNoElements_active')
   } else {
@@ -170,80 +180,6 @@ popupNewPlaceCloseBtn.addEventListener('click', () => handlePopupClose(popupNewP
 // Кнопка закрытия попапа с картинкой
 popupImgCloseBtn.addEventListener('click', () => handlePopupClose(popupImg))
 
-class Card {
-  // в конструкторе будут динамические данные,
-  // для каждого экземпляра свои
-  constructor(data, cardSelector) {
-    // Создаем приватные поля
-    this._name = data.name;
-    this._link = data.link;
-    this._cardSelector = cardSelector;
-  }
-
-  _getTemplate() {
-    // здесь выполним все необходимые операции, чтобы вернуть разметку
-    const cardElement = document
-      .querySelector(this._cardSelector)
-      .content
-      .querySelector('.element')
-      .cloneNode(true);
-    // вернём DOM-элемент карточки
-    return cardElement;
-  }
-
-  _setEventListeners() {
-    this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._handlePopupImg()
-    })
-
-    this._element.querySelector('.element__buttonDelete').addEventListener('click', (event) => {
-      this._handleDelBtn(event)
-    })
-
-    this._element.querySelector('.element__likeButton').addEventListener('click', (event) => {
-      this._handleLikeBtn(event)
-    })
-  }
-
-  _handlePopupImg() {
-    handlePopupOpen(popupImg);
-    popupImgPicEl.src = this._link;
-    popupImgPicEl.alt = this._name;
-    popupImgNameEl.textContent = this._name;
-  }
-
-  _handleDelBtn(event) {
-    // Выбираем кнопку через специальное свойство target
-    const targetDeleteEl = event.target;
-    // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
-    const targetItem = targetDeleteEl.closest('.element');
-    targetItem.remove() // Функция удаления элемента
-    // Добавляем надпись "Нет элементов"
-    // Если все карточки были удалены
-    handleAddMsgNoElements()
-  }
-
-  _handleLikeBtn(event) {
-    // Получаем кнопку, как элемент цель
-    const targetBtnLikeEl = event.target;
-    // Добавляем переключатель класса
-    const targetItem = targetBtnLikeEl.classList.toggle('element__likeButton_active');
-  }
-
-  generateCard() {
-    // Запишем разметку в приватное поле _element.
-    this._element = this._getTemplate();
-    this._setEventListeners();
-
-    // Добавим данные
-    this._element.querySelector('.element__title').textContent = this._name;
-    this._element.querySelector('.element__image').src = this._link;
-
-    // Вернём элемент наружу
-    return this._element;
-  }
-}
-
 // Перебираем исходный массив с данными
 initialCards.forEach((item) => {
   // Наполняем данными шаблон класса Card
@@ -254,6 +190,16 @@ initialCards.forEach((item) => {
   // Вставляем новую карточку в разметку DOM
   elementListContainer.append(cardElement);
 });
+
+// Перебираем исходный массив с данными формы
+enableValidation.forEach((item) => {
+  // Наполняем данными шаблон класса Card
+  const valid = new FormValidator(item, formPopupProfile); // item - передаем данные в виде объекта
+  // Вызываем метод в созданном выше экземпляре для создания новой карточки
+  valid.enableValidation();
+});
+
+
 
 // // создадим экземпляр карточки с уникальным текстом и аватаром пользователя
 // const card = new Card('Привет! Как дела?', 'userpic.jpg');
@@ -275,7 +221,7 @@ initialCards.forEach((item) => {
 
 //   // Добавляем надпись "Нет элементов"
 //   // Если все карточки были удалены
-//   handleAddMsgNoElements()
+//   handleMsgNoElements()
 // }
 
 
@@ -321,4 +267,78 @@ initialCards.forEach((item) => {
 
 //   // Возвращаем созданный шаблон
 //   return newItems;
+// }
+
+// class Card {
+//   // в конструкторе будут динамические данные,
+//   // для каждого экземпляра свои
+//   constructor(data, cardSelector) {
+//     // Создаем приватные поля
+//     this._name = data.name;
+//     this._link = data.link;
+//     this._cardSelector = cardSelector;
+//   }
+
+//   _getTemplate() {
+//     // здесь выполним все необходимые операции, чтобы вернуть разметку
+//     const cardElement = document
+//       .querySelector(this._cardSelector)
+//       .content
+//       .querySelector('.element')
+//       .cloneNode(true);
+//     // вернём DOM-элемент карточки
+//     return cardElement;
+//   }
+
+//   _setEventListeners() {
+//     this._element.querySelector('.element__image').addEventListener('click', () => {
+//       this._handlePopupImg()
+//     })
+
+//     this._element.querySelector('.element__buttonDelete').addEventListener('click', (event) => {
+//       this._handleDelBtn(event)
+//     })
+
+//     this._element.querySelector('.element__likeButton').addEventListener('click', (event) => {
+//       this._handleLikeBtn(event)
+//     })
+//   }
+
+//   _handlePopupImg() {
+//     handlePopupOpen(popupImg);
+//     popupImgPicEl.src = this._link;
+//     popupImgPicEl.alt = this._name;
+//     popupImgNameEl.textContent = this._name;
+//   }
+
+//   _handleDelBtn(event) {
+//     // Выбираем кнопку через специальное свойство target
+//     const targetDeleteEl = event.target;
+//     // Выбираем родительский элемент, в котором будет удаляться дочерний элемент
+//     const targetItem = targetDeleteEl.closest('.element');
+//     targetItem.remove() // Функция удаления элемента
+//     // Добавляем надпись "Нет элементов"
+//     // Если все карточки были удалены
+//     handleMsgNoElements()
+//   }
+
+//   _handleLikeBtn(event) {
+//     // Получаем кнопку, как элемент цель
+//     const targetBtnLikeEl = event.target;
+//     // Добавляем переключатель класса
+//     const targetItem = targetBtnLikeEl.classList.toggle('element__likeButton_active');
+//   }
+
+//   generateCard() {
+//     // Запишем разметку в приватное поле _element.
+//     this._element = this._getTemplate();
+//     this._setEventListeners();
+
+//     // Добавим данные
+//     this._element.querySelector('.element__title').textContent = this._name;
+//     this._element.querySelector('.element__image').src = this._link;
+
+//     // Вернём элемент наружу
+//     return this._element;
+//   }
 // }
