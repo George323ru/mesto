@@ -72,9 +72,7 @@ export const popupImgPicEl = popupImg.querySelector('.popup__picture_type_img')
 export const popupImgNameEl = popupImg.querySelector('.popup__placeName_type_img')
 // Код клавиши Escape
 const escCode = 'Escape';
-// Находим формы
-// const formPopupProfile = document.querySelector('.popup__form_type_profile')
-// const formPopupNewPlace = document.querySelector('.popup__form_type_newPlace')
+
 
 
 // Обработчик открытия "попапа"
@@ -138,6 +136,7 @@ function formAddSubmitHandler(evt) {
     link: inputSrc
   }
 
+  // Наполняем шаблон класса данными
   const cardEl = new Card(inputList, templateEl); // item - передаем данные в виде объекта
   // Создаём карточку и возвращаем наружу
   const listItem = cardEl.generateCard();

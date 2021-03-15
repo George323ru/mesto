@@ -95,7 +95,7 @@ export default class FormValidator {
     // formList.forEach((formElement) => {
     //   this._setEventListeners(formElement)
     // });
-
+    // На элементы формы навешиваем событие
     this._setEventListeners(this._formSelector)
   }
 }
