@@ -1,5 +1,5 @@
 import {
-  handlePopupOpen,
+  handleOpenPopup,
   handleMsgNoElements,
   popupImg,
   popupImgPicEl,
@@ -42,7 +42,7 @@ export default class Card {
   }
 
   _handlePopupImg() {
-    handlePopupOpen(popupImg);
+    handleOpenPopup(popupImg);
     popupImgPicEl.src = this._link;
     popupImgPicEl.alt = this._name;
     popupImgNameEl.textContent = this._name;

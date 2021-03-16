@@ -79,13 +79,13 @@ export const popupImgNameEl = popupImg.querySelector('.popup__placeName_type_img
 const escCode = 'Escape';
 
 // Обработчик открытия "попапа"
-export const handlePopupOpen = function (element) {
+export const handleOpenPopup = function (element) {
   element.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEsc)
 }
 
 // Обработчик закрытия "попапа"
-const handlePopupClose = function (element) {
+const handleClosePopup = function (element) {
   element.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEsc)
 }
@@ -94,7 +94,7 @@ const handlePopupClose = function (element) {
 popup.forEach((popupElement) => {
   addEventListener('click', e => {
     if (e.target.classList.contains('popup')) {
-      handlePopupClose(popupElement);
+      handleClosePopup(popupElement);
     }
   })
 })
@@ -102,13 +102,13 @@ popup.forEach((popupElement) => {
 function closeByEsc(evt) {
   if (evt.key === escCode) {
     const openedPopup = document.querySelector('.popup_opened');
-    handlePopupClose(openedPopup);
+    handleClosePopup(openedPopup);
   }
 }
 
 // Обработчик открытия формы
-const handlePopupProfileOpen = function () {
-  handlePopupOpen(popupProfile);
+const handleOpenPopupProfile = function () {
+  handleOpenPopup(popupProfile);
 
   // Добавляем в поля формы текст из профиля на странице
   popupProfileInputTypeName.value = profileUserName.textContent;
@@ -116,7 +116,7 @@ const handlePopupProfileOpen = function () {
 }
 
 // Обработчик «отправки» формы
-function formSubmitHandler(evt) {
+function handleFormProfile(evt) {
   evt.preventDefault(); // Отменяем стандартную отправку формы
 
   // Меняем содержимое в профиле на новое содержимое из полей формы
@@ -124,11 +124,11 @@ function formSubmitHandler(evt) {
   profileUserJob.textContent = popupProfileInputTypeJob.value;
 
   // Прячем "попап"
-  handlePopupClose(popupProfile);
+  handleClosePopup(popupProfile);
 }
 
 // Форма добавления новой карточки на станицу
-function handleFormAddSubmit(evt) {
+function handleFormAddCard(evt) {
   evt.preventDefault(); // Отменяем стандартную отправку формы
 
   // Сохраняем значения, полученные из input'ов формы
@@ -153,7 +153,7 @@ function handleFormAddSubmit(evt) {
   // Деактивация кнопки submit
   handleBtnInactive(submitBtn)
   // Закрываем popup
-  handlePopupClose(popupNewPlace)
+  handleClosePopup(popupNewPlace)
 }
 
 // Обработчик блокировки кнопки sumbit
@@ -172,16 +172,16 @@ export function handleMsgNoElements() {
 }
 
 // События, которые будут происходить при нажатии на кнопки
-popupProfileOpenBtn.addEventListener('click', handlePopupProfileOpen);
-popupProfileCloseBtn.addEventListener('click', () => handlePopupClose(popupProfile));
-popupProfileFormEL.addEventListener('submit', formSubmitHandler);
-popupNewPlaceAddBtn.addEventListener('click', () => handlePopupOpen(popupNewPlace))
+popupProfileOpenBtn.addEventListener('click', handleOpenPopupProfile);
+popupProfileCloseBtn.addEventListener('click', () => handleClosePopup(popupProfile));
+popupProfileFormEL.addEventListener('submit', handleFormProfile);
+popupNewPlaceAddBtn.addEventListener('click', () => handleOpenPopup(popupNewPlace))
 // Кнопка закрытия формы добавления нового места
-popupNewPlaceForm.addEventListener('submit', handleFormAddSubmit)
+popupNewPlaceForm.addEventListener('submit', handleFormAddCard)
 // Кнопка закрытия попапа нового места
-popupNewPlaceCloseBtn.addEventListener('click', () => handlePopupClose(popupNewPlace))
+popupNewPlaceCloseBtn.addEventListener('click', () => handleClosePopup(popupNewPlace))
 // Кнопка закрытия попапа с картинкой
-popupImgCloseBtn.addEventListener('click', () => handlePopupClose(popupImg))
+popupImgCloseBtn.addEventListener('click', () => handleClosePopup(popupImg))
 
 // Перебираем исходный массив с данными
 initialCards.forEach((item) => {
