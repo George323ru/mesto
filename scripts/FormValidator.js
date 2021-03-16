@@ -1,6 +1,5 @@
 export default class FormValidator {
   constructor(options, formSelector) {
-    // this._formSelector = options.formSelector;
     this._inputSelector = options.inputSelector;
     this._submitButtonSelector = options.submitButtonSelector;
     this._inactiveButtonClass = options.inactiveButtonClass;
@@ -31,7 +30,7 @@ export default class FormValidator {
   }
 
   // Обработчик состояния кнопки
-  _toggleButtonState() {
+  toggleButtonState() {
     if (this._hasInvalidInput(this._inputList)) {
       this._buttonElement.setAttribute('disabled', true);
       this._buttonElement.classList.add(this._inactiveButtonClass);
@@ -64,7 +63,7 @@ export default class FormValidator {
       evt.preventDefault();
     });
 
-    this._toggleButtonState(this._inputList, this._buttonElement);
+    this.toggleButtonState(this._inputList, this._buttonElement);
 
     // На каждый "инпут" навешиваем событие
     this._inputList.forEach(inputElement => {
@@ -72,7 +71,7 @@ export default class FormValidator {
         // Проверка инпута на валидность
         this._checkInputValidity(formElement, inputElement);
         // Блокировка кнопки sumbit в случае не валидности одного из полей ввода
-        this._toggleButtonState(this._inputList, this._buttonElement);
+        this.toggleButtonState(this._inputList, this._buttonElement);
       });
     });
   }

@@ -29,7 +29,6 @@ const initialCards = [{
 ];
 
 const settingsValidation = [{
-  // formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__saveBtn',
   inactiveButtonClass: 'popup__saveBtn_inactive',
@@ -115,6 +114,23 @@ const handleOpenPopupProfile = function () {
   popupProfileInputTypeJob.value = profileUserJob.textContent;
 }
 
+// Обработчик создания карточек по шаблону класса Card
+function createCard(item, cardSelector) {
+  // Наполняем шаблон класса данными
+  const card = new Card(item, cardSelector);
+  // Создаём карточку и возвращаем наружу
+  return card.generateCard();
+}
+
+function initValidationPopup(arrSet, classValid, selectorPopupForm) {
+  arrSet.forEach((item) => {
+    // Наполняем данными шаблон класса
+    const validFormPopup = new classValid(item, selectorPopupForm);
+    // Вызываем метод в созданном выше экземпляре для создания новой карточки
+    return validFormPopup.enableValidation();
+  });
+}
+
 // Обработчик «отправки» формы
 function handleFormProfile(evt) {
   evt.preventDefault(); // Отменяем стандартную отправку формы
@@ -127,6 +143,7 @@ function handleFormProfile(evt) {
   handleClosePopup(popupProfile);
 }
 
+
 // Форма добавления новой карточки на станицу
 function handleFormAddCard(evt) {
   evt.preventDefault(); // Отменяем стандартную отправку формы
@@ -134,15 +151,12 @@ function handleFormAddCard(evt) {
   // Сохраняем значения, полученные из input'ов формы
   const inputText = popupNewPlaceInputName.value;
   const inputSrc = popupNewPlaceInputLink.value;
-  const inputList = {
+  const inputListForm = {
     name: inputText,
     link: inputSrc
   }
 
-  // Наполняем шаблон класса данными
-  const cardEl = new Card(inputList, templateEl); // item - передаем данные в виде объекта
-  // Создаём карточку и возвращаем наружу
-  const listItem = cardEl.generateCard();
+  const listItem = createCard(inputListForm, templateEl);
   // Добавляем новую карточку в DOM
   elementListContainer.prepend(listItem);
 
@@ -151,7 +165,9 @@ function handleFormAddCard(evt) {
   // Очищаем input формы
   popupNewPlaceForm.reset();
   // Деактивация кнопки submit
-  handleBtnInactive(submitBtn)
+  // handleBtnInactive(submitBtn)
+  initValidationPopup(settingsValidation, FormValidator, popupProfileFormEL)
+  validFormPopup.toggleButtonState();
   // Закрываем popup
   handleClosePopup(popupNewPlace)
 }
@@ -185,21 +201,11 @@ popupImgCloseBtn.addEventListener('click', () => handleClosePopup(popupImg))
 
 // Перебираем исходный массив с данными
 initialCards.forEach((item) => {
-  // Наполняем данными шаблон класса Card
-  const card = new Card(item, templateEl);
-  // Вызываем метод в созданном выше экземпляре для создания новой карточки
-  const cardElement = card.generateCard();
-
+  const cardElement = createCard(item, templateEl);
   // Вставляем новую карточку в разметку DOM
   elementListContainer.append(cardElement);
 });
 
-// Перебираем исходный массив с данными формы
-settingsValidation.forEach((item) => {
-  // Наполняем данными шаблон класса FormValidator
-  const validFormPopupProfile = new FormValidator(item, popupProfileFormEL);
-  const validFormPopupNewPlace = new FormValidator(item, popupNewPlaceForm);
-  // Вызываем метод в созданном выше экземпляре для создания новой карточки
-  validFormPopupProfile.enableValidation();
-  validFormPopupNewPlace.enableValidation();
-});
+// Запускаем валидацию форм
+initValidationPopup(settingsValidation, FormValidator, popupProfileFormEL)
+initValidationPopup(settingsValidation, FormValidator, popupNewPlaceForm)
