@@ -28,13 +28,13 @@ const initialCards = [{
   }
 ];
 
-const settingsValidation = [{
+const settingsValidation = {
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__saveBtn',
   inactiveButtonClass: 'popup__saveBtn_inactive',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
-}];
+};
 
 // Находим все попапы
 const popup = document.querySelectorAll('.popup')
@@ -122,14 +122,11 @@ function createCard(item, cardSelector) {
   return card.generateCard();
 }
 
-function initValidationPopup(arrSet, classValid, selectorPopupForm) {
-  arrSet.forEach((item) => {
-    // Наполняем данными шаблон класса
-    const validFormPopup = new classValid(item, selectorPopupForm);
-    // Вызываем метод в созданном выше экземпляре для создания новой карточки
-    return validFormPopup.enableValidation();
-  });
-}
+// Запускаем валидацию форм
+const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
+popupProfileValid.enableValidation();
+const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceForm);
+popupAddCardValid.enableValidation();
 
 // Обработчик «отправки» формы
 function handleFormProfile(evt) {
@@ -165,17 +162,9 @@ function handleFormAddCard(evt) {
   // Очищаем input формы
   popupNewPlaceForm.reset();
   // Деактивация кнопки submit
-  // handleBtnInactive(submitBtn)
-  initValidationPopup(settingsValidation, FormValidator, popupProfileFormEL)
-  validFormPopup.toggleButtonState();
+  popupAddCardValid.toggleButtonState();
   // Закрываем popup
   handleClosePopup(popupNewPlace)
-}
-
-// Обработчик блокировки кнопки sumbit
-function handleBtnInactive(buttonEl) {
-  buttonEl.setAttribute('disabled', true);
-  buttonEl.classList.add('popup__saveBtn_inactive');
 }
 
 // Обработчик добавления сообщения "Нет элементов"
@@ -205,7 +194,3 @@ initialCards.forEach((item) => {
   // Вставляем новую карточку в разметку DOM
   elementListContainer.append(cardElement);
 });
-
-// Запускаем валидацию форм
-initValidationPopup(settingsValidation, FormValidator, popupProfileFormEL)
-initValidationPopup(settingsValidation, FormValidator, popupNewPlaceForm)
