@@ -140,7 +140,6 @@ function handleFormProfile(evt) {
   handleClosePopup(popupProfile);
 }
 
-
 // Форма добавления новой карточки на станицу
 function handleFormAddCard(evt) {
   evt.preventDefault(); // Отменяем стандартную отправку формы
@@ -188,9 +187,71 @@ popupNewPlaceCloseBtn.addEventListener('click', () => handleClosePopup(popupNewP
 // Кнопка закрытия попапа с картинкой
 popupImgCloseBtn.addEventListener('click', () => handleClosePopup(popupImg))
 
-// Перебираем исходный массив с данными
-initialCards.forEach((item) => {
-  const cardElement = createCard(item, templateEl);
-  // Вставляем новую карточку в разметку DOM
-  elementListContainer.append(cardElement);
-});
+// // Перебираем исходный массив с данными
+// initialCards.forEach((item) => {
+//   const cardElement = createCard(item, templateEl);
+//   // Вставляем новую карточку в разметку DOM
+//   elementListContainer.append(cardElement);
+// });
+
+
+class Section {
+  constructor({
+    data,
+    renderer
+  }, containerSelector) {
+    this._renderedItems = data;
+    this._renderer = renderer;
+    this._container = document.querySelector(containerSelector);
+  }
+
+  // Вставляем в разметку
+  addItem(element) {
+    this._container.append(element);
+  }
+
+  //Преобразуем массив с данными
+  renderItems() {
+    this._renderedItems.forEach(item => {
+      this._renderer(item);
+
+    });
+  }
+
+}
+
+const listItems = new Section({
+  // Массив с данными
+  data: initialCards,
+  // Передаем код ф-ии, который будет преобразовывать каждый элемент
+  renderer: (item) => {
+    const cardElement = createCard(item, templateEl);
+    // Вставляем в разметку
+    listItems.addItem(cardElement)
+  }
+}, '.elements__element-list')
+
+console.log(listItems)
+listItems.renderItems()
+
+class Popup {
+  constructor(selectorPopup) {
+    this._selector = selectorPopup;
+  }
+
+  open() {
+
+  }
+
+  close() {
+
+  }
+
+  _handleEscClose() {
+
+  }
+
+  setEventListeners() {
+
+  }
+}
