@@ -166,7 +166,7 @@ function handleFormAddCard(evt) {
   // Деактивация кнопки submit
   popupAddCardValid.toggleButtonState();
   // Закрываем popup
-  handleClosePopup(popupNewPlace)
+  popupEx.close(popupNewPlace)
 }
 
 // Обработчик добавления сообщения "Нет элементов"
@@ -180,15 +180,15 @@ export function handleMsgNoElements() {
 
 // События, которые будут происходить при нажатии на кнопки
 popupProfileOpenBtn.addEventListener('click', handleOpenPopupProfile);
-popupProfileCloseBtn.addEventListener('click', () => handleClosePopup(popupProfile));
+popupProfileCloseBtn.addEventListener('click', () => popupEx.close(popupProfile));
 popupProfileFormEL.addEventListener('submit', handleFormProfile);
-popupNewPlaceAddBtn.addEventListener('click', () => handleOpenPopup(popupNewPlace))
+popupNewPlaceAddBtn.addEventListener('click', () => popupEx.open(popupNewPlace))
 // Кнопка закрытия формы добавления нового места
 popupNewPlaceForm.addEventListener('submit', handleFormAddCard)
 // Кнопка закрытия попапа нового места
-popupNewPlaceCloseBtn.addEventListener('click', () => handleClosePopup(popupNewPlace))
+popupNewPlaceCloseBtn.addEventListener('click', () => popupEx.close(popupNewPlace))
 // Кнопка закрытия попапа с картинкой
-popupImgCloseBtn.addEventListener('click', () => handleClosePopup(popupImg))
+popupImgCloseBtn.addEventListener('click', () => popupEx.close(popupImg))
 
 // // Перебираем исходный массив с данными
 // initialCards.forEach((item) => {
@@ -235,7 +235,7 @@ const listItems = new Section({
 
 listItems.renderItems()
 
-class Popup {
+export default class Popup {
   constructor(selectorPopup) {
     this._selector = selectorPopup;
   }
@@ -267,22 +267,65 @@ class Popup {
 
   // Добавляем слушатель клика иконке закрытия попапа
   setEventListeners() {
+    this._selector.querySelector('.popup__closeButton_type_profile').addEventListener('click', () => this.close(this._selector));
+  }
+}
+
+export const popupEx = new Popup(popupProfile);
+
+
+class PopupWithImage extends Popup {
+  constructor(data, selectorPopup) {
+    super(selectorPopup);
+  }
+
+  open() {
+    card._handlePopupImg();
+  }
+
+  // Добавляем слушатель клика иконке закрытия попапа
+  setEventListeners() {
+    this._selector.querySelector('.popup__closeButton_type_img').addEventListener('click', () => popupEx.close(this._selector));
+  }
+
+
+}
+
+class PopupWithForm extends Popup {
+  constructor(selectorPopup, submit) {
+    super(selectorPopup);
+    this._selector = selectorPopup;
+    this.submit = submit;
+  }
+
+  // Собираем данные всех полей формы
+  _getInputValues() {
+
+  }
+
+  setEventListeners() {
+
+  }
+
+  close() {
 
   }
 }
 
-const popupEx = new Popup(popupProfile);
-
-
-class PopupWithImage extends Popup {
-  constructor(selectorPopup) {
-    super(selectorPopup);
+class UserInfo {
+  constructor(data) {
+    this._selectorName = data.name;
+    this.selectorJob = data.job;
 
   }
 
-  open() {
-    card._handlePopupImg()
+  // Возвращаем объект с данными пользователя
+  getUserInfo() {
+
   }
 
+  // Принимаем новые данные пользователя и добавляем их на страницу
+  setUserInfo() {
 
+  }
 }

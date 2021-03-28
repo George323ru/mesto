@@ -3,8 +3,10 @@ import {
   handleMsgNoElements,
   popupImg,
   popupImgPicEl,
-  popupImgNameEl
+  popupImgNameEl,
+  popupEx
 } from './index.js'
+
 
 export default class Card {
   // в конструкторе будут динамические данные,
@@ -42,7 +44,7 @@ export default class Card {
   }
 
   _handlePopupImg() {
-    handleOpenPopup(popupImg);
+    popupEx.open(popupImg);
     popupImgPicEl.src = this._link;
     popupImgPicEl.alt = this._name;
     popupImgNameEl.textContent = this._name;
