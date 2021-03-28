@@ -77,37 +77,39 @@ export const popupImgNameEl = popupImg.querySelector('.popup__placeName_type_img
 // Код клавиши Escape
 const escCode = 'Escape';
 
-// Обработчик открытия "попапа"
-export const handleOpenPopup = function (element) {
-  element.classList.add('popup_opened');
-  document.addEventListener('keydown', closeByEsc)
-}
+// // Обработчик открытия "попапа"
+// export const handleOpenPopup = function (element) {
+//   element.classList.add('popup_opened');
+//   document.addEventListener('keydown', closeByEsc)
+// }
 
-// Обработчик закрытия "попапа"
-const handleClosePopup = function (element) {
-  element.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeByEsc)
-}
+// // Обработчик закрытия "попапа"
+// const handleClosePopup = function (element) {
+//   element.classList.remove('popup_opened');
+//   document.removeEventListener('keydown', closeByEsc)
+// }
 
 // Обработчик закрытия "попапа" через Overlay
 popup.forEach((popupElement) => {
   addEventListener('click', e => {
     if (e.target.classList.contains('popup')) {
-      handleClosePopup(popupElement);
+      // handleClosePopup(popupElement);
+      popupEx.close()
     }
   })
 })
 
-function closeByEsc(evt) {
-  if (evt.key === escCode) {
-    const openedPopup = document.querySelector('.popup_opened');
-    handleClosePopup(openedPopup);
-  }
-}
+// function closeByEsc(evt) {
+//   if (evt.key === escCode) {
+//     const openedPopup = document.querySelector('.popup_opened');
+//     handleClosePopup(openedPopup);
+//   }
+// }
 
 // Обработчик открытия формы
 const handleOpenPopupProfile = function () {
-  handleOpenPopup(popupProfile);
+  // handleOpenPopup(popupProfile);
+  popupEx.open(popupProfile)
 
   // Добавляем в поля формы текст из профиля на странице
   popupProfileInputTypeName.value = profileUserName.textContent;
@@ -137,7 +139,8 @@ function handleFormProfile(evt) {
   profileUserJob.textContent = popupProfileInputTypeJob.value;
 
   // Прячем "попап"
-  handleClosePopup(popupProfile);
+  // handleClosePopup(popupProfile);
+  popupEx.close(popupProfile)
 }
 
 // Форма добавления новой карточки на станицу
@@ -214,7 +217,6 @@ class Section {
   renderItems() {
     this._renderedItems.forEach(item => {
       this._renderer(item);
-
     });
   }
 
@@ -231,7 +233,6 @@ const listItems = new Section({
   }
 }, '.elements__element-list')
 
-console.log(listItems)
 listItems.renderItems()
 
 class Popup {
@@ -239,19 +240,49 @@ class Popup {
     this._selector = selectorPopup;
   }
 
-  open() {
-
+  // Открытие попапа
+  open(element) {
+    element.classList.add('popup_opened');
+    document.addEventListener('keydown', (evt) => {
+      this._handleEscClose(evt)
+    })
   }
 
-  close() {
-
+  // Закрытие попапа
+  close(element) {
+    element.classList.remove('popup_opened');
+    document.removeEventListener('keydown', (evt) => {
+      this._handleEscClose(evt)
+    })
   }
 
-  _handleEscClose() {
-
+  // Логика закрытия попапа клавишей Esc
+  _handleEscClose(evt) {
+    if (evt.key === escCode) {
+      console.log('привет')
+      const openedPopup = document.querySelector('.popup_opened');
+      this.close(openedPopup);
+    }
   }
 
+  // Добавляем слушатель клика иконке закрытия попапа
   setEventListeners() {
 
   }
+}
+
+const popupEx = new Popup(popupProfile);
+
+
+class PopupWithImage extends Popup {
+  constructor(selectorPopup) {
+    super(selectorPopup);
+
+  }
+
+  open() {
+    card._handlePopupImg()
+  }
+
+
 }

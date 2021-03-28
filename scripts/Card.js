@@ -1,5 +1,5 @@
 import {
-  handleOpenPopup,
+  // handleOpenPopup,
   handleMsgNoElements,
   popupImg,
   popupImgPicEl,
