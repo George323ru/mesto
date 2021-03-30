@@ -1,5 +1,7 @@
 import Card from './Card.js';
-import FormValidator from './FormValidator.js'
+import FormValidator from './FormValidator.js';
+import Section from './Section.js';
+import Popup from './Popup.js';
 
 // Шесть карточек «из коробки», которые сразу добавляются на главную страницу
 const initialCards = [{
@@ -94,7 +96,7 @@ popup.forEach((popupElement) => {
   addEventListener('click', e => {
     if (e.target.classList.contains('popup')) {
       // handleClosePopup(popupElement);
-      popupEx.close()
+      popupEx.close(popupElement)
     }
   })
 })
@@ -197,31 +199,7 @@ popupImgCloseBtn.addEventListener('click', () => popupEx.close(popupImg))
 //   elementListContainer.append(cardElement);
 // });
 
-
-class Section {
-  constructor({
-    data,
-    renderer
-  }, containerSelector) {
-    this._renderedItems = data;
-    this._renderer = renderer;
-    this._container = document.querySelector(containerSelector);
-  }
-
-  // Вставляем в разметку
-  addItem(element) {
-    this._container.append(element);
-  }
-
-  //Преобразуем массив с данными
-  renderItems() {
-    this._renderedItems.forEach(item => {
-      this._renderer(item);
-    });
-  }
-
-}
-
+// Создаем экземпляр класса Section
 const listItems = new Section({
   // Массив с данными
   data: initialCards,
@@ -233,63 +211,42 @@ const listItems = new Section({
   }
 }, '.elements__element-list')
 
+// запускаем отрисовку
 listItems.renderItems()
 
-export default class Popup {
-  constructor(selectorPopup) {
-    this._selector = selectorPopup;
-  }
 
-  // Открытие попапа
-  open(element) {
-    element.classList.add('popup_opened');
-    document.addEventListener('keydown', (evt) => {
-      this._handleEscClose(evt)
-    })
-  }
 
-  // Закрытие попапа
-  close(element) {
-    element.classList.remove('popup_opened');
-    document.removeEventListener('keydown', (evt) => {
-      this._handleEscClose(evt)
-    })
-  }
 
-  // Логика закрытия попапа клавишей Esc
-  _handleEscClose(evt) {
-    if (evt.key === escCode) {
-      console.log('привет')
-      const openedPopup = document.querySelector('.popup_opened');
-      this.close(openedPopup);
-    }
-  }
 
-  // Добавляем слушатель клика иконке закрытия попапа
-  setEventListeners() {
-    this._selector.querySelector('.popup__closeButton_type_profile').addEventListener('click', () => this.close(this._selector));
-  }
-}
 
+
+// Экземпляр класса для попапа профиля
 export const popupEx = new Popup(popupProfile);
 
 
 class PopupWithImage extends Popup {
-  constructor(data, selectorPopup) {
+  constructor(selectorPopup) {
     super(selectorPopup);
   }
 
   open() {
-    card._handlePopupImg();
+    popupEx.open(popupImg);
+    popupImgPicEl.src = initialCards.link;
+    popupImgPicEl.alt = initialCards.name;
+    popupImgNameEl.textContent = initialCards.name;
+
   }
 
-  // Добавляем слушатель клика иконке закрытия попапа
-  setEventListeners() {
-    this._selector.querySelector('.popup__closeButton_type_img').addEventListener('click', () => popupEx.close(this._selector));
-  }
-
-
+  // // Добавляем слушатель клика иконке закрытия попапа
+  // setEventListeners() {
+  //   this._selector.querySelector('.popup__closeButton_type_img').addEventListener('click', () => popupEx.close(this._selector));
+  // }
 }
+
+// попап для картинки
+const popupWI = new PopupWithImage(popupImg)
+
+
 
 class PopupWithForm extends Popup {
   constructor(selectorPopup, submit) {
@@ -304,7 +261,14 @@ class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
+    // при сабмите формы
+    this._element.addEventListener('submit', (evt) => {
+      // отменим стандартное поведение
+      evt.preventDefault();
 
+      // и сбросим её поля
+      this._element.reset();
+    })
   }
 
   close() {
