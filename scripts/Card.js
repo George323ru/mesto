@@ -1,11 +1,15 @@
 import {
   // handleOpenPopup,
-  handleMsgNoElements,
+
   popupImg,
   popupImgPicEl,
   popupImgNameEl,
+
+} from '../utils/constants.js';
+import {
+  handleMsgNoElements,
   popupEx
-} from './index.js'
+} from '../pages/index.js'
 
 
 export default class Card {
