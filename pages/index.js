@@ -36,20 +36,16 @@ popup.forEach((popupElement) => {
 
     if (e.target.classList.contains('popup')) {
 
-      // handleClosePopup(popupElement);
       popupEx.close(popupElement)
 
     }
   })
 })
 
-// Обработчик создания карточек по шаблону класса Card
 function createCard(item, cardSelector, handleCardClick) {
 
-  // Наполняем шаблон класса данными
   const card = new Card(item, cardSelector, handleCardClick);
 
-  // Создаём карточку и возвращаем наружу
   return card.generateCard();
 
 }
@@ -57,14 +53,11 @@ function createCard(item, cardSelector, handleCardClick) {
 
 // Наполняем DOM экземплярами класса Section
 const listItems = new Section({
-  // Массив с данными
-  data: initialCards,
 
-  // Преобразуем каждый элемент массива data с помощью ф-ии
+  data: initialCards,
   renderer: (item) => {
 
     const cardElement = createCard(
-
       item,
       templateEl,
       () => {
@@ -74,7 +67,6 @@ const listItems = new Section({
 
     );
 
-    // Вставляем в разметку
     listItems.addItem(cardElement)
 
   }
@@ -84,16 +76,10 @@ const listItems = new Section({
 listItems.renderItems()
 
 
-
-
-
-// Обработчик открытия формы
 const handleOpenPopupProfile = function () {
 
-  // handleOpenPopup(popupProfile);
   popupEx.open(popupProfile)
 
-  // Добавляем в поля формы текст из профиля на странице
   popupProfileInputTypeName.value = userData.getUserInfo().name.textContent;
   popupProfileInputTypeJob.value = userData.getUserInfo().job.textContent;
 
@@ -103,8 +89,6 @@ popupProfileOpenBtn.addEventListener('click', handleOpenPopupProfile);
 
 
 
-
-// Запускаем валидацию форм
 const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
 popupProfileValid.enableValidation();
 
@@ -112,7 +96,6 @@ const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceFor
 popupAddCardValid.enableValidation();
 
 
-// Обработчик добавления сообщения "Нет элементов"
 export function handleMsgNoElements() {
 
   if (elementListContainer.children.length === 0) {
@@ -127,12 +110,9 @@ export function handleMsgNoElements() {
 
 
 
-// // События, которые будут происходить при нажатии на кнопки
-// popupProfileCloseBtn.addEventListener('click', () => popupEx.close(popupProfile));
 popupNewPlaceAddBtn.addEventListener('click', () => popupEx.open(popupNewPlace))
-// Кнопка закрытия попапа нового места
-popupNewPlaceCloseBtn.addEventListener('click', () => popupEx.close(popupNewPlace))
-// Кнопка закрытия попапа с картинкой
+
+
 popupImgCloseBtn.addEventListener('click', () => popupEx.close(popupImg))
 
 
@@ -183,7 +163,10 @@ const popupAddCardForm = new PopupWithForm({
       () => {
 
         // Передаем ф-ию открытия попапа с картинкой
-        popupWI.open(item)
+        popupWI.open({
+          name,
+          link
+        })
 
       });
 
