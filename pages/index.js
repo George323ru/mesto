@@ -35,7 +35,7 @@ popup.forEach((popupElement) => {
 
     if (e.target.classList.contains('popup')) {
 
-      popupEx.close(popupElement)
+      popupFormP.close(popupElement)
 
     }
   })
@@ -77,7 +77,7 @@ listItems.renderItems()
 
 const handleOpenPopupProfile = function () {
 
-  popupEx.open(popupProfile)
+  popupFormP.open(popupProfile)
 
   popupProfileInputTypeName.value = userData.getUserInfo().name.textContent;
   popupProfileInputTypeJob.value = userData.getUserInfo().job.textContent;
@@ -105,14 +105,7 @@ export function handleMsgNoElements() {
 }
 
 
-
-
-
-
-popupNewPlaceAddBtn.addEventListener('click', () => popupEx.open(popupNewPlace))
-
-
-export const popupEx = new Popup(popupProfile);
+popupNewPlaceAddBtn.addEventListener('click', () => popupAddCardForm.open(popupNewPlace))
 
 const popupWithImg = new PopupWithImage(popupImg)
 
@@ -152,7 +145,6 @@ const popupAddCardForm = new PopupWithForm({
       }, templateEl,
       () => {
 
-        // Передаем ф-ию открытия попапа с картинкой
         popupWithImg.open({
           name,
           link
@@ -160,7 +152,6 @@ const popupAddCardForm = new PopupWithForm({
 
       });
 
-    // Добавляем новую карточку в DOM
     elementListContainer.prepend(listItem);
 
     popupAddCardForm.close(popupNewPlace);
