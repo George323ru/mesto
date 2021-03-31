@@ -39,15 +39,15 @@ export const popup = document.querySelectorAll('.popup')
 export const popupProfile = document.querySelector('.popup_type_profile');
 // Находим кнопки, при нажатии на которые попап будет открываться и закрываться
 export const popupProfileOpenBtn = document.querySelector('.profile__editBtn');
-export const popupProfileCloseBtn = popupProfile.querySelector('.popup__closeButton_type_profile');
+export const popupProfileCloseBtn = document.querySelector('.popup__closeButton_type_profile');
 // Находим поля, куда будут подставлены новые значения из полей формы
 export const profileUserName = document.querySelector('.profile__user-name');
 export const profileUserJob = document.querySelector('.profile__userJob');
 // Находим форму в DOM
-export const popupProfileFormEL = popupProfile.querySelector('.popup__form_type_profile');
+export const popupProfileFormEL = document.querySelector('.popup__form_type_profile');
 // Находим поля формы в DOM
-export const popupProfileInputTypeName = popupProfile.querySelector('.popup__input_type_profileName');
-export const popupProfileInputTypeJob = popupProfile.querySelector('.popup__input_type_profileJob');
+export const popupProfileInputTypeName = document.querySelector('.popup__input_type_profileName');
+export const popupProfileInputTypeJob = document.querySelector('.popup__input_type_profileJob');
 // Находим кнопку открытия попапа для добавления нового места
 export const popupNewPlaceAddBtn = document.querySelector('.profile__add-button')
 // Находим попап добавления нового места вместе с формой

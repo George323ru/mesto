@@ -1,20 +1,10 @@
 import {
-  popupImg,
-  popupImgPicEl,
-  popupImgNameEl,
-
-} from '../utils/constants.js';
-import {
-  handleMsgNoElements,
-  popupEx
+  handleMsgNoElements
 } from '../pages/index.js'
 
 
 export default class Card {
-  // в конструкторе будут динамические данные,
-  // для каждого экземпляра свои
   constructor(data, cardSelector, handleCardClick) {
-    // Создаем приватные поля
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
@@ -44,13 +34,6 @@ export default class Card {
     this._element.querySelector('.element__likeButton').addEventListener('click', (event) => {
       this._handleLikeBtn(event)
     })
-  }
-
-  _handlePopupImg() {
-    popupEx.open(popupImg);
-    popupImgPicEl.src = this._link;
-    popupImgPicEl.alt = this._name;
-    popupImgNameEl.textContent = this._name;
   }
 
   _handleDelBtn(event) {

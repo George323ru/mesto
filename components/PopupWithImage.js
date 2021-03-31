@@ -9,7 +9,6 @@ export default class PopupWithImage extends Popup {
   }
 
   open(img) {
-    console.log('hi')
     const popupImg = this._selector.querySelector('.popup__picture_type_img')
     popupImg.src = img.link;
     popupImg.alt = img.name;

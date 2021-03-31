@@ -22,17 +22,15 @@ import {
   popupNewPlaceInputName,
   popupNewPlaceInputLink,
   popupNewPlaceCloseBtn,
-  submitBtn,
   elementListContainer,
   elementsMsgNoElements,
   templateEl,
   popupImg,
   popupImgCloseBtn,
-  popupImgPicEl,
-  popupImgNameEl,
-  escCode,
   settingsValidation
 } from '../utils/constants.js'
+
+
 
 // Обработчик закрытия "попапа" через Overlay
 popup.forEach((popupElement) => {
@@ -44,6 +42,15 @@ popup.forEach((popupElement) => {
   })
 })
 
+
+
+
+
+
+
+
+
+
 // Обработчик создания карточек по шаблону класса Card
 function createCard(item, cardSelector, handleCardClick) {
   // Наполняем шаблон класса данными
@@ -52,15 +59,17 @@ function createCard(item, cardSelector, handleCardClick) {
   return card.generateCard();
 }
 
-// Создаем экземпляр класса Section
+// Наполняем DOM экземплярами класса Section
 const listItems = new Section({
   // Массив с данными
   data: initialCards,
-  // Передаем код ф-ии, который будет преобразовывать каждый элемент
+  // Преобразуем каждый элемент массива data с помощью ф-ии
   renderer: (item) => {
-    const cardElement = createCard(item, templateEl,
+    const cardElement = createCard(
+      item,
+      templateEl,
       () => {
-        console.log(item)
+        // Передаем ф-ию открытия попапа с картинкой
         popupWI.open(item)
       }
     );
@@ -72,37 +81,46 @@ const listItems = new Section({
 // запускаем отрисовку
 listItems.renderItems()
 
+
+
+
+
 // Обработчик открытия формы
 const handleOpenPopupProfile = function () {
   // handleOpenPopup(popupProfile);
   popupEx.open(popupProfile)
 
   // Добавляем в поля формы текст из профиля на странице
-  popupProfileInputTypeName.value = profileUserName.textContent;
-  popupProfileInputTypeJob.value = profileUserJob.textContent;
+  popupProfileInputTypeName.value = userData.getUserInfo().name.textContent;
+  popupProfileInputTypeJob.value = userData.getUserInfo().job.textContent;
 }
 popupProfileOpenBtn.addEventListener('click', handleOpenPopupProfile);
+
+
+
 
 // Обработчик «отправки» формы с профилем
 function handleFormProfile(evt) {
   evt.preventDefault(); // Отменяем стандартную отправку формы
 
   // Меняем содержимое в профиле на новое содержимое из полей формы
-  profileUserName.textContent = popupProfileInputTypeName.value;
-  profileUserJob.textContent = popupProfileInputTypeJob.value;
-
-  // Прячем "попап"
-  // handleClosePopup(popupProfile);
+  userData.setUserInfo(popupProfileInputTypeName.value, popupProfileInputTypeJob.value)
   popupEx.close(popupProfile)
 }
-popupProfileFormEL.addEventListener('submit', handleFormProfile);
+// popupProfileFormEL.addEventListener('submit', handleFormProfile);
 
-// Запускаем валидацию для формы с профилем
+
+
+
+// Запускаем валидацию форм
 const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
 popupProfileValid.enableValidation();
-// Запускаем валидацию для формы с добавлением нового места
 const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceForm);
 popupAddCardValid.enableValidation();
+
+
+
+
 
 
 // Форма добавления новой карточки на станицу
@@ -131,7 +149,11 @@ function handleFormAddCard(evt) {
   popupEx.close(popupNewPlace)
 }
 // Кнопка закрытия формы добавления нового места
-popupNewPlaceForm.addEventListener('submit', handleFormAddCard)
+// popupNewPlaceForm.addEventListener('submit', handleFormAddCard)
+
+
+
+
 
 // Обработчик добавления сообщения "Нет элементов"
 export function handleMsgNoElements() {
@@ -142,8 +164,13 @@ export function handleMsgNoElements() {
   }
 }
 
+
+
+
+
+
 // // События, которые будут происходить при нажатии на кнопки
-popupProfileCloseBtn.addEventListener('click', () => popupEx.close(popupProfile));
+// popupProfileCloseBtn.addEventListener('click', () => popupEx.close(popupProfile));
 popupNewPlaceAddBtn.addEventListener('click', () => popupEx.open(popupNewPlace))
 // Кнопка закрытия попапа нового места
 popupNewPlaceCloseBtn.addEventListener('click', () => popupEx.close(popupNewPlace))
@@ -151,8 +178,36 @@ popupNewPlaceCloseBtn.addEventListener('click', () => popupEx.close(popupNewPlac
 popupImgCloseBtn.addEventListener('click', () => popupEx.close(popupImg))
 
 
+
+
+
+
+
 // Экземпляр класса для попапа профиля
 export const popupEx = new Popup(popupProfile);
 
-// попап для картинки
+// Попап для картинки
 const popupWI = new PopupWithImage(popupImg)
+
+
+
+// Создаем экземпляр класса с данными пользователя
+const userData = new UserInfo({
+  name: profileUserName,
+  job: profileUserJob
+})
+
+// Создаем экземпляр класса попапа с формой для попапа профиля, передаем селектор и то, что будет происходить при сабмите
+const popupFormP = new PopupWithForm({
+  selectorPopup: popupProfile,
+  handleFormSubmit: (formData) => {
+    // При сабмите мы вставляем данные пользователя обратно в форму
+    console.log(formData)
+    userData.setUserInfo(
+      formData.popupProfileInputTypeName,
+      formData.popupProfileInputTypeJob
+    );
+    popupEx.close(popupProfile);
+  }
+})
+popupFormP.setEventListeners()

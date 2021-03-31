@@ -18,6 +18,7 @@ export default class Popup {
 
   // Закрытие попапа
   close(element) {
+
     element.classList.remove('popup_opened');
     document.removeEventListener('keydown', (evt) => {
       this._handleEscClose(evt)
@@ -36,6 +37,7 @@ export default class Popup {
 
   // Добавляем слушатель клика иконке закрытия попапа
   setEventListeners() {
+    console.log(this._selector)
     this._selector.querySelector('.popup__closeButton_type_profile').addEventListener('click', () => this.close(this._selector));
   }
 }
