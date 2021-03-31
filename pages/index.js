@@ -35,7 +35,7 @@ popup.forEach((popupElement) => {
 
     if (e.target.classList.contains('popup')) {
 
-      popupFormP.close(popupElement)
+      popupProfileForm.close(popupElement)
 
     }
   })
@@ -77,7 +77,7 @@ listItems.renderItems()
 
 const handleOpenPopupProfile = function () {
 
-  popupFormP.open(popupProfile)
+  popupProfileForm.open(popupProfile)
 
   popupProfileInputTypeName.value = userData.getUserInfo().name.textContent;
   popupProfileInputTypeJob.value = userData.getUserInfo().job.textContent;
@@ -114,7 +114,7 @@ const userData = new UserInfo({
   job: profileUserJob
 })
 
-const popupFormP = new PopupWithForm({
+const popupProfileForm = new PopupWithForm({
   selectorPopup: popupProfile,
   handleFormSubmit: (formData) => {
 
@@ -126,10 +126,10 @@ const popupFormP = new PopupWithForm({
 
     );
 
-    popupFormP.close(popupProfile);
+    popupProfileForm.close(popupProfile);
   }
 })
-popupFormP.setEventListeners()
+popupProfileForm.setEventListeners()
 
 const popupAddCardForm = new PopupWithForm({
 
