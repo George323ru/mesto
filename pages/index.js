@@ -211,3 +211,26 @@ const popupFormP = new PopupWithForm({
   }
 })
 popupFormP.setEventListeners()
+
+const popupAddCardForm = new PopupWithForm({
+  selectorPopup: popupNewPlace,
+  handleFormSubmit: (formData) => {
+
+    const name = formData.popupNewPlaceInputTypeName;
+    const link = formData.popupNewPlaceInputTypeLink;
+
+    const listItem = createCard({
+        name,
+        link
+      }, templateEl,
+      () => {
+        // Передаем ф-ию открытия попапа с картинкой
+        popupWI.open(item)
+      });
+    // Добавляем новую карточку в DOM
+    elementListContainer.prepend(listItem);
+    popupEx.close(popupNewPlace);
+  }
+})
+
+popupAddCardForm.setEventListeners()
