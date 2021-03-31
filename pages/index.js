@@ -10,7 +10,6 @@ import {
   popup,
   popupProfile,
   popupProfileOpenBtn,
-  popupProfileCloseBtn,
   profileUserName,
   profileUserJob,
   popupProfileFormEL,
@@ -19,8 +18,6 @@ import {
   popupNewPlaceAddBtn,
   popupNewPlace,
   popupNewPlaceForm,
-  popupNewPlaceInputName,
-  popupNewPlaceInputLink,
   popupNewPlaceCloseBtn,
   elementListContainer,
   elementsMsgNoElements,
@@ -117,42 +114,6 @@ const popupProfileValid = new FormValidator(settingsValidation, popupProfileForm
 popupProfileValid.enableValidation();
 const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceForm);
 popupAddCardValid.enableValidation();
-
-
-
-
-
-
-// Форма добавления новой карточки на станицу
-function handleFormAddCard(evt) {
-  evt.preventDefault(); // Отменяем стандартную отправку формы
-
-  // Сохраняем значения, полученные из input'ов формы
-  const inputText = popupNewPlaceInputName.value;
-  const inputSrc = popupNewPlaceInputLink.value;
-  const inputListForm = {
-    name: inputText,
-    link: inputSrc
-  }
-
-  const listItem = createCard(inputListForm, templateEl);
-  // Добавляем новую карточку в DOM
-  elementListContainer.prepend(listItem);
-
-  // Проверяем, есть ли надпись "Нет элементов"
-  handleMsgNoElements()
-  // Очищаем input формы
-  popupNewPlaceForm.reset();
-  // Деактивация кнопки submit
-  popupAddCardValid.toggleButtonState();
-  // Закрываем popup
-  popupEx.close(popupNewPlace)
-}
-// Кнопка закрытия формы добавления нового места
-// popupNewPlaceForm.addEventListener('submit', handleFormAddCard)
-
-
-
 
 
 // Обработчик добавления сообщения "Нет элементов"
