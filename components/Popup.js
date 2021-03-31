@@ -34,7 +34,6 @@ export default class Popup {
 
   // Добавляем слушатель клика иконке закрытия попапа
   setEventListeners() {
-
     this._selector.querySelector('.popup__closeButton').addEventListener('click', () => this.close(this._selector));
   }
 }

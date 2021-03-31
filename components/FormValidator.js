@@ -6,6 +6,7 @@ export default class FormValidator {
     this._inputErrorClass = options.inputErrorClass;
     this._errorClass = options.errorClass;
     this._formSelector = formSelector;
+
     // Создаем массив из всех "инпутов"
     this._inputList = Array.from(this._formSelector.querySelectorAll(this._inputSelector));
     this._buttonElement = this._formSelector.querySelector(this._submitButtonSelector)
@@ -13,24 +14,32 @@ export default class FormValidator {
 
   // Показываем сообщение с ошибкой
   _showInputError(formElement, inputElement, errorMessage) {
+
     // Находим элемент span с id как у инпута для текста ошибки
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
+
     // Добавляем класс для появления ошибки
     errorElement.classList.add(this._errorClass);
+
   }
 
   // Прячем сообщение с ошибкой
   _hideInputError(formElement, inputElement) {
+
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
+
     errorElement.textContent = '';
+
   }
 
   // Обработчик состояния кнопки
   toggleButtonState() {
+
     if (this._hasInvalidInput(this._inputList)) {
       this._buttonElement.setAttribute('disabled', true);
       this._buttonElement.classList.add(this._inactiveButtonClass);
@@ -38,6 +47,7 @@ export default class FormValidator {
       this._buttonElement.removeAttribute('disabled');
       this._buttonElement.classList.remove(this._inactiveButtonClass);
     }
+
   }
 
   // Проверяем инпуты на валидность
@@ -49,12 +59,14 @@ export default class FormValidator {
 
   // Проверяем все "инпуты" на валидность для показа сообщения об ошибке
   _checkInputValidity(formElement, inputElement) {
+
     // Условие, при которых будет показана ошибка
     if (!inputElement.validity.valid) {
       this._showInputError(formElement, inputElement, inputElement.validationMessage);
     } else {
       this._hideInputError(formElement, inputElement);
     }
+
   };
 
   _setEventListeners(formElement) {
@@ -68,10 +80,13 @@ export default class FormValidator {
     // На каждый "инпут" навешиваем событие
     this._inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
+
         // Проверка инпута на валидность
         this._checkInputValidity(formElement, inputElement);
+
         // Блокировка кнопки sumbit в случае не валидности одного из полей ввода
         this.toggleButtonState(this._inputList, this._buttonElement);
+
       });
     });
   }
