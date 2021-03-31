@@ -18,7 +18,6 @@ import {
   popupNewPlaceAddBtn,
   popupNewPlace,
   popupNewPlaceForm,
-  popupNewPlaceCloseBtn,
   elementListContainer,
   elementsMsgNoElements,
   templateEl,
@@ -62,7 +61,7 @@ const listItems = new Section({
       templateEl,
       () => {
         // Передаем ф-ию открытия попапа с картинкой
-        popupWI.open(item)
+        popupWithImg.open(item)
       }
 
     );
@@ -113,24 +112,15 @@ export function handleMsgNoElements() {
 popupNewPlaceAddBtn.addEventListener('click', () => popupEx.open(popupNewPlace))
 
 
-popupImgCloseBtn.addEventListener('click', () => popupEx.close(popupImg))
-
-
-
-// Экземпляр класса для попапа профиля
 export const popupEx = new Popup(popupProfile);
 
-// Попап для картинки
-const popupWI = new PopupWithImage(popupImg)
+const popupWithImg = new PopupWithImage(popupImg)
 
-// Создаем экземпляр класса с данными пользователя
 const userData = new UserInfo({
   name: profileUserName,
   job: profileUserJob
 })
 
-
-// Создаем экземпляр класса попапа с формой для попапа профиля, передаем селектор и то, что будет происходить при сабмите
 const popupFormP = new PopupWithForm({
   selectorPopup: popupProfile,
   handleFormSubmit: (formData) => {
@@ -143,7 +133,7 @@ const popupFormP = new PopupWithForm({
 
     );
 
-    popupEx.close(popupProfile);
+    popupFormP.close(popupProfile);
   }
 })
 popupFormP.setEventListeners()
@@ -163,7 +153,7 @@ const popupAddCardForm = new PopupWithForm({
       () => {
 
         // Передаем ф-ию открытия попапа с картинкой
-        popupWI.open({
+        popupWithImg.open({
           name,
           link
         })
@@ -173,7 +163,7 @@ const popupAddCardForm = new PopupWithForm({
     // Добавляем новую карточку в DOM
     elementListContainer.prepend(listItem);
 
-    popupEx.close(popupNewPlace);
+    popupAddCardForm.close(popupNewPlace);
   }
 })
 

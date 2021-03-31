@@ -1,11 +1,9 @@
 import Popup from './Popup.js'
-import {
-  popupEx
-} from '../pages/index.js'
 
 export default class PopupWithImage extends Popup {
   constructor(selectorPopup) {
     super(selectorPopup);
+    super.setEventListeners()
   }
 
   open(img) {
@@ -13,6 +11,8 @@ export default class PopupWithImage extends Popup {
     popupImg.src = img.link;
     popupImg.alt = img.name;
     this._selector.querySelector('.popup__placeName_type_img').textContent = img.name;
-    popupEx.open(this._selector);
+    super.open(this._selector);
   }
+
+
 }
