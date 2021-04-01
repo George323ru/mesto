@@ -94,14 +94,6 @@ const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceFor
 popupAddCardValid.enableValidation();
 
 
-export function handleMsgNoElements() {
-
-  if (elementListContainer.children.length === 0) {
-    elementsMsgNoElements.classList.add('elements__msgNoElements_active')
-  } else {
-    elementsMsgNoElements.classList.remove('elements__msgNoElements_active')
-  }
-}
 
 
 popupNewPlaceAddBtn.addEventListener('click', () => popupAddCardForm.open(popupNewPlace))
@@ -129,6 +121,7 @@ const popupProfileForm = new PopupWithForm({
   }
 })
 popupProfileForm.setEventListeners()
+
 
 const popupAddCardForm = new PopupWithForm({
 
@@ -158,3 +151,13 @@ const popupAddCardForm = new PopupWithForm({
 })
 
 popupAddCardForm.setEventListeners()
+
+
+export function handleMsgNoElements() {
+
+  if (elementListContainer.children.length === 0) {
+    elementsMsgNoElements.classList.add('elements__msgNoElements_active')
+  } else {
+    elementsMsgNoElements.classList.remove('elements__msgNoElements_active')
+  }
+}

@@ -33,44 +33,28 @@ export const settingsValidation = {
   errorClass: 'popup__input-error_active'
 };
 
-// Находим все попапы
+
 export const popup = document.querySelectorAll('.popup')
-// Находим контейнер с попапом
+
 export const popupProfile = document.querySelector('.popup_type_profile');
-// Находим кнопки, при нажатии на которые попап будет открываться и закрываться
 export const popupProfileOpenBtn = document.querySelector('.profile__editBtn');
-export const popupProfileCloseBtn = document.querySelector('.popup__closeButton_type_profile');
-// Находим поля, куда будут подставлены новые значения из полей формы
+export const popupProfileCloseBtn = popupProfile.querySelector('.popup__closeButton_type_profile');
 export const profileUserName = document.querySelector('.profile__user-name');
 export const profileUserJob = document.querySelector('.profile__userJob');
-// Находим форму в DOM
-export const popupProfileFormEL = document.querySelector('.popup__form_type_profile');
-// Находим поля формы в DOM
-export const popupProfileInputTypeName = document.querySelector('.popup__input_type_profileName');
-export const popupProfileInputTypeJob = document.querySelector('.popup__input_type_profileJob');
-// Находим кнопку открытия попапа для добавления нового места
-export const popupNewPlaceAddBtn = document.querySelector('.profile__add-button')
-// Находим попап добавления нового места вместе с формой
-export const popupNewPlace = document.querySelector('.popup_type_newPlace')
-export const popupNewPlaceForm = popupNewPlace.querySelector('.popup__form_type_newPlace')
-// Находим поля ввода названия и ссылки новой карточки
-export const popupNewPlaceInputName = popupNewPlace.querySelector('.popup__input_type_newPlaceTypeName')
-export const popupNewPlaceInputLink = popupNewPlace.querySelector('.popup__input_type_newPlaceTypeLink')
-// Находим кнопку закрытия и отправки формы попапа
-export const popupNewPlaceCloseBtn = popupNewPlace.querySelector('.popup__closeButton_type_newPlace')
-export const submitBtn = popupNewPlaceForm.querySelector('.popup__saveBtn')
-// Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
-export const elementListContainer = document.querySelector('.elements__element-list')
-export const elementListContainerSelector = '.elements__element-list'
-export const elementsMsgNoElements = document.querySelector('.elements__msgNoElements')
-// Находим код шаблона, по которому будем создавать новые карточки
+// Нужна для валидации
+export const popupProfileFormEL = popupProfile.querySelector('.popup__form_type_profile');
+export const popupProfileInputTypeName = popupProfile.querySelector('.popup__input_type_profileName');
+export const popupProfileInputTypeJob = popupProfile.querySelector('.popup__input_type_profileJob');
+export const popupNewPlaceAddBtn = document.querySelector('.profile__add-button');
+export const popupNewPlace = document.querySelector('.popup_type_newPlace');
+export const popupNewPlaceForm = popupNewPlace.querySelector('.popup__form_type_newPlace');
+export const popupNewPlaceInputName = popupNewPlace.querySelector('.popup__input_type_newPlaceTypeName');
+export const popupNewPlaceInputLink = popupNewPlace.querySelector('.popup__input_type_newPlaceTypeLink');
+export const popupNewPlaceCloseBtn = popupNewPlace.querySelector('.popup__closeButton_type_newPlace');
+export const submitBtn = popupNewPlaceForm.querySelector('.popup__saveBtn');
+export const elementListContainer = document.querySelector('.elements__element-list');
+export const elementListContainerSelector = '.elements__element-list';
+export const elementsMsgNoElements = document.querySelector('.elements__msgNoElements');
 export const templateEl = '.templateEl';
-// Находим попап, в котором будет появляться картинка в увеличенном виде
-export const popupImg = document.querySelector('.popup_type_img')
-// Находим кнопку закрытия попапа с увеличенной картинкой
-export const popupImgCloseBtn = popupImg.querySelector('.popup__closeButton_type_img')
-// Находим картинку и заголовок карточки, которая будет увеличена
-export const popupImgPicEl = popupImg.querySelector('.popup__picture_type_img')
-export const popupImgNameEl = popupImg.querySelector('.popup__placeName_type_img')
-// Код клавиши Escape
+export const popupImg = document.querySelector('.popup_type_img');
 export const escCode = 'Escape';
