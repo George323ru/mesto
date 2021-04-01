@@ -35,17 +35,17 @@ export const settingsValidation = {
 
 
 export const popup = document.querySelectorAll('.popup')
-
+const profileElement = document.querySelector('.profile')
 export const popupProfile = document.querySelector('.popup_type_profile');
-export const popupProfileOpenBtn = document.querySelector('.profile__editBtn');
+export const popupProfileOpenBtn = profileElement.querySelector('.profile__editBtn');
 export const popupProfileCloseBtn = popupProfile.querySelector('.popup__closeButton_type_profile');
-export const profileUserName = document.querySelector('.profile__user-name');
-export const profileUserJob = document.querySelector('.profile__userJob');
+export const profileUserName = profileElement.querySelector('.profile__user-name');
+export const profileUserJob = profileElement.querySelector('.profile__userJob');
 // Нужна для валидации
 export const popupProfileFormEL = popupProfile.querySelector('.popup__form_type_profile');
 export const popupProfileInputTypeName = popupProfile.querySelector('.popup__input_type_profileName');
 export const popupProfileInputTypeJob = popupProfile.querySelector('.popup__input_type_profileJob');
-export const popupNewPlaceAddBtn = document.querySelector('.profile__add-button');
+export const popupNewPlaceAddBtn = profileElement.querySelector('.profile__add-button');
 export const popupNewPlace = document.querySelector('.popup_type_newPlace');
 export const popupNewPlaceForm = popupNewPlace.querySelector('.popup__form_type_newPlace');
 export const popupNewPlaceInputName = popupNewPlace.querySelector('.popup__input_type_newPlaceTypeName');
