@@ -13,7 +13,6 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
   }
 
-  // Собираем данные всех полей формы
   _getInputValues() {
     this._formValues = {};
 
@@ -25,12 +24,9 @@ export default class PopupWithForm extends Popup {
   }
 
   setEventListeners() {
-    // Навешиваем слушатель клика по иконке закрытия попапа
     super.setEventListeners();
 
-    // при сабмите формы
     this._form.addEventListener('submit', (evt) => {
-      // отменим стандартное поведение
       evt.preventDefault();
 
       this._handleFormSubmit(this._getInputValues());

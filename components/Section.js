@@ -13,7 +13,6 @@ export default class Section {
     this._container.append(element);
   }
 
-  // Отрисовываем массив с данными на странице
   renderItems() {
     this._renderedItems.forEach(item => {
       this._renderer(item);

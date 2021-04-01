@@ -7,12 +7,10 @@ export default class FormValidator {
     this._errorClass = options.errorClass;
     this._formSelector = formSelector;
 
-    // Создаем массив из всех "инпутов"
     this._inputList = Array.from(this._formSelector.querySelectorAll(this._inputSelector));
     this._buttonElement = this._formSelector.querySelector(this._submitButtonSelector)
   }
 
-  // Показываем сообщение с ошибкой
   _showInputError(formElement, inputElement, errorMessage) {
 
     // Находим элемент span с id как у инпута для текста ошибки
@@ -20,12 +18,10 @@ export default class FormValidator {
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
 
-    // Добавляем класс для появления ошибки
     errorElement.classList.add(this._errorClass);
 
   }
 
-  // Прячем сообщение с ошибкой
   _hideInputError(formElement, inputElement) {
 
     const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -37,7 +33,6 @@ export default class FormValidator {
 
   }
 
-  // Обработчик состояния кнопки
   toggleButtonState() {
 
     if (this._hasInvalidInput(this._inputList)) {
@@ -50,17 +45,14 @@ export default class FormValidator {
 
   }
 
-  // Проверяем инпуты на валидность
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   }
 
-  // Проверяем все "инпуты" на валидность для показа сообщения об ошибке
   _checkInputValidity(formElement, inputElement) {
 
-    // Условие, при которых будет показана ошибка
     if (!inputElement.validity.valid) {
       this._showInputError(formElement, inputElement, inputElement.validationMessage);
     } else {
@@ -70,21 +62,17 @@ export default class FormValidator {
   };
 
   _setEventListeners(formElement) {
-    // Отменяем стандартную отправку формы
     formElement.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
 
     this.toggleButtonState(this._inputList, this._buttonElement);
 
-    // На каждый "инпут" навешиваем событие
     this._inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
 
-        // Проверка инпута на валидность
         this._checkInputValidity(formElement, inputElement);
 
-        // Блокировка кнопки sumbit в случае не валидности одного из полей ввода
         this.toggleButtonState(this._inputList, this._buttonElement);
 
       });
