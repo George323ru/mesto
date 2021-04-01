@@ -61,6 +61,7 @@ export const popupNewPlaceCloseBtn = popupNewPlace.querySelector('.popup__closeB
 export const submitBtn = popupNewPlaceForm.querySelector('.popup__saveBtn')
 // Находим ту секцию, куда будем добавлять карточки из массива и новые пользовательские карточки
 export const elementListContainer = document.querySelector('.elements__element-list')
+export const elementListContainerSelector = '.elements__element-list'
 export const elementsMsgNoElements = document.querySelector('.elements__msgNoElements')
 // Находим код шаблона, по которому будем создавать новые карточки
 export const templateEl = '.templateEl';

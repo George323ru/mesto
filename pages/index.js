@@ -1,7 +1,6 @@
 import Card from '../components/Card.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
-import Popup from '../components/Popup.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js'
@@ -19,10 +18,10 @@ import {
   popupNewPlace,
   popupNewPlaceForm,
   elementListContainer,
+  elementListContainerSelector,
   elementsMsgNoElements,
   templateEl,
   popupImg,
-  popupImgCloseBtn,
   settingsValidation
 } from '../utils/constants.js'
 
@@ -41,9 +40,9 @@ popup.forEach((popupElement) => {
   })
 })
 
-function createCard(item, cardSelector, handleCardClick) {
+function createCard(item, templateSelector, handleCardClick) {
 
-  const card = new Card(item, cardSelector, handleCardClick);
+  const card = new Card(item, templateSelector, handleCardClick);
 
   return card.generateCard();
 
@@ -69,7 +68,7 @@ const listItems = new Section({
     listItems.addItem(cardElement)
 
   }
-}, '.elements__element-list')
+}, elementListContainerSelector)
 
 // запускаем отрисовку
 listItems.renderItems()
