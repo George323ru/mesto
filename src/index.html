@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Место</title>
-  <link rel="icon" href="./favicon.ico">
-  <link rel="stylesheet" href="./pages/index.css">
+  <link rel="icon" href="<%=require('./favicon.ico')%>">
 </head>
 
 <body class="body">
@@ -15,7 +14,7 @@
 
     <!-- Header -->
     <header class="header section section_size_small page__container">
-      <img class="header__logo" src="./images/mesto-logo.svg" alt="Логотип Место">
+      <img class="header__logo" src="<%=require('./images/mesto-logo.svg')%>" alt="Логотип Место">
     </header>
     <!-- /Header -->
 
@@ -116,7 +115,6 @@
   </template>
   <!-- /Template for block Element -->
   <!-- <script defer src="./scripts/validate.js"></script> -->
-  <script defer src="./pages/index.js" type="module"></script>
   <!-- <script defer src="./scripts/Card.js" type="module"></script> -->
 </body>
 

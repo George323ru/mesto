@@ -23,7 +23,8 @@ import {
   templateEl,
   popupImg,
   settingsValidation
-} from '../utils/constants.js'
+} from '../utils/constants.js';
+import("./index.css");
 
 
 
