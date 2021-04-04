@@ -48,6 +48,7 @@ function createCard(item, templateSelector, handleCardClick) {
 
 }
 
+const popupWithImg = new PopupWithImage(popupImg)
 
 // Наполняем DOM экземплярами класса Section
 const listItems = new Section({
@@ -84,21 +85,10 @@ const handleOpenPopupProfile = function () {
 }
 
 popupProfileOpenBtn.addEventListener('click', handleOpenPopupProfile);
-
-
-
-const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
-popupProfileValid.enableValidation();
-
-const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceForm);
-popupAddCardValid.enableValidation();
-
-
-
-
 popupNewPlaceAddBtn.addEventListener('click', () => popupAddCardForm.open(popupNewPlace))
 
-const popupWithImg = new PopupWithImage(popupImg)
+
+
 
 const userData = new UserInfo({
   name: profileUserName,
@@ -151,6 +141,14 @@ const popupAddCardForm = new PopupWithForm({
 })
 
 popupAddCardForm.setEventListeners()
+
+
+
+const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
+popupProfileValid.enableValidation();
+
+const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceForm);
+popupAddCardValid.enableValidation();
 
 
 export function handleMsgNoElements() {
