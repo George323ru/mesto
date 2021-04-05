@@ -1,7 +1,3 @@
-import {
-  handleMsgNoElements
-} from '../pages/index.js'
-
 export default class Card {
   constructor(data,
     cardSelector,
@@ -47,8 +43,6 @@ export default class Card {
 
     const targetItem = targetDeleteEl.closest('.element');
     targetItem.remove()
-
-    handleMsgNoElements()
   }
 
   _handleLikeBtn(event) {

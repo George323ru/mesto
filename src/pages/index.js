@@ -19,27 +19,12 @@ import {
   popupNewPlaceForm,
   elementListContainer,
   elementListContainerSelector,
-  elementsMsgNoElements,
   templateEl,
   popupImg,
   settingsValidation
 } from '../utils/constants.js';
 import '../pages/index.css';
 
-
-
-// Обработчик закрытия "попапа" через Overlay
-popup.forEach((popupElement) => {
-
-  addEventListener('click', e => {
-
-    if (e.target.classList.contains('popup')) {
-
-      popupProfileForm.close(popupElement)
-
-    }
-  })
-})
 
 function createCard(item, templateSelector, handleCardClick) {
 
@@ -150,13 +135,3 @@ popupProfileValid.enableValidation();
 
 const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceForm);
 popupAddCardValid.enableValidation();
-
-
-export function handleMsgNoElements() {
-
-  if (elementListContainer.children.length === 0) {
-    elementsMsgNoElements.classList.add('elements__msgNoElements_active')
-  } else {
-    elementsMsgNoElements.classList.remove('elements__msgNoElements_active')
-  }
-}

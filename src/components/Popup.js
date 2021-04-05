@@ -1,5 +1,6 @@
 import {
-  escCode
+  escCode,
+  popup
 } from '../utils/constants.js'
 
 export default class Popup {
@@ -9,23 +10,21 @@ export default class Popup {
   }
 
   // Открытие попапа
-  open(element) {
-    element.classList.add('popup_opened');
+  open() {
+    this._selector.classList.add('popup_opened');
     document.addEventListener('keydown', this._handleEscClose)
-
+    this._selector.addEventListener('pointerdown', this._handleEscClose)
   }
 
-  close(element) {
-    element.classList.remove('popup_opened');
+  close() {
+    this._selector.classList.remove('popup_opened');
     document.removeEventListener('keydown', this._handleEscClose)
   }
 
   _handleEscClose(evt) {
-    if (evt.key === escCode) {
+    if (evt.key === escCode || evt.target === this._selector) {
       console.log('нажтие на кнопку Esc')
-      const openedPopup = document.querySelector('.popup_opened');
-      console.log(openedPopup)
-      this.close(openedPopup);
+      this.close();
     }
   }
 
