@@ -24,7 +24,7 @@ import {
   popupImg,
   settingsValidation
 } from '../utils/constants.js';
-import("./index.css");
+import '../pages/index.css';
 
 
 
