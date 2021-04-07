@@ -94,7 +94,7 @@ const userData = new UserInfo({
 })
 
 const popupProfileForm = new PopupWithForm({
-  selectorPopup: popupProfile,
+  popupElement: popupProfile,
   handleFormSubmit: (formData) => {
 
     // При сабмите мы вставляем данные пользователя обратно в форму
@@ -116,7 +116,7 @@ popupProfileForm.setEventListeners()
 
 const popupAddCardForm = new PopupWithForm({
 
-  selectorPopup: popupNewPlace,
+  popupElement: popupNewPlace,
   handleFormSubmit: (formData) => {
 
     const name = formData.popupNewPlaceInputTypeName;
