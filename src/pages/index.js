@@ -60,10 +60,17 @@ const listItems = new Section({
 // запускаем отрисовку
 listItems.renderItems()
 
+const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
+popupProfileValid.enableValidation();
+
+const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceForm);
+popupAddCardValid.enableValidation();
+
 
 const handleOpenPopupProfile = function () {
 
-  popupProfileForm.open(popupProfile)
+  popupProfileForm.open()
+  popupProfileValid.cleanValid()
 
   popupProfileInputTypeName.value = userData.getUserInfo().name.textContent;
   popupProfileInputTypeJob.value = userData.getUserInfo().job.textContent;
@@ -71,7 +78,12 @@ const handleOpenPopupProfile = function () {
 }
 
 popupProfileOpenBtn.addEventListener('click', handleOpenPopupProfile);
-popupNewPlaceAddBtn.addEventListener('click', () => popupAddCardForm.open(popupNewPlace))
+popupNewPlaceAddBtn.addEventListener('click', () => {
+  popupAddCardForm.open();
+  popupAddCardValid.cleanValid()
+})
+
+
 
 
 
@@ -93,7 +105,10 @@ const popupProfileForm = new PopupWithForm({
 
     );
 
-    popupProfileForm.close(popupProfile);
+    popupProfileForm.close();
+    popupProfileValid.toggleButtonState()
+
+
   }
 })
 popupProfileForm.setEventListeners()
@@ -122,16 +137,9 @@ const popupAddCardForm = new PopupWithForm({
 
     elementListContainer.prepend(listItem);
 
-    popupAddCardForm.close(popupNewPlace);
+    popupAddCardForm.close();
+    popupAddCardValid.toggleButtonState()
   }
 })
 
 popupAddCardForm.setEventListeners()
-
-
-
-const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
-popupProfileValid.enableValidation();
-
-const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceForm);
-popupAddCardValid.enableValidation();

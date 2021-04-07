@@ -11,10 +11,10 @@ export default class FormValidator {
     this._buttonElement = this._formSelector.querySelector(this._submitButtonSelector)
   }
 
-  _showInputError(formElement, inputElement, errorMessage) {
+  _showInputError(inputElement, errorMessage) {
 
     // Находим элемент span с id как у инпута для текста ошибки
-    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    const errorElement = this._formSelector.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
 
@@ -22,9 +22,9 @@ export default class FormValidator {
 
   }
 
-  _hideInputError(formElement, inputElement) {
+  _hideInputError(inputElement) {
 
-    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    const errorElement = this._formSelector.querySelector(`#${inputElement.id}-error`);
 
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
@@ -51,18 +51,18 @@ export default class FormValidator {
     })
   }
 
-  _checkInputValidity(formElement, inputElement) {
+  _checkInputValidity(inputElement) {
 
     if (!inputElement.validity.valid) {
-      this._showInputError(formElement, inputElement, inputElement.validationMessage);
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      this._hideInputError(formElement, inputElement);
+      this._hideInputError(inputElement);
     }
 
   };
 
-  _setEventListeners(formElement) {
-    formElement.addEventListener('submit', (evt) => {
+  _setEventListeners() {
+    this._formSelector.addEventListener('submit', (evt) => {
       evt.preventDefault();
     });
 
@@ -71,11 +71,17 @@ export default class FormValidator {
     this._inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
 
-        this._checkInputValidity(formElement, inputElement);
+        this._checkInputValidity(inputElement);
 
         this.toggleButtonState(this._inputList, this._buttonElement);
 
       });
+    });
+  }
+
+  cleanValid() {
+    this._inputList.forEach(inputElement => {
+      this._hideInputError(inputElement)
     });
   }
 

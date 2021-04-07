@@ -1,11 +1,10 @@
 import {
-  escCode,
-  popup
+  escCode
 } from '../utils/constants.js'
 
 export default class Popup {
-  constructor(selectorPopup) {
-    this._selector = selectorPopup;
+  constructor(popupElement) {
+    this._selector = popupElement;
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
@@ -23,7 +22,6 @@ export default class Popup {
 
   _handleEscClose(evt) {
     if (evt.key === escCode || evt.target === this._selector) {
-      console.log('нажтие на кнопку Esc')
       this.close();
     }
   }
