@@ -37,19 +37,12 @@ export default class Card {
 
   _handleDelBtn(event) {
 
-    // target - "цель"
-    const targetDeleteEl = event.target;
-
-    const targetItem = targetDeleteEl.closest('.element');
-    targetItem.remove()
+    const targetItem = event.target.closest('.element').remove();
   }
 
   _handleLikeBtn(event) {
 
-    // target - "цель"
-    const targetBtnLikeEl = event.target;
-
-    const targetItem = targetBtnLikeEl.classList.toggle('element__likeButton_active');
+    const targetItem = event.target.classList.toggle('element__likeButton_active');
   }
 
   generateCard() {
