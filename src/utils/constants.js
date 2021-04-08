@@ -41,7 +41,6 @@ export const popupProfileOpenBtn = profileElement.querySelector('.profile__editB
 export const popupProfileCloseBtn = popupProfile.querySelector('.popup__closeButton_type_profile');
 export const profileUserName = profileElement.querySelector('.profile__user-name');
 export const profileUserJob = profileElement.querySelector('.profile__userJob');
-// Нужна для валидации
 export const popupProfileFormEL = popupProfile.querySelector('.popup__form_type_profile');
 export const popupProfileInputTypeName = popupProfile.querySelector('.popup__input_type_profileName');
 export const popupProfileInputTypeJob = popupProfile.querySelector('.popup__input_type_profileJob');

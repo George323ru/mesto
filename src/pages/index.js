@@ -29,7 +29,6 @@ import '../pages/index.css';
 function createCard(item, templateSelector, handleCardClick) {
 
   const card = new Card(item, templateSelector, handleCardClick);
-
   return card.generateCard();
 
 }
@@ -66,7 +65,6 @@ popupProfileValid.enableValidation();
 const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceForm);
 popupAddCardValid.enableValidation();
 
-
 const handleOpenPopupProfile = function () {
 
   popupProfileForm.open()
@@ -82,11 +80,6 @@ popupNewPlaceAddBtn.addEventListener('click', () => {
   popupAddCardForm.open();
   popupAddCardValid.cleanValid()
 })
-
-
-
-
-
 
 const userData = new UserInfo({
   name: profileUserName,
@@ -112,7 +105,6 @@ const popupProfileForm = new PopupWithForm({
   }
 })
 popupProfileForm.setEventListeners()
-
 
 const popupAddCardForm = new PopupWithForm({
 

@@ -19,7 +19,6 @@ export default class FormValidator {
     errorElement.textContent = errorMessage;
 
     errorElement.classList.add(this._errorClass);
-
   }
 
   _hideInputError(inputElement) {
@@ -30,7 +29,6 @@ export default class FormValidator {
     errorElement.classList.remove(this._errorClass);
 
     errorElement.textContent = '';
-
   }
 
   toggleButtonState() {
@@ -42,7 +40,6 @@ export default class FormValidator {
       this._buttonElement.removeAttribute('disabled');
       this._buttonElement.classList.remove(this._inactiveButtonClass);
     }
-
   }
 
   _hasInvalidInput() {

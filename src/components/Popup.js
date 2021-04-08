@@ -4,29 +4,29 @@ import {
 
 export default class Popup {
   constructor(popupElement) {
-    this._selector = popupElement;
+    this._popupElement = popupElement;
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   // Открытие попапа
   open() {
-    this._selector.classList.add('popup_opened');
+    this._popupElement.classList.add('popup_opened');
     document.addEventListener('keydown', this._handleEscClose)
-    this._selector.addEventListener('pointerdown', this._handleEscClose)
+    this._popupElement.addEventListener('pointerdown', this._handleEscClose)
   }
 
   close() {
-    this._selector.classList.remove('popup_opened');
+    this._popupElement.classList.remove('popup_opened');
     document.removeEventListener('keydown', this._handleEscClose)
   }
 
   _handleEscClose(evt) {
-    if (evt.key === escCode || evt.target === this._selector) {
+    if (evt.key === escCode || evt.target === this._popupElement) {
       this.close();
     }
   }
 
   setEventListeners() {
-    this._selector.querySelector('.popup__closeButton').addEventListener('click', () => this.close(this._selector));
+    this._popupElement.querySelector('.popup__closeButton').addEventListener('click', () => this.close());
   }
 }

@@ -4,7 +4,6 @@ export default class UserInfo {
   ) {
     this._selectorName = data.name;
     this._selectorJob = data.job;
-
   }
 
   // Возвращаем объект с данными пользователя
