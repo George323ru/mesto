@@ -6,7 +6,6 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js'
 import {
   initialCards,
-  popup,
   popupProfile,
   popupProfileOpenBtn,
   profileUserName,
@@ -24,7 +23,6 @@ import {
   settingsValidation
 } from '../utils/constants.js';
 import '../pages/index.css';
-
 
 function createCard(item, templateSelector, handleCardClick) {
 
