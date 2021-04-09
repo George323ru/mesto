@@ -33,29 +33,43 @@ function createCard(item, templateSelector, handleCardClick) {
 
 const popupWithImg = new PopupWithImage(popupImg)
 
+const resArr = fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
+    method: 'GET',
+    headers: {
+      authorization: '59e52716-d825-43a0-9822-26cced8398ed'
+    }
+  })
+  .then(res => res.json())
+  .then((result) => {
+    renderCards(result)
+  })
+
+
 // Наполняем DOM экземплярами класса Section
-const listItems = new Section({
+function renderCards(cardsArr) {
+  const listItems = new Section({
 
-  data: initialCards,
-  renderer: (item) => {
+    data: cardsArr,
+    renderer: (item) => {
 
-    const cardElement = createCard(
-      item,
-      templateEl,
-      () => {
-        // Передаем ф-ию открытия попапа с картинкой
-        popupWithImg.open(item)
-      }
+      const cardElement = createCard(
+        item,
+        templateEl,
+        () => {
+          // Передаем ф-ию открытия попапа с картинкой
+          popupWithImg.open(item)
+        }
 
-    );
+      );
 
-    listItems.addItem(cardElement)
+      listItems.addItem(cardElement)
 
-  }
-}, elementListContainerSelector)
+    }
+  }, elementListContainerSelector)
 
-// запускаем отрисовку
-listItems.renderItems()
+  // запускаем отрисовку
+  listItems.renderItems()
+}
 
 const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
 popupProfileValid.enableValidation();
@@ -99,37 +113,62 @@ const popupProfileForm = new PopupWithForm({
     popupProfileForm.close();
     popupProfileValid.toggleButtonState()
 
-
   }
 })
 popupProfileForm.setEventListeners()
 
-const popupAddCardForm = new PopupWithForm({
+function addCards() {
+  const popupAddCardForm = new PopupWithForm({
 
-  popupElement: popupNewPlace,
-  handleFormSubmit: (formData) => {
+    popupElement: popupNewPlace,
+    handleFormSubmit: (formData) => {
 
-    const name = formData.popupNewPlaceInputTypeName;
-    const link = formData.popupNewPlaceInputTypeLink;
+      const name = formData.popupNewPlaceInputTypeName;
+      const link = formData.popupNewPlaceInputTypeLink;
 
-    const listItem = createCard({
-        name,
-        link
-      }, templateEl,
-      () => {
-
-        popupWithImg.open({
+      const listItem = createCard({
           name,
           link
-        })
+        }, templateEl,
+        () => {
 
-      });
+          popupWithImg.open({
+            name,
+            link
+          })
 
-    elementListContainer.prepend(listItem);
+        });
 
-    popupAddCardForm.close();
-    popupAddCardValid.toggleButtonState()
-  }
-})
+      elementListContainer.prepend(listItem);
 
-popupAddCardForm.setEventListeners()
+      popupAddCardForm.close();
+      popupAddCardValid.toggleButtonState()
+    }
+  })
+
+  popupAddCardForm.setEventListeners()
+}
+
+// fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
+//   method: 'PATCH',
+//   headers: {
+//     authorization: '59e52716-d825-43a0-9822-26cced8398ed',
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({
+//     name: userData.getUserInfo().name.textContent,
+//     about: userData.getUserInfo().job.textContent
+//   })
+// });
+
+// fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
+//   method: 'POST',
+//   headers: {
+//     authorization: '59e52716-d825-43a0-9822-26cced8398ed',
+//     'Content-Type': 'application/json; charset=UTF-8'
+//   },
+//   body: JSON.stringify({
+//     name: 'Сургут',
+//     link: 'https://barcaffe.ru/wp-content/uploads/2020/07/28_surgut2020.jpg'
+//   })
+// })
