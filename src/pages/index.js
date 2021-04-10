@@ -25,6 +25,9 @@ import {
 } from '../utils/constants.js';
 import '../pages/index.css';
 
+
+const api = new Api()
+
 function createCard(item, templateSelector, handleCardClick) {
 
   const card = new Card(item, templateSelector, handleCardClick);
