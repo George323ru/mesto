@@ -4,6 +4,7 @@ import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import UserInfo from '../components/UserInfo.js'
+import Api from '../components/Api.js'
 import {
   initialCards,
   popupProfile,
@@ -33,43 +34,31 @@ function createCard(item, templateSelector, handleCardClick) {
 
 const popupWithImg = new PopupWithImage(popupImg)
 
-const resArr = fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
-    method: 'GET',
-    headers: {
-      authorization: '59e52716-d825-43a0-9822-26cced8398ed'
-    }
-  })
-  .then(res => res.json())
-  .then((result) => {
-    renderCards(result)
-  })
-
-
 // Наполняем DOM экземплярами класса Section
-function renderCards(cardsArr) {
-  const listItems = new Section({
+const listItems = new Section({
 
-    data: cardsArr,
-    renderer: (item) => {
+  data: initialCards,
+  renderer: (item) => {
 
-      const cardElement = createCard(
-        item,
-        templateEl,
-        () => {
-          // Передаем ф-ию открытия попапа с картинкой
-          popupWithImg.open(item)
-        }
+    const cardElement = createCard(
+      item,
+      templateEl,
+      () => {
+        // Передаем ф-ию открытия попапа с картинкой
+        popupWithImg.open(item)
 
-      );
+      }
 
-      listItems.addItem(cardElement)
+    );
 
-    }
-  }, elementListContainerSelector)
+    listItems.addItem(cardElement)
 
-  // запускаем отрисовку
-  listItems.renderItems()
-}
+  }
+}, elementListContainerSelector)
+
+// запускаем отрисовку
+listItems.renderItems()
+
 
 const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
 popupProfileValid.enableValidation();
