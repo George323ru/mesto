@@ -1,15 +1,15 @@
 export default class Api {
   constructor({
-    adress,
+    address,
     token
   }) {
-    this.adress = adress;
+    this.address = address;
     this.token = token;
   }
 
 
   getCards() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
+    return fetch(`${this.address}/cards`, {
         headers: {
           authorization: this.token
         }
@@ -26,7 +26,7 @@ export default class Api {
   }
 
   getUserInfo() {
-    return fetch(`${this._address}/users/me`, {
+    return fetch(`${this.address}/users/me`, {
         headers: {
           authorization: this.token
         }
@@ -34,15 +34,20 @@ export default class Api {
       .then(res => {
           if (res.ok) {
             return res.json();
+
           }
-          return Promise.reject(`Ошибка ${response.status}`)
+          return Promise.reject(`
+      Ошибка $ {
+        response.status
+      }
+      `)
         }
 
       )
   }
 
   patchSaveUserData() {
-    return fetch(`${this._address}/users/me`, {
+    return fetch(`${this.address}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this.token,
@@ -56,7 +61,7 @@ export default class Api {
   }
 
   postAddNewCard() {
-    return fetch(`${this._address}/cards`, {
+    return fetch(`${this.address}/cards`, {
       method: 'POST',
       headers: {
         authorization: this.token,
@@ -84,7 +89,7 @@ export default class Api {
   }
 
   putLike() {
-    return fetch(`${this._address}/cards/likes/cardId`, {
+    return fetch(`${this.address}/cards/likes/cardId`, {
       method: 'PUT',
       headers: {
         authorization: this.token,
@@ -98,7 +103,7 @@ export default class Api {
   }
 
   deleteLike() {
-    return fetch(`${this._address}/cards/likes/cardId`, {
+    return fetch(`${this.address}/cards/likes/cardId`, {
       method: 'DELETE',
       headers: {
         authorization: this.token,
@@ -112,7 +117,7 @@ export default class Api {
   }
 
   patchUpdateUserAvatar() {
-    return fetch(`${this._address}/users/me/avatar`, {
+    return fetch(`${this.address}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
         authorization: this.token,

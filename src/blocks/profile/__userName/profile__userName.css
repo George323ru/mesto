@@ -1,4 +1,4 @@
-.profile__user-name {
+.profile__userName {
   margin: 0;
 
   text-overflow: ellipsis;
@@ -13,7 +13,7 @@
 
 @media screen and (max-width: 660px) {
 
-  .profile__user-name {
+  .profile__userName {
     font-size: 27px;
     line-height: 33px;
     text-align: center;

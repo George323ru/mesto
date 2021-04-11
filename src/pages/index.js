@@ -27,13 +27,20 @@ import '../pages/index.css';
 
 
 const api = new Api({
-  adress: 'https://mesto.nomoreparties.co/v1/cohort-22/',
+  address: 'https://mesto.nomoreparties.co/v1/cohort-22',
   token: '59e52716-d825-43a0-9822-26cced8398ed'
 })
 
 api.getCards()
   .then(cards => {
     listItems.renderItems(cards)
+  })
+
+api.getUserInfo()
+  .then(info => {
+    console.log(info.name)
+    profileUserName.textContent = info.name;
+    profileUserJob.textContent = info.about;
   })
 
 function createCard(item, templateSelector, handleCardClick) {
