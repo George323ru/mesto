@@ -31,9 +31,9 @@ const api = new Api({
   token: '59e52716-d825-43a0-9822-26cced8398ed'
 })
 
-api.getCard()
-  .then(card => {
-    listItems.renderItems(card)
+api.getCards()
+  .then(cards => {
+    listItems.renderItems(cards)
   })
 
 function createCard(item, templateSelector, handleCardClick) {
@@ -67,7 +67,7 @@ const listItems = new Section({
 }, elementListContainerSelector)
 
 // запускаем отрисовку
-listItems.renderItems()
+
 
 
 const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);

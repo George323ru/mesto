@@ -8,7 +8,7 @@ export default class Api {
   }
 
 
-  getCard() {
+  getCards() {
     return fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
         headers: {
           authorization: this.token
