@@ -36,17 +36,13 @@ export default class Api {
             return res.json();
 
           }
-          return Promise.reject(`
-      Ошибка $ {
-        response.status
-      }
-      `)
+          return Promise.reject(`Ошибка ${response.status}`)
         }
 
       )
   }
 
-  patchSaveUserData() {
+  patchSaveUserData(name, job) {
     return fetch(`${this.address}/users/me`, {
       method: 'PATCH',
       headers: {
@@ -54,8 +50,8 @@ export default class Api {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: 'Marie Skłodowska Curie',
-        about: 'Physicist and Chemist'
+        name: name,
+        about: job
       })
     });
   }

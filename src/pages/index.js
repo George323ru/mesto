@@ -43,6 +43,8 @@ api.getUserInfo()
     profileUserJob.textContent = info.about;
   })
 
+
+
 function createCard(item, templateSelector, handleCardClick) {
 
   const card = new Card(item, templateSelector, handleCardClick);
@@ -108,7 +110,12 @@ const popupProfileForm = new PopupWithForm({
   popupElement: popupProfile,
   handleFormSubmit: (formData) => {
 
-    // При сабмите мы вставляем данные пользователя обратно в форму
+
+    api.patchSaveUserData(formData.popupProfileInputTypeName, formData.popupProfileInputTypeJob)
+      .then(userData => {
+        console.log(userData)
+      })
+    // // При сабмите мы вставляем данные пользователя обратно в форму
     userData.setUserInfo(
 
       formData.popupProfileInputTypeName,

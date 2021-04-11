@@ -39,6 +39,7 @@ const profileElement = document.querySelector('.profile')
 export const popupProfile = document.querySelector('.popup_type_profile');
 export const popupProfileOpenBtn = profileElement.querySelector('.profile__editBtn');
 export const popupProfileCloseBtn = popupProfile.querySelector('.popup__closeButton_type_profile');
+export const profileUserAvatar = profileElement.querySelector('.profile__avatar');
 export const profileUserName = profileElement.querySelector('.profile__userName');
 export const profileUserJob = profileElement.querySelector('.profile__userJob');
 export const popupProfileFormEL = popupProfile.querySelector('.popup__form_type_profile');
