@@ -26,7 +26,15 @@ import {
 import '../pages/index.css';
 
 
-const api = new Api()
+const api = new Api({
+  adress: 'https://mesto.nomoreparties.co/v1/cohort-22/',
+  token: '59e52716-d825-43a0-9822-26cced8398ed'
+})
+
+api.getCard()
+  .then(card => {
+    listItems.renderItems(card)
+  })
 
 function createCard(item, templateSelector, handleCardClick) {
 
@@ -40,7 +48,6 @@ const popupWithImg = new PopupWithImage(popupImg)
 // Наполняем DOM экземплярами класса Section
 const listItems = new Section({
 
-  data: initialCards,
   renderer: (item) => {
 
     const cardElement = createCard(

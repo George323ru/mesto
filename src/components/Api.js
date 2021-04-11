@@ -1,8 +1,12 @@
 export default class Api {
-  constructor(adress, token) {
+  constructor({
+    adress,
+    token
+  }) {
     this.adress = adress;
     this.token = token;
   }
+
 
   getCard() {
     return fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
@@ -18,14 +22,11 @@ export default class Api {
         }
 
       )
-      .then((result) => {
-        renderCards(result)
-      })
 
   }
 
   getUserInfo() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
+    return fetch(`${this._address}/users/me`, {
         headers: {
           authorization: this.token
         }
@@ -41,7 +42,7 @@ export default class Api {
   }
 
   patchSaveUserData() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
+    return fetch(`${this._address}/users/me`, {
       method: 'PATCH',
       headers: {
         authorization: this.token,
@@ -55,7 +56,7 @@ export default class Api {
   }
 
   postAddNewCard() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
+    return fetch(`${this._address}/cards`, {
       method: 'POST',
       headers: {
         authorization: this.token,
@@ -69,7 +70,7 @@ export default class Api {
   }
 
   deleteCard() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards/cardId', {
+    return fetch(`${this._address}/cardId`, {
       method: 'DELETE',
       headers: {
         authorization: this.token,
@@ -83,7 +84,7 @@ export default class Api {
   }
 
   putLike() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards/likes/cardId', {
+    return fetch(`${this._address}/cards/likes/cardId`, {
       method: 'PUT',
       headers: {
         authorization: this.token,
@@ -97,7 +98,7 @@ export default class Api {
   }
 
   deleteLike() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards/likes/cardId', {
+    return fetch(`${this._address}/cards/likes/cardId`, {
       method: 'DELETE',
       headers: {
         authorization: this.token,
@@ -111,7 +112,7 @@ export default class Api {
   }
 
   patchUpdateUserAvatar() {
-    return fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me/avatar', {
+    return fetch(`${this._address}/users/me/avatar`, {
       method: 'PATCH',
       headers: {
         authorization: this.token,
