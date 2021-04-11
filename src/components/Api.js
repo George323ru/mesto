@@ -56,7 +56,7 @@ export default class Api {
     });
   }
 
-  postAddNewCard() {
+  postAddNewCard(name, link) {
     return fetch(`${this.address}/cards`, {
       method: 'POST',
       headers: {
@@ -64,8 +64,8 @@ export default class Api {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        name: 'Marie Skłodowska Curie',
-        link: 'Physicist and Chemist'
+        name: name,
+        link: link
       })
     });
   }

@@ -35,12 +35,18 @@ api.getCards()
   .then(cards => {
     listItems.renderItems(cards)
   })
+  .catch(err => {
+    console.log(err)
+  })
 
 api.getUserInfo()
   .then(info => {
     console.log(info.name)
     profileUserName.textContent = info.name;
     profileUserJob.textContent = info.about;
+  })
+  .catch(err => {
+    console.log(err)
   })
 
 
@@ -115,6 +121,9 @@ const popupProfileForm = new PopupWithForm({
       .then(userData => {
         console.log(userData)
       })
+      .catch(err => {
+        console.log(err)
+      })
     // // При сабмите мы вставляем данные пользователя обратно в форму
     userData.setUserInfo(
 
@@ -130,37 +139,41 @@ const popupProfileForm = new PopupWithForm({
 })
 popupProfileForm.setEventListeners()
 
-function addCards() {
-  const popupAddCardForm = new PopupWithForm({
+const popupAddCardForm = new PopupWithForm({
 
-    popupElement: popupNewPlace,
-    handleFormSubmit: (formData) => {
+  popupElement: popupNewPlace,
+  handleFormSubmit: (formData) => {
 
-      const name = formData.popupNewPlaceInputTypeName;
-      const link = formData.popupNewPlaceInputTypeLink;
+    const name = formData.popupNewPlaceInputTypeName;
+    const link = formData.popupNewPlaceInputTypeLink;
 
-      const listItem = createCard({
+    api.postAddNewCard(name, link)
+      .catch(err => {
+        console.log(err)
+      })
+
+    const listItem = createCard({
+        name,
+        link
+      }, templateEl,
+      () => {
+
+        popupWithImg.open({
           name,
           link
-        }, templateEl,
-        () => {
+        })
 
-          popupWithImg.open({
-            name,
-            link
-          })
+      });
 
-        });
+    elementListContainer.prepend(listItem);
 
-      elementListContainer.prepend(listItem);
+    popupAddCardForm.close();
+    popupAddCardValid.toggleButtonState()
+  }
+})
 
-      popupAddCardForm.close();
-      popupAddCardValid.toggleButtonState()
-    }
-  })
+popupAddCardForm.setEventListeners()
 
-  popupAddCardForm.setEventListeners()
-}
 
 // fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
 //   method: 'PATCH',
