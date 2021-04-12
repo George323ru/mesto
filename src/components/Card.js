@@ -4,6 +4,7 @@ export default class Card {
     handleCardClick) {
     this._name = data.name;
     this._link = data.link;
+    this._like = data.likes.length;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -33,6 +34,7 @@ export default class Card {
     this._element.querySelector('.element__likeButton').addEventListener('click', (event) => {
       this._handleLikeBtn(event)
     })
+
   }
 
   _handleDelBtn(event) {
@@ -53,6 +55,7 @@ export default class Card {
     this._element.querySelector('.element__title').textContent = this._name;
     this._imgElement.src = this._link;
     this._imgElement.alt = this._name;
+    this._element.querySelector('.element__likeCount').textContent = this._like;
 
     return this._element;
 

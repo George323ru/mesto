@@ -25,7 +25,6 @@ import {
 } from '../utils/constants.js';
 import '../pages/index.css';
 
-
 const api = new Api({
   address: 'https://mesto.nomoreparties.co/v1/cohort-22',
   token: '59e52716-d825-43a0-9822-26cced8398ed'
@@ -34,19 +33,19 @@ const api = new Api({
 api.getCards()
   .then(cards => {
     listItems.renderItems(cards)
+    console.log(cards)
   })
   .catch(err => {
-    console.log(err)
+    console.log('Ошибка при получении карточек с сервера')
   })
 
 api.getUserInfo()
   .then(info => {
-    console.log(info.name)
     profileUserName.textContent = info.name;
     profileUserJob.textContent = info.about;
   })
   .catch(err => {
-    console.log(err)
+    console.log('Ошибка при получении информации о пользователе')
   })
 
 
@@ -81,10 +80,6 @@ const listItems = new Section({
   }
 }, elementListContainerSelector)
 
-// запускаем отрисовку
-
-
-
 const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
 popupProfileValid.enableValidation();
 
@@ -116,13 +111,12 @@ const popupProfileForm = new PopupWithForm({
   popupElement: popupProfile,
   handleFormSubmit: (formData) => {
 
-
     api.patchSaveUserData(formData.popupProfileInputTypeName, formData.popupProfileInputTypeJob)
       .then(userData => {
         console.log(userData)
       })
       .catch(err => {
-        console.log(err)
+        console.log('Ошибка при отправке новых данных о пользователе')
       })
     // // При сабмите мы вставляем данные пользователя обратно в форму
     userData.setUserInfo(
@@ -149,7 +143,7 @@ const popupAddCardForm = new PopupWithForm({
 
     api.postAddNewCard(name, link)
       .catch(err => {
-        console.log(err)
+        console.log('Ошибка при создании новой карточке на сервере')
       })
 
     const listItem = createCard({
@@ -173,28 +167,3 @@ const popupAddCardForm = new PopupWithForm({
 })
 
 popupAddCardForm.setEventListeners()
-
-
-// fetch('https://mesto.nomoreparties.co/v1/cohort-22/users/me', {
-//   method: 'PATCH',
-//   headers: {
-//     authorization: '59e52716-d825-43a0-9822-26cced8398ed',
-//     'Content-Type': 'application/json'
-//   },
-//   body: JSON.stringify({
-//     name: userData.getUserInfo().name.textContent,
-//     about: userData.getUserInfo().job.textContent
-//   })
-// });
-
-// fetch('https://mesto.nomoreparties.co/v1/cohort-22/cards', {
-//   method: 'POST',
-//   headers: {
-//     authorization: '59e52716-d825-43a0-9822-26cced8398ed',
-//     'Content-Type': 'application/json; charset=UTF-8'
-//   },
-//   body: JSON.stringify({
-//     name: 'Сургут',
-//     link: 'https://barcaffe.ru/wp-content/uploads/2020/07/28_surgut2020.jpg'
-//   })
-// })

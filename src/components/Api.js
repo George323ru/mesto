@@ -84,18 +84,22 @@ export default class Api {
     });
   }
 
-  putLike() {
-    return fetch(`${this.address}/cards/likes/cardId`, {
-      method: 'PUT',
-      headers: {
-        authorization: this.token,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: 'Marie Skłodowska Curie',
-        link: 'Physicist and Chemist'
+  getLike() {
+    return fetch(`${this.address}/cards`, {
+
+        headers: {
+          authorization: this.token,
+
+        }
       })
-    });
+      .then(res => {
+          if (res.ok) {
+            return res.json();
+          }
+          return Promise.reject(`Ошибка ${response.status}`)
+        }
+
+      )
   }
 
   deleteLike() {
