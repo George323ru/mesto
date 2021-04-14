@@ -72,8 +72,6 @@ export default class Api {
   }
 
   deleteCard(cardId) {
-    console.log(cardId)
-    console.log(this.address)
     return fetch(`${this.address}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
@@ -83,35 +81,24 @@ export default class Api {
     });
   }
 
-  getLike() {
-    return fetch(`${this.address}/cards`, {
 
-        headers: {
-          authorization: this.token,
-
-        }
-      })
-      .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Ошибка ${response.status}`)
-        }
-
-      )
+  putLike(cardId) {
+    return fetch(`${this.address}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: {
+        authorization: this.token,
+        'Content-Type': 'application/json'
+      },
+    });
   }
 
-  deleteLike() {
-    return fetch(`${this.address}/cards/likes/cardId`, {
+  deleteLike(cardId) {
+    return fetch(`${this.address}/cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: {
         authorization: this.token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        name: 'Marie Skłodowska Curie',
-        link: 'Physicist and Chemist'
-      })
     });
   }
 

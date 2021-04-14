@@ -49,11 +49,9 @@ api.getUserInfo()
     console.log('Ошибка при получении информации о пользователе')
   })
 
+function createCard(item, templateSelector, handleCardClick, handlePopupConfirmDelete, handlePutCardLike) {
 
-
-function createCard(item, templateSelector, handleCardClick, handleOpenPopupConfirmDelete) {
-
-  const card = new Card(item, templateSelector, handleCardClick, handleOpenPopupConfirmDelete);
+  const card = new Card(item, templateSelector, handleCardClick, handlePopupConfirmDelete, handlePutCardLike);
   return card.generateCard();
 
 }
@@ -74,20 +72,14 @@ const listItems = new Section({
         popupWithImg.open(item)
 
       },
-      popupConfirmButton
-
+      popupConfirmButton,
+      api
     );
 
     listItems.addItem(cardElement)
 
   }
 }, elementListContainerSelector)
-
-const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
-popupProfileValid.enableValidation();
-
-const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceForm);
-popupAddCardValid.enableValidation();
 
 const handleOpenPopupProfile = function () {
 
@@ -98,12 +90,6 @@ const handleOpenPopupProfile = function () {
   popupProfileInputTypeJob.value = userData.getUserInfo().job.textContent;
 
 }
-
-popupProfileOpenBtn.addEventListener('click', handleOpenPopupProfile);
-popupNewPlaceAddBtn.addEventListener('click', () => {
-  popupAddCardForm.open();
-  popupAddCardValid.cleanValid()
-})
 
 const userData = new UserInfo({
   name: profileUserName,
@@ -121,7 +107,7 @@ const popupProfileForm = new PopupWithForm({
       .catch(err => {
         console.log('Ошибка при отправке новых данных о пользователе')
       })
-    // // При сабмите мы вставляем данные пользователя обратно в форму
+    // При сабмите мы вставляем данные пользователя обратно в форму
     userData.setUserInfo(
 
       formData.popupProfileInputTypeName,
@@ -181,10 +167,18 @@ const popupConfirmButton = new PopupWithConfirmButton({
 
     api.deleteCard(cardId)
 
-
     popupConfirmButton.close()
   }
 })
-// popupConfirmButton.setEventListeners()
 
-console.log(popupConfirmButton)
+popupProfileOpenBtn.addEventListener('click', handleOpenPopupProfile);
+popupNewPlaceAddBtn.addEventListener('click', () => {
+  popupAddCardForm.open();
+  popupAddCardValid.cleanValid()
+})
+
+const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
+popupProfileValid.enableValidation();
+
+const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceForm);
+popupAddCardValid.enableValidation();
