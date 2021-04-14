@@ -70,8 +70,8 @@ export default class Api {
     });
   }
 
-  deleteCard() {
-    return fetch(`${this._address}/cardId`, {
+  deleteCard(cardId) {
+    return fetch(`${this._address}/${cardId}`, {
       method: 'DELETE',
       headers: {
         authorization: this.token,

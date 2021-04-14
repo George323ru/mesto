@@ -3,10 +3,10 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirmButton from '../components/PopupWithConfirmButton.js'
 import UserInfo from '../components/UserInfo.js'
 import Api from '../components/Api.js'
 import {
-  initialCards,
   popupProfile,
   popupProfileOpenBtn,
   profileUserName,
@@ -17,11 +17,13 @@ import {
   popupNewPlaceAddBtn,
   popupNewPlace,
   popupNewPlaceForm,
+  popupConfirmDeleteCard,
   elementListContainer,
   elementListContainerSelector,
   templateEl,
   popupImg,
-  settingsValidation
+  settingsValidation,
+  elementsMsgNoElements
 } from '../utils/constants.js';
 import '../pages/index.css';
 
@@ -50,9 +52,9 @@ api.getUserInfo()
 
 
 
-function createCard(item, templateSelector, handleCardClick) {
+function createCard(item, templateSelector, handleCardClick, handleOpenPopupConfirmDelete) {
 
-  const card = new Card(item, templateSelector, handleCardClick);
+  const card = new Card(item, templateSelector, handleCardClick, handleOpenPopupConfirmDelete);
   return card.generateCard();
 
 }
@@ -67,11 +69,13 @@ const listItems = new Section({
     const cardElement = createCard(
       item,
       templateEl,
+      // Передаем ф-ию открытия попапа с картинкой
       () => {
-        // Передаем ф-ию открытия попапа с картинкой
+
         popupWithImg.open(item)
 
-      }
+      },
+      popupConfirmButton
 
     );
 
@@ -149,7 +153,8 @@ const popupAddCardForm = new PopupWithForm({
     const listItem = createCard({
         name,
         link
-      }, templateEl,
+      },
+      templateEl,
       () => {
 
         popupWithImg.open({
@@ -157,7 +162,9 @@ const popupAddCardForm = new PopupWithForm({
           link
         })
 
-      });
+      },
+      popupConfirmButton
+    );
 
     elementListContainer.prepend(listItem);
 
@@ -167,3 +174,15 @@ const popupAddCardForm = new PopupWithForm({
 })
 
 popupAddCardForm.setEventListeners()
+
+const popupConfirmButton = new PopupWithConfirmButton({
+  popupElement: popupConfirmDeleteCard,
+  handleSubmitButton: () => {
+    console.log('hello!')
+
+    popupConfirmButton.close()
+  }
+})
+popupConfirmButton.setEventListeners()
+
+console.log(popupConfirmButton)

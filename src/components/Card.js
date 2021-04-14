@@ -1,12 +1,16 @@
 export default class Card {
   constructor(data,
     cardSelector,
-    handleCardClick) {
+    handleCardClick,
+    handleOpenPopupConfirmDelete) {
     this._name = data.name;
     this._link = data.link;
     this._like = data.likes.length;
+    this._id = data._id;
+    this._ownerId = data.owner._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleOpenPopupConfirmDelete = handleOpenPopupConfirmDelete;
   }
 
   _getTemplate() {
@@ -27,8 +31,10 @@ export default class Card {
       this._handleCardClick()
     })
 
-    this._element.querySelector('.element__buttonDelete').addEventListener('click', (event) => {
-      this._handleDelBtn(event)
+    this._buttonDeleteElement = this._element.querySelector('.element__buttonDelete')
+    this._buttonDeleteElement.addEventListener('click', (event) => {
+      // this._handleDelBtn(event);
+      this._handlePopupConfirmOpen();
     })
 
     this._element.querySelector('.element__likeButton').addEventListener('click', (event) => {
@@ -37,8 +43,11 @@ export default class Card {
 
   }
 
-  _handleDelBtn(event) {
+  _handlePopupConfirmOpen() {
+    this._handleOpenPopupConfirmDelete.open()
+  }
 
+  _handleDelBtn(event) {
     const targetItem = event.target.closest('.element').remove();
   }
 
@@ -56,6 +65,11 @@ export default class Card {
     this._imgElement.src = this._link;
     this._imgElement.alt = this._name;
     this._element.querySelector('.element__likeCount').textContent = this._like;
+    this._element.dataset.id = this._id
+
+    if (this._ownerId !== '9b223845ed4c941af29c84c8') {
+      this._buttonDeleteElement.remove()
+    }
 
     return this._element;
 
