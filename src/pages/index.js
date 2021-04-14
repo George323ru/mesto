@@ -176,8 +176,11 @@ popupAddCardForm.setEventListeners()
 
 const popupConfirmButton = new PopupWithConfirmButton({
   popupElement: popupConfirmDeleteCard,
-  handleSubmitButton: () => {
-    console.log('hello!')
+  handleSubmitButton: (cardId) => {
+    console.log(cardId)
+
+    api.deleteCard(cardId)
+
 
     popupConfirmButton.close()
   }

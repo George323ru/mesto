@@ -44,7 +44,8 @@ export default class Card {
 
   _handlePopupConfirmOpen(event) {
     this._handleOpenPopupConfirmDelete.open()
-    this._handleOpenPopupConfirmDelete.setEventListeners(event)
+    this._handleOpenPopupConfirmDelete.setEventListeners(event, this._id)
+
   }
 
 

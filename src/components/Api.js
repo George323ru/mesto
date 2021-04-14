@@ -4,6 +4,7 @@ export default class Api {
     token
   }) {
     this.address = address;
+
     this.token = token;
   }
 
@@ -71,16 +72,14 @@ export default class Api {
   }
 
   deleteCard(cardId) {
-    return fetch(`${this._address}/${cardId}`, {
+    console.log(cardId)
+    console.log(this.address)
+    return fetch(`${this.address}/cards/${cardId}`, {
       method: 'DELETE',
       headers: {
         authorization: this.token,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        name: 'Marie Skłodowska Curie',
-        link: 'Physicist and Chemist'
-      })
     });
   }
 
