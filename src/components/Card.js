@@ -33,8 +33,7 @@ export default class Card {
 
     this._buttonDeleteElement = this._element.querySelector('.element__buttonDelete')
     this._buttonDeleteElement.addEventListener('click', (event) => {
-      // this._handleDelBtn(event);
-      this._handlePopupConfirmOpen();
+      this._handlePopupConfirmOpen(event);
     })
 
     this._element.querySelector('.element__likeButton').addEventListener('click', (event) => {
@@ -43,13 +42,11 @@ export default class Card {
 
   }
 
-  _handlePopupConfirmOpen() {
+  _handlePopupConfirmOpen(event) {
     this._handleOpenPopupConfirmDelete.open()
+    this._handleOpenPopupConfirmDelete.setEventListeners(event)
   }
 
-  _handleDelBtn(event) {
-    const targetItem = event.target.closest('.element').remove();
-  }
 
   _handleLikeBtn(event) {
 

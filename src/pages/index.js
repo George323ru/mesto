@@ -22,8 +22,7 @@ import {
   elementListContainerSelector,
   templateEl,
   popupImg,
-  settingsValidation,
-  elementsMsgNoElements
+  settingsValidation
 } from '../utils/constants.js';
 import '../pages/index.css';
 
@@ -183,6 +182,6 @@ const popupConfirmButton = new PopupWithConfirmButton({
     popupConfirmButton.close()
   }
 })
-popupConfirmButton.setEventListeners()
+// popupConfirmButton.setEventListeners()
 
 console.log(popupConfirmButton)
