@@ -56,19 +56,21 @@ export default class Card {
         item._id === '9b223845ed4c941af29c84c8')) {
       return true
     }
-
   }
 
   _handleLikeBtn(event) {
-    console.log()
-    if ((this._handleFindOwnerLike() || this._element.querySelector('.element__likeButton').classList.contains('element__likeButton_active')) && this._element.querySelector('.element__likeButton').classList.contains('element__likeButton_active')) {
+    this._containsLikeButtonActive = this._likeButton.classList.contains('element__likeButton_active')
+
+    if ((this._handleFindOwnerLike() || this._containsLikeButtonActive) && this._containsLikeButtonActive) {
       console.log('делете')
       this._putCardLike.deleteLike(this._id)
       const targetRemoveItem = event.target.classList.remove('element__likeButton_active');
+      this._likeCount.textContent = this._numberLike - 1
     } else {
       console.log('пут')
       this._putCardLike.putLike(this._id)
       const targetItem = event.target.classList.add('element__likeButton_active');
+      this._likeCount.textContent = this._numberLike + 1
     }
     // // Number(this._likeCount.textContent) + 1;
 
@@ -85,13 +87,15 @@ export default class Card {
     this._likeCount = this._element.querySelector('.element__likeCount');
     this._likeCount.textContent = this._arrayLikeLength;
     this._element.dataset.id = this._id
+    this._numberLike = Number(this._likeCount.textContent);
 
     if (this._ownerId !== '9b223845ed4c941af29c84c8') {
       this._buttonDeleteElement.remove()
     }
 
+    this._likeButton = this._element.querySelector('.element__likeButton');
     if (this._handleFindOwnerLike()) {
-      this._element.querySelector('.element__likeButton').classList.add('element__likeButton_active');
+      this._likeButton.classList.add('element__likeButton_active');
     }
 
     return this._element;
