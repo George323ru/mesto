@@ -6,13 +6,13 @@ export default class Popup {
   constructor(popupElement) {
     this._popupElement = popupElement;
     this._handleEscClose = this._handleEscClose.bind(this);
+    this._handleClickOverlay = this._handleClickOverlay.bind(this);
   }
 
   // Открытие попапа
   open() {
     this._popupElement.classList.add('popup_opened');
     document.addEventListener('keydown', this._handleEscClose)
-    this._popupElement.addEventListener('pointerdown', this._handleEscClose)
   }
 
   close() {
@@ -21,12 +21,19 @@ export default class Popup {
   }
 
   _handleEscClose(evt) {
-    if (evt.key === escCode || evt.target === this._popupElement) {
+    if (evt.key === escCode) {
+      this.close();
+    }
+  }
+
+  _handleClickOverlay(evt) {
+    if (evt.target === this._popupElement) {
       this.close();
     }
   }
 
   setEventListeners() {
+    this._popupElement.addEventListener('pointerdown', this._handleClickOverlay)
     this._popupElement.querySelector('.popup__closeButton').addEventListener('click', () => this.close());
   }
 }

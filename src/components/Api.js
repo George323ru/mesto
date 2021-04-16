@@ -7,6 +7,13 @@ export default class Api {
     this.token = token;
   }
 
+  _checkingResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка ${response.status}`);
+  }
+
 
   getCards() {
     return fetch(`${this.address}/cards`, {
@@ -14,15 +21,7 @@ export default class Api {
           authorization: this.token
         }
       })
-      .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Ошибка ${response.status}`)
-        }
-
-      )
-
+      .then(this._checkingResponse)
   }
 
   getUserInfo() {
@@ -31,12 +30,7 @@ export default class Api {
           authorization: this.token
         }
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка ${response.status}`)
-      })
+      .then(this._checkingResponse)
   }
 
   patchSaveUserData(name, job) {
@@ -51,14 +45,7 @@ export default class Api {
           about: job
         })
       })
-      .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Ошибка ${response.status}`)
-        }
-
-      )
+      .then(this._checkingResponse)
   }
 
   postAddNewCard(name, link) {
@@ -73,15 +60,7 @@ export default class Api {
           link: link
         })
       })
-      .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-
-          return Promise.reject(`Ошибка ${response.status}`)
-        }
-
-      )
+      .then(this._checkingResponse)
 
   }
 
@@ -93,15 +72,7 @@ export default class Api {
           'Content-Type': 'application/json'
         },
       })
-      .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-
-          return Promise.reject(`Ошибка ${response.status}`)
-        }
-
-      )
+      .then(this._checkingResponse)
 
   }
 
@@ -114,15 +85,7 @@ export default class Api {
           'Content-Type': 'application/json'
         },
       })
-      .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-
-          return Promise.reject(`Ошибка ${response.status}`)
-        }
-
-      )
+      .then(this._checkingResponse)
 
   }
 
@@ -134,15 +97,7 @@ export default class Api {
           'Content-Type': 'application/json'
         },
       })
-      .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-
-          return Promise.reject(`Ошибка ${response.status}`)
-        }
-
-      )
+      .then(this._checkingResponse)
 
   }
 
@@ -157,12 +112,7 @@ export default class Api {
           avatar: acceptAvatar
         })
       })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка ${response.status}`)
-      })
+      .then(this._checkingResponse)
   }
 
 }

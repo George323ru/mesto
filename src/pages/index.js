@@ -30,6 +30,8 @@ import {
 } from '../utils/constants.js';
 import '../pages/index.css';
 
+let ownerId = undefined;
+
 const api = new Api({
   address: 'https://mesto.nomoreparties.co/v1/cohort-22',
   token: '59e52716-d825-43a0-9822-26cced8398ed'
@@ -66,7 +68,7 @@ function createCard(item,
     handlePopupConfirmDelete,
     handlePutCardLike);
 
-  return card.generateCard();
+  return card;
 
 }
 
@@ -79,8 +81,6 @@ const handleOpenPopupProfile = function () {
   popupProfileInputTypeName.value = userData.getUserInfo().name.textContent;
   popupProfileInputTypeJob.value = userData.getUserInfo().job.textContent;
 }
-
-let ownerId = null;
 
 const userData = new UserInfo({
   name: profileUserName,
@@ -102,7 +102,8 @@ const listItems = new Section({
       popupConfirmButton,
       api
     );
-    listItems.addItem(cardElement)
+
+    listItems.addItem(cardElement.generateCard())
   }
 }, elementListContainerSelector)
 
@@ -123,14 +124,15 @@ const popupProfileForm = new PopupWithForm({
           responseUserData.name,
           responseUserData.about,
           responseUserData._id
-        );
+        )
+
+        popupProfileForm.close()
       })
       .catch(err => {
         console.log('Ошибка при отправке новых данных о пользователе')
       })
       .finally(() => {
         popupProfileForm.stopIndicatLoading()
-        popupProfileForm.close();
         popupProfileValid.toggleButtonState()
       })
   }
@@ -148,7 +150,7 @@ const popupAddCardForm = new PopupWithForm({
 
     api.postAddNewCard(name, link)
       .then(res => {
-        const listItem = createCard(res,
+        const cardItem = createCard(res,
           templateEl,
           userData.getUserInfo().id,
           () => {
@@ -161,14 +163,14 @@ const popupAddCardForm = new PopupWithForm({
           api
         );
 
-        elementListContainer.prepend(listItem);
+        popupAddCardForm.close()
+        listItems.addNewUserItem(cardItem.generateCard())
       })
       .catch(err => {
         console.log('Ошибка при создании новой карточке на сервере')
       })
       .finally(() => {
         popupAddCardForm.stopIndicatLoading()
-        popupAddCardForm.close();
         popupAddCardValid.toggleButtonState()
       })
   }
@@ -182,13 +184,13 @@ const popapChangeUserAvatar = new PopupWithForm({
     api.patchUpdateUserAvatar(formData.popupChangeAvatarInputTypeLink)
       .then(responseUserAvatar => {
         profileAvatarImage.src = responseUserAvatar.avatar
+        popapChangeUserAvatar.close()
       })
       .catch(err => {
         console.log('Ошибка при получении аватара с сервера')
       })
       .finally(() => {
         popapChangeUserAvatar.stopIndicatLoading()
-        popapChangeUserAvatar.close()
         popupChangeAvatarValid.toggleButtonState()
       })
 
@@ -201,7 +203,6 @@ const popupConfirmButton = new PopupWithConfirmButton({
 
     api.deleteCard(cardId)
     popupConfirmButton.close()
-
   }
 })
 
