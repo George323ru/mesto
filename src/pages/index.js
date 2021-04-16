@@ -110,7 +110,7 @@ const userData = new UserInfo({
 const popupProfileForm = new PopupWithForm({
   popupElement: popupProfile,
   handleFormSubmit: (formData) => {
-
+    popupProfileForm.indicatLoading()
     api.patchSaveUserData(
         formData.popupProfileInputTypeName,
         formData.popupProfileInputTypeJob
@@ -128,6 +128,7 @@ const popupProfileForm = new PopupWithForm({
         console.log('Ошибка при отправке новых данных о пользователе')
       })
       .finally(() => {
+        popupProfileForm.stopIndicatLoading()
         popupProfileForm.close();
         popupProfileValid.toggleButtonState()
       })
@@ -142,6 +143,8 @@ const popupAddCardForm = new PopupWithForm({
 
     const name = formData.popupNewPlaceInputTypeName;
     const link = formData.popupNewPlaceInputTypeLink;
+
+    popupAddCardForm.indicatLoading()
 
     api.postAddNewCard(name, link)
       .then(res => {
@@ -164,6 +167,7 @@ const popupAddCardForm = new PopupWithForm({
         console.log('Ошибка при создании новой карточке на сервере')
       })
       .finally(() => {
+        popupAddCardForm.stopIndicatLoading()
         popupAddCardForm.close();
         popupAddCardValid.toggleButtonState()
       })
@@ -181,6 +185,7 @@ const popapChangeUserAvatar = new PopupWithForm({
   popupElement: popupChangeAvatar,
   handleFormSubmit: (formData) => {
 
+    popapChangeUserAvatar.indicatLoading()
     api.patchUpdateUserAvatar(formData.popupChangeAvatarInputTypeLink)
       .then(responseUserAvatar => {
         console.log(responseUserAvatar)
@@ -190,6 +195,7 @@ const popapChangeUserAvatar = new PopupWithForm({
         console.log('Ошибка при отправке аватара на сервер')
       })
       .finally(() => {
+        popapChangeUserAvatar.stopIndicatLoading()
         popapChangeUserAvatar.close()
       })
 

@@ -74,19 +74,15 @@ export default class Card {
     this._containsLikeButtonActive = this._likeButton.classList.contains('element__likeButton_active')
 
     if ((this._handleFindOwnerLike() || this._containsLikeButtonActive) && this._containsLikeButtonActive) {
-      console.log('делете')
+
       this._apiCard.deleteLike(this._id)
-
       const targetRemoveItem = event.target.classList.remove('element__likeButton_active');
-
       this._likeCount.textContent = this._numberLikes - 1
 
     } else {
-      console.log('пут')
+
       this._apiCard.putLike(this._id)
-
       const targetItem = event.target.classList.add('element__likeButton_active');
-
       this._likeCount.textContent = this._numberLikes + 1
 
     }
