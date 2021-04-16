@@ -11,6 +11,9 @@ import {
   popupProfileOpenBtn,
   profileUserName,
   profileUserJob,
+  profileAvatarImage,
+  profileAvatarImageSecond,
+  profileAvatarButton,
   popupProfileFormEL,
   popupProfileInputTypeName,
   popupProfileInputTypeJob,
@@ -18,6 +21,10 @@ import {
   popupNewPlace,
   popupNewPlaceForm,
   popupConfirmDeleteCard,
+  popupChangeAvatar,
+  popupChangeAvatarForm,
+  popupChangeAvatarInputLink,
+  popupChangeAvatarCloseBtn,
   elementListContainer,
   elementListContainerSelector,
   templateEl,
@@ -49,7 +56,11 @@ api.getUserInfo()
     console.log('Ошибка при получении информации о пользователе')
   })
 
-function createCard(item, templateSelector, handleCardClick, handlePopupConfirmDelete, handlePutCardLike) {
+function createCard(item,
+  templateSelector,
+  handleCardClick,
+  handlePopupConfirmDelete,
+  handlePutCardLike) {
 
   const card = new Card(item, templateSelector, handleCardClick, handlePopupConfirmDelete, handlePutCardLike);
   return card.generateCard();
@@ -100,24 +111,26 @@ const popupProfileForm = new PopupWithForm({
   popupElement: popupProfile,
   handleFormSubmit: (formData) => {
 
-    api.patchSaveUserData(formData.popupProfileInputTypeName, formData.popupProfileInputTypeJob)
-      .then(userData => {
-        console.log(userData)
+    api.patchSaveUserData(
+        formData.popupProfileInputTypeName,
+        formData.popupProfileInputTypeJob
+      )
+      .then(responseUserData => {
+        console.log(responseUserData)
+        userData.setUserInfo(
+
+          responseUserData.name,
+          responseUserData.about
+
+        );
+
+        popupProfileForm.close();
+        popupProfileValid.toggleButtonState()
+
       })
       .catch(err => {
         console.log('Ошибка при отправке новых данных о пользователе')
       })
-    // При сабмите мы вставляем данные пользователя обратно в форму
-    userData.setUserInfo(
-
-      formData.popupProfileInputTypeName,
-      formData.popupProfileInputTypeJob
-
-    );
-
-    popupProfileForm.close();
-    popupProfileValid.toggleButtonState()
-
   }
 })
 popupProfileForm.setEventListeners()
@@ -130,35 +143,47 @@ const popupAddCardForm = new PopupWithForm({
     const name = formData.popupNewPlaceInputTypeName;
     const link = formData.popupNewPlaceInputTypeLink;
 
+
     api.postAddNewCard(name, link)
+      .then(res => {
+        console.log(res.owner._id)
+        const listItem = createCard(res,
+          templateEl,
+          () => {
+            popupWithImg.open({
+              name,
+              link
+            })
+          },
+          popupConfirmButton,
+          api
+        );
+        console.log(listItem)
+        elementListContainer.prepend(listItem);
+
+        popupAddCardForm.close();
+        popupAddCardValid.toggleButtonState()
+      })
       .catch(err => {
         console.log('Ошибка при создании новой карточке на сервере')
       })
-
-    const listItem = createCard({
-        name,
-        link
-      },
-      templateEl,
-      () => {
-
-        popupWithImg.open({
-          name,
-          link
-        })
-
-      },
-      popupConfirmButton
-    );
-
-    elementListContainer.prepend(listItem);
-
-    popupAddCardForm.close();
-    popupAddCardValid.toggleButtonState()
   }
 })
 
 popupAddCardForm.setEventListeners()
+
+profileAvatarImageSecond.addEventListener('click', () => {
+  popapChangeAvatar.open()
+})
+
+const popapChangeAvatar = new PopupWithForm({
+  popupElement: popupChangeAvatar,
+  handleFormSubmit: (formData) => {
+    console.log(formData.popupChangeAvatarInputTypeLink)
+    popapChangeAvatar.close()
+  }
+})
+
 
 const popupConfirmButton = new PopupWithConfirmButton({
   popupElement: popupConfirmDeleteCard,

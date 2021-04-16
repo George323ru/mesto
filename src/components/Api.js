@@ -19,6 +19,7 @@ export default class Api {
           if (res.ok) {
             return res.json();
           }
+          
           return Promise.reject(`Ошибка ${response.status}`)
         }
 
@@ -54,7 +55,15 @@ export default class Api {
         name: name,
         about: job
       })
-    });
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка ${response.status}`)
+    }
+
+  )
   }
 
   postAddNewCard(name, link) {
@@ -68,7 +77,17 @@ export default class Api {
         name: name,
         link: link
       })
-    });
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      
+      return Promise.reject(`Ошибка ${response.status}`)
+    }
+
+  )
+
   }
 
   deleteCard(cardId) {
@@ -78,7 +97,17 @@ export default class Api {
         authorization: this.token,
         'Content-Type': 'application/json'
       },
-    });
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      
+      return Promise.reject(`Ошибка ${response.status}`)
+    }
+
+  )
+
   }
 
 
@@ -89,7 +118,17 @@ export default class Api {
         authorization: this.token,
         'Content-Type': 'application/json'
       },
-    });
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      
+      return Promise.reject(`Ошибка ${response.status}`)
+    }
+
+  )
+
   }
 
   deleteLike(cardId) {
@@ -99,7 +138,17 @@ export default class Api {
         authorization: this.token,
         'Content-Type': 'application/json'
       },
-    });
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      
+      return Promise.reject(`Ошибка ${response.status}`)
+    }
+
+  )
+
   }
 
   patchUpdateUserAvatar() {
@@ -112,7 +161,17 @@ export default class Api {
       body: JSON.stringify({
         avatar
       })
-    });
+    })
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      
+      return Promise.reject(`Ошибка ${response.status}`)
+    }
+
+  )
+
   }
 
 }

@@ -1,5 +1,6 @@
 .profile__user-info {
   display: flex;
+  position: relative;
 }
 
 @media screen and (max-width: 660px) {

@@ -23,13 +23,16 @@
       <!-- Section Profile -->
       <section class="profile">
         <div class="profile__user-info">
-          <div class="profile__avatar">
-            <img class="profile_" src="./images/avatar-pen.svg" alt="Ручка">
-          </div>
+
+          <img class="profile__avatar" src="<%=require('./images/user-avatar.jpg')%>" alt="Аватар">
+          <!-- <button class="profile__buttonAvatar" type="button" name="avatarButton">
+            <img class="profile__avatarImage" src="<%=require('./images/avatar-pen.svg')%>" alt="Ручка">
+          </button> -->
+
           <div class="profile__user-details">
             <div class="profile__user-description">
-              <h1 class="profile__userName">Жак-Ив Кусто</h1>
-              <p class="profile__userJob">Исследователь океана</p>
+              <h1 class="profile__userName"></h1>
+              <p class="profile__userJob"></p>
             </div>
             <button class="profile__editBtn" type="button" name="editButton"></button>
           </div>
@@ -41,7 +44,7 @@
       <!-- Section Elements -->
       <section class="elements">
         <ul class="elements__element-list"></ul>
-        <span class="elements__msgNoElements">Нет элементов</span>
+        <!-- <span class="elements__msgNoElements">Нет элементов</span> -->
       </section>
       <!-- /Section Elements -->
 
@@ -107,6 +110,24 @@
       </div>
     </div>
     <!-- /Popup Confirm -->
+
+    <!-- Popup Change Avatar -->
+    <div class="popup popup_type_сhangeAvatar">
+      <div class="popup__container">
+        <form class="popup__form popup__form_type_сhangeAvatar" action="#" name="popupMainForm" novalidate>
+          <h2 class="popup__title">
+            Обновить аватар
+          </h2>
+          <input class="popup__input popup__input_type_сhangeAvatarTypeLink" id="popupChangeAvatarInputTypeLink"
+            type="url" name="popupChangeAvatarInputTypeLink" required value="" placeholder="Ссылка на новый аватар">
+          <span class="popup__input-error" id="popupChangeAvatarInputTypeLink-error"></span>
+          <button class="popup__saveBtn" type="submit" name="saveButton">Создать</button>
+        </form>
+        <button class="popup__closeButton popup__closeButton_type_сhangeAvatar" type="button"
+          name="closeButton"></button>
+      </div>
+    </div>
+    <!-- /Popup Change Avatar -->
 
     <!-- Footer -->
     <footer class="footer page__container">
