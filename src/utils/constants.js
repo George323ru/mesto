@@ -15,8 +15,7 @@ export const popupProfileCloseBtn = popupProfile.querySelector('.popup__closeBut
 export const profileUserAvatar = profileElement.querySelector('.profile__avatar');
 export const profileUserName = profileElement.querySelector('.profile__userName');
 export const profileUserJob = profileElement.querySelector('.profile__userJob');
-export const profileAvatarImage = profileElement.querySelector('.profile__avatarImage')
-export const profileAvatarImageSecond = profileElement.querySelector('.profile__avatar')
+export const profileAvatarImage = profileElement.querySelector('.profile__avatar')
 export const profileAvatarButton = profileElement.querySelector('.profile__editAvatarButton')
 
 export const popupProfileFormEL = popupProfile.querySelector('.popup__form_type_profile');
@@ -32,10 +31,10 @@ export const popupNewPlaceCloseBtn = popupNewPlace.querySelector('.popup__closeB
 
 export const popupConfirmDeleteCard = document.querySelector('.popup_type_confirmDeleteCard');
 
-export const popupChangeAvatar = document.querySelector('.popup_type_сhangeAvatar');
-export const popupChangeAvatarForm = popupChangeAvatar.querySelector('.popup__form_type_сhangeAvatar');
-export const popupChangeAvatarInputLink = popupChangeAvatar.querySelector('.popup__input_type_сhangeAvatarTypeLink');
-export const popupChangeAvatarCloseBtn = popupChangeAvatar.querySelector('.popup__closeButton_type_сhangeAvatar');
+export const popupChangeAvatar = document.querySelector('.popup_type_changeAvatar');
+export const popupChangeAvatarForm = popupChangeAvatar.querySelector('.popup__form_type_changeAvatar');
+export const popupChangeAvatarInputLink = popupChangeAvatar.querySelector('.popup__input_type_changeAvatarTypeLink');
+export const popupChangeAvatarCloseBtn = popupChangeAvatar.querySelector('.popup__closeButton_type_changeAvatar');
 
 export const submitBtn = popupNewPlaceForm.querySelector('.popup__saveBtn');
 export const elementListContainer = document.querySelector('.elements__element-list');

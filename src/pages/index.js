@@ -12,7 +12,6 @@ import {
   profileUserName,
   profileUserJob,
   profileAvatarImage,
-  profileAvatarImageSecond,
   profileAvatarButton,
   popupProfileFormEL,
   popupProfileInputTypeName,
@@ -49,7 +48,7 @@ api.getUserInfo()
   .then(info => {
     profileUserName.textContent = info.name;
     profileUserJob.textContent = info.about;
-    profileAvatarImageSecond.src = info.avatar;
+    profileAvatarImage.src = info.avatar;
   })
   .catch(err => {
     console.log('Ошибка при получении информации о пользователе')
@@ -176,7 +175,7 @@ const popapChangeUserAvatar = new PopupWithForm({
     api.patchUpdateUserAvatar(formData.popupChangeAvatarInputTypeLink)
       .then(responseUserAvatar => {
         console.log(responseUserAvatar)
-        profileAvatarImageSecond.src = responseUserAvatar.avatar
+        profileAvatarImage.src = responseUserAvatar.avatar
       })
       .catch(err => {
         console.log('Ошибка при получении аватара с сервера')
