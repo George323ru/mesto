@@ -116,20 +116,20 @@ const popupProfileForm = new PopupWithForm({
         formData.popupProfileInputTypeJob
       )
       .then(responseUserData => {
-        console.log(responseUserData)
+
         userData.setUserInfo(
 
           responseUserData.name,
           responseUserData.about
 
         );
-
-        popupProfileForm.close();
-        popupProfileValid.toggleButtonState()
-
       })
       .catch(err => {
         console.log('Ошибка при отправке новых данных о пользователе')
+      })
+      .finally(() => {
+        popupProfileForm.close();
+        popupProfileValid.toggleButtonState()
       })
   }
 })
@@ -142,7 +142,6 @@ const popupAddCardForm = new PopupWithForm({
 
     const name = formData.popupNewPlaceInputTypeName;
     const link = formData.popupNewPlaceInputTypeLink;
-
 
     api.postAddNewCard(name, link)
       .then(res => {
@@ -158,14 +157,15 @@ const popupAddCardForm = new PopupWithForm({
           popupConfirmButton,
           api
         );
-        console.log(listItem)
-        elementListContainer.prepend(listItem);
 
-        popupAddCardForm.close();
-        popupAddCardValid.toggleButtonState()
+        elementListContainer.prepend(listItem);
       })
       .catch(err => {
         console.log('Ошибка при создании новой карточке на сервере')
+      })
+      .finally(() => {
+        popupAddCardForm.close();
+        popupAddCardValid.toggleButtonState()
       })
   }
 })
@@ -173,22 +173,34 @@ const popupAddCardForm = new PopupWithForm({
 popupAddCardForm.setEventListeners()
 
 profileAvatarImageSecond.addEventListener('click', () => {
-  popapChangeAvatar.open()
+  popapChangeUserAvatar.open()
 })
 
-const popapChangeAvatar = new PopupWithForm({
+
+const popapChangeUserAvatar = new PopupWithForm({
   popupElement: popupChangeAvatar,
   handleFormSubmit: (formData) => {
-    console.log(formData.popupChangeAvatarInputTypeLink)
-    popapChangeAvatar.close()
+
+    api.patchUpdateUserAvatar(formData.popupChangeAvatarInputTypeLink)
+      .then(responseUserAvatar => {
+        console.log(responseUserAvatar)
+        profileAvatarImageSecond.src = responseUserAvatar.avatar
+      })
+      .catch(err => {
+        console.log('Ошибка при отправке аватара на сервер')
+      })
+      .finally(() => {
+        popapChangeUserAvatar.close()
+      })
+
   }
 })
 
+popapChangeUserAvatar.setEventListeners()
 
 const popupConfirmButton = new PopupWithConfirmButton({
   popupElement: popupConfirmDeleteCard,
   handleSubmitButton: (cardId) => {
-    console.log(cardId)
 
     api.deleteCard(cardId)
 
