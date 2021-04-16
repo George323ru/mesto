@@ -38,7 +38,6 @@ const api = new Api({
 api.getCards()
   .then(cards => {
     listItems.renderItems(cards)
-    console.log(cards)
   })
   .catch(err => {
     console.log('Ошибка при получении карточек с сервера')
@@ -47,7 +46,6 @@ api.getCards()
 api.getUserInfo()
   .then(info => {
     profileAvatarImage.src = info.avatar;
-    console.log()
     userData.setUserInfo(info.name, info.about, info._id)
   })
   .catch(err => {
@@ -80,7 +78,6 @@ const handleOpenPopupProfile = function () {
 
   popupProfileInputTypeName.value = userData.getUserInfo().name.textContent;
   popupProfileInputTypeJob.value = userData.getUserInfo().job.textContent;
-  console.log(userData.getUserInfo().id)
 }
 
 let ownerId = null;
@@ -121,10 +118,11 @@ const popupProfileForm = new PopupWithForm({
         formData.popupProfileInputTypeJob
       )
       .then(responseUserData => {
+
         userData.setUserInfo(
           responseUserData.name,
           responseUserData.about,
-          responseUserData.owner._id
+          responseUserData._id
         );
       })
       .catch(err => {
@@ -183,7 +181,6 @@ const popapChangeUserAvatar = new PopupWithForm({
     popapChangeUserAvatar.indicatLoading()
     api.patchUpdateUserAvatar(formData.popupChangeAvatarInputTypeLink)
       .then(responseUserAvatar => {
-        console.log(responseUserAvatar)
         profileAvatarImage.src = responseUserAvatar.avatar
       })
       .catch(err => {
