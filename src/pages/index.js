@@ -46,9 +46,9 @@ api.getCards()
 
 api.getUserInfo()
   .then(info => {
-    profileUserName.textContent = info.name;
-    profileUserJob.textContent = info.about;
     profileAvatarImage.src = info.avatar;
+    console.log()
+    userData.setUserInfo(info.name, info.about, info._id)
   })
   .catch(err => {
     console.log('Ошибка при получении информации о пользователе')
@@ -56,12 +56,14 @@ api.getUserInfo()
 
 function createCard(item,
   templateSelector,
+  anyOwnerId,
   handleCardClick,
   handlePopupConfirmDelete,
   handlePutCardLike) {
 
   const card = new Card(item,
     templateSelector,
+    anyOwnerId,
     handleCardClick,
     handlePopupConfirmDelete,
     handlePutCardLike);
@@ -70,9 +72,23 @@ function createCard(item,
 
 }
 
+
+const handleOpenPopupProfile = function () {
+
+  popupProfileForm.open()
+  popupProfileValid.cleanValid()
+
+  popupProfileInputTypeName.value = userData.getUserInfo().name.textContent;
+  popupProfileInputTypeJob.value = userData.getUserInfo().job.textContent;
+  console.log(userData.getUserInfo().id)
+}
+
+let ownerId = null;
+
 const userData = new UserInfo({
   name: profileUserName,
-  job: profileUserJob
+  job: profileUserJob,
+  id: ownerId
 })
 
 // Наполняем DOM экземплярами класса Section
@@ -82,6 +98,7 @@ const listItems = new Section({
     const cardElement = createCard(
       item,
       templateEl,
+      userData.getUserInfo().id,
       () => {
         popupWithImg.open(item)
       },
@@ -91,16 +108,6 @@ const listItems = new Section({
     listItems.addItem(cardElement)
   }
 }, elementListContainerSelector)
-
-const handleOpenPopupProfile = function () {
-
-  popupProfileForm.open()
-  popupProfileValid.cleanValid()
-
-  popupProfileInputTypeName.value = userData.getUserInfo().name.textContent;
-  popupProfileInputTypeJob.value = userData.getUserInfo().job.textContent;
-
-}
 
 const popupWithImg = new PopupWithImage(popupImg)
 
@@ -116,7 +123,8 @@ const popupProfileForm = new PopupWithForm({
       .then(responseUserData => {
         userData.setUserInfo(
           responseUserData.name,
-          responseUserData.about
+          responseUserData.about,
+          responseUserData.owner._id
         );
       })
       .catch(err => {
@@ -144,6 +152,7 @@ const popupAddCardForm = new PopupWithForm({
       .then(res => {
         const listItem = createCard(res,
           templateEl,
+          userData.getUserInfo().id,
           () => {
             popupWithImg.open({
               name,

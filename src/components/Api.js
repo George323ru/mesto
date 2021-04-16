@@ -4,7 +4,6 @@ export default class Api {
     token
   }) {
     this.address = address;
-
     this.token = token;
   }
 
@@ -19,7 +18,6 @@ export default class Api {
           if (res.ok) {
             return res.json();
           }
-
           return Promise.reject(`Ошибка ${response.status}`)
         }
 
@@ -34,14 +32,11 @@ export default class Api {
         }
       })
       .then(res => {
-          if (res.ok) {
-            return res.json();
-
-          }
-          return Promise.reject(`Ошибка ${response.status}`)
+        if (res.ok) {
+          return res.json();
         }
-
-      )
+        return Promise.reject(`Ошибка ${response.status}`)
+      })
   }
 
   patchSaveUserData(name, job) {

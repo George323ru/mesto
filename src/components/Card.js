@@ -1,6 +1,7 @@
 export default class Card {
   constructor(data,
     cardSelector,
+    anyOwnerId,
     handleCardClick,
     handlePopupConfirmDelete,
     apiCard) {
@@ -10,6 +11,7 @@ export default class Card {
     this._ownerId = data.owner._id;
     this._id = data._id;
     this._cardSelector = cardSelector;
+    this._userId = anyOwnerId
     this._handleCardClick = handleCardClick;
     this._handlePopupConfirmDelete = handlePopupConfirmDelete;
     this._apiCard = apiCard;
@@ -53,7 +55,7 @@ export default class Card {
   _checkUserLike() {
     this._arrayLikes.forEach((like) => {
 
-      if (like._id === '9b223845ed4c941af29c84c8') {
+      if (like._id === this._userId) {
         this._likeButton.classList.add('element__likeButton_active');
       }
     })
@@ -87,7 +89,7 @@ export default class Card {
   }
 
   _checkOwnerIdDeleteBasket() {
-    if (this._ownerId !== '9b223845ed4c941af29c84c8') {
+    if (this._ownerId !== this._userId) {
       this._buttonDeleteElement.remove()
     }
   }
