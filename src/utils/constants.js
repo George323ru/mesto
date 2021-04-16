@@ -17,7 +17,7 @@ export const profileUserName = profileElement.querySelector('.profile__userName'
 export const profileUserJob = profileElement.querySelector('.profile__userJob');
 export const profileAvatarImage = profileElement.querySelector('.profile__avatarImage')
 export const profileAvatarImageSecond = profileElement.querySelector('.profile__avatar')
-export const profileAvatarButton = profileElement.querySelector('.profile__buttonAvatar')
+export const profileAvatarButton = profileElement.querySelector('.profile__editAvatarButton')
 
 export const popupProfileFormEL = popupProfile.querySelector('.popup__form_type_profile');
 export const popupProfileInputTypeName = popupProfile.querySelector('.popup__input_type_profileName');

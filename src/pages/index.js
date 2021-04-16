@@ -23,8 +23,6 @@ import {
   popupConfirmDeleteCard,
   popupChangeAvatar,
   popupChangeAvatarForm,
-  popupChangeAvatarInputLink,
-  popupChangeAvatarCloseBtn,
   elementListContainer,
   elementListContainerSelector,
   templateEl,
@@ -51,6 +49,7 @@ api.getUserInfo()
   .then(info => {
     profileUserName.textContent = info.name;
     profileUserJob.textContent = info.about;
+    profileAvatarImageSecond.src = info.avatar;
   })
   .catch(err => {
     console.log('Ошибка при получении информации о пользователе')
@@ -62,33 +61,35 @@ function createCard(item,
   handlePopupConfirmDelete,
   handlePutCardLike) {
 
-  const card = new Card(item, templateSelector, handleCardClick, handlePopupConfirmDelete, handlePutCardLike);
+  const card = new Card(item,
+    templateSelector,
+    handleCardClick,
+    handlePopupConfirmDelete,
+    handlePutCardLike);
+
   return card.generateCard();
 
 }
 
-const popupWithImg = new PopupWithImage(popupImg)
+const userData = new UserInfo({
+  name: profileUserName,
+  job: profileUserJob
+})
 
 // Наполняем DOM экземплярами класса Section
 const listItems = new Section({
 
   renderer: (item) => {
-
     const cardElement = createCard(
       item,
       templateEl,
-      // Передаем ф-ию открытия попапа с картинкой
       () => {
-
         popupWithImg.open(item)
-
       },
       popupConfirmButton,
       api
     );
-
     listItems.addItem(cardElement)
-
   }
 }, elementListContainerSelector)
 
@@ -102,26 +103,21 @@ const handleOpenPopupProfile = function () {
 
 }
 
-const userData = new UserInfo({
-  name: profileUserName,
-  job: profileUserJob
-})
+const popupWithImg = new PopupWithImage(popupImg)
 
 const popupProfileForm = new PopupWithForm({
   popupElement: popupProfile,
   handleFormSubmit: (formData) => {
+
     popupProfileForm.indicatLoading()
     api.patchSaveUserData(
         formData.popupProfileInputTypeName,
         formData.popupProfileInputTypeJob
       )
       .then(responseUserData => {
-
         userData.setUserInfo(
-
           responseUserData.name,
           responseUserData.about
-
         );
       })
       .catch(err => {
@@ -134,7 +130,6 @@ const popupProfileForm = new PopupWithForm({
       })
   }
 })
-popupProfileForm.setEventListeners()
 
 const popupAddCardForm = new PopupWithForm({
 
@@ -148,7 +143,6 @@ const popupAddCardForm = new PopupWithForm({
 
     api.postAddNewCard(name, link)
       .then(res => {
-        console.log(res.owner._id)
         const listItem = createCard(res,
           templateEl,
           () => {
@@ -174,13 +168,6 @@ const popupAddCardForm = new PopupWithForm({
   }
 })
 
-popupAddCardForm.setEventListeners()
-
-profileAvatarImageSecond.addEventListener('click', () => {
-  popapChangeUserAvatar.open()
-})
-
-
 const popapChangeUserAvatar = new PopupWithForm({
   popupElement: popupChangeAvatar,
   handleFormSubmit: (formData) => {
@@ -192,36 +179,48 @@ const popapChangeUserAvatar = new PopupWithForm({
         profileAvatarImageSecond.src = responseUserAvatar.avatar
       })
       .catch(err => {
-        console.log('Ошибка при отправке аватара на сервер')
+        console.log('Ошибка при получении аватара с сервера')
       })
       .finally(() => {
         popapChangeUserAvatar.stopIndicatLoading()
         popapChangeUserAvatar.close()
+        popupChangeAvatarValid.toggleButtonState()
       })
 
   }
 })
-
-popapChangeUserAvatar.setEventListeners()
 
 const popupConfirmButton = new PopupWithConfirmButton({
   popupElement: popupConfirmDeleteCard,
   handleSubmitButton: (cardId) => {
 
     api.deleteCard(cardId)
-
     popupConfirmButton.close()
+
   }
 })
 
-popupProfileOpenBtn.addEventListener('click', handleOpenPopupProfile);
-popupNewPlaceAddBtn.addEventListener('click', () => {
-  popupAddCardForm.open();
-  popupAddCardValid.cleanValid()
-})
-
+// FormValidator
 const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
 popupProfileValid.enableValidation();
 
 const popupAddCardValid = new FormValidator(settingsValidation, popupNewPlaceForm);
 popupAddCardValid.enableValidation();
+
+const popupChangeAvatarValid = new FormValidator(settingsValidation, popupChangeAvatarForm);
+popupChangeAvatarValid.enableValidation();
+
+// addEventListener
+popupProfileOpenBtn.addEventListener('click', handleOpenPopupProfile)
+popupNewPlaceAddBtn.addEventListener('click', () => {
+  popupAddCardForm.open()
+  popupAddCardValid.cleanValid()
+})
+profileAvatarButton.addEventListener('click', () => {
+  popapChangeUserAvatar.open()
+})
+
+// setEventListeners
+popupProfileForm.setEventListeners()
+popupAddCardForm.setEventListeners()
+popapChangeUserAvatar.setEventListeners()

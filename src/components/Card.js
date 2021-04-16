@@ -47,11 +47,9 @@ export default class Card {
 
   }
 
-
   _handlePopupConfirmOpen(event) {
     this._handlePopupConfirmDelete.open()
     this._handlePopupConfirmDelete.setEventListeners(event, this._id)
-
   }
 
   _checkUserLike() {
