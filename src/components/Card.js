@@ -9,13 +9,11 @@ export default class Card {
     this._arrayLikeLength = data.likes.length;
     this._ownerId = data.owner._id;
     this._id = data._id;
-    // console.log(this._id)
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
     this._handlePopupConfirmDelete = handlePopupConfirmDelete;
     this._apiCard = apiCard;
     this._arrayLikes = data.likes;
-
   }
 
   _getTemplate() {
@@ -54,7 +52,8 @@ export default class Card {
 
   _checkUserLike() {
     this._arrayLikes.forEach((like) => {
-      if (like._id === this._ownerId) {
+
+      if (like._id === '9b223845ed4c941af29c84c8') {
         this._likeButton.classList.add('element__likeButton_active');
       }
     })
