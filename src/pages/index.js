@@ -77,7 +77,7 @@ const popupConfirmButton = new PopupWithConfirmButton({
   }
 })
 
-popupConfirmButton.setEventListeners()
+
 
 function createCard(item, templateSelector, anyOwnerId) {
 
@@ -248,4 +248,5 @@ profileAvatarButton.addEventListener('click', () => {
 // setEventListeners
 popupProfileForm.setEventListeners()
 popupAddCardForm.setEventListeners()
+popupConfirmButton.setEventListeners()
 popapChangeUserAvatar.setEventListeners()
