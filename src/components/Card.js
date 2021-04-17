@@ -53,7 +53,7 @@ export default class Card {
   }
 
   removeCard() {
-    console.log('hi')
+    this._element.closest('.element').remove()
   }
 
   setUserLike(responseData) {
@@ -96,7 +96,6 @@ export default class Card {
     this._element.querySelector('.element__title').textContent = this._data.name;
     this._imgElement.src = this._data.link;
     this._imgElement.alt = this._data.name;
-    this._element.dataset.id = this._data._id
     this._likeButton = this._element.querySelector('.element__likeButton');
     this._likeCount = this._element.querySelector('.element__likeCount');
     this._likeCount.textContent = this._data.likes.length;

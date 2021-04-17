@@ -30,6 +30,7 @@ import {
 import '../pages/index.css';
 
 let ownerId = undefined;
+let userCardElement = undefined;
 
 const api = new Api({
   address: 'https://mesto.nomoreparties.co/v1/cohort-22',
@@ -59,29 +60,34 @@ api.getUserInfo()
     console.log('Ошибка при получении информации о пользователе')
   })
 
-function createCard(item,
-  templateSelector,
-  anyOwnerId, {
-    handleCardClick,
-    handlePopupConfirmDelete,
-    handlePutLike,
-    handleDeleteLike
-  }
-) {
+function createCard(item, templateSelector, anyOwnerId) {
 
-  const card = new Card(item,
-    templateSelector,
-    anyOwnerId, {
-      handleCardClick,
-      handlePopupConfirmDelete,
-      handlePutLike,
-      handleDeleteLike
+  const card = new Card(item, templateSelector, anyOwnerId, {
+    handleCardClick: () => {
+      popupWithImg.open(item)
+    },
+    handlePopupConfirmDelete: () => {
+      userCardElement = card;
+      console.log(userCardElement)
+      popupConfirmButton.open()
+      popupConfirmButton.setEventListeners(item._id)
+    },
+    handlePutLike: () => {
+      api.putLike(item._id)
+        .then((responseData) => {
+          card.setUserLike(responseData)
+        })
+    },
+    handleDeleteLike: () => {
+      api.deleteLike(item._id)
+        .then((responseData) => {
+          card.deleteUserLike(responseData)
+        })
     }
-  );
-
+  });
   return card;
-
 }
+
 
 const handleOpenPopupProfile = function () {
 
@@ -105,32 +111,13 @@ const listItems = new Section({
     const cardElement = createCard(
       item,
       templateEl,
-      userData.getUserInfo().id, {
-        handleCardClick: () => {
-          popupWithImg.open(item)
-        },
-        handlePopupConfirmDelete: () => {
-          popupConfirmButton.open()
-          popupConfirmButton.setEventListeners(item._id)
-        },
-        handlePutLike: () => {
-          api.putLike(item._id)
-            .then((responseData) => {
-              cardElement.setUserLike(responseData)
-            })
-        },
-        handleDeleteLike: () => {
-          api.deleteLike(item._id)
-            .then((responseData) => {
-              cardElement.deleteUserLike(responseData)
-            })
-        }
-      }
+      userData.getUserInfo().id
     );
 
     listItems.addItem(cardElement.generateCard())
   }
 }, elementListContainerSelector)
+
 
 const popupWithImg = new PopupWithImage(popupImg)
 
@@ -177,27 +164,7 @@ const popupAddCardForm = new PopupWithForm({
       .then(res => {
         const cardItem = createCard(res,
           templateEl,
-          userData.getUserInfo().id, {
-            handleCardClick: () => {
-              popupWithImg.open(res)
-            },
-            handlePopupConfirmDelete: () => {
-              popupConfirmButton.open()
-              popupConfirmButton.setEventListeners(res._id)
-            },
-            handlePutLike: () => {
-              api.putLike(res._id)
-                .then((responseData) => {
-                  cardItem.setUserLike(responseData)
-                })
-            },
-            handleDeleteLike: () => {
-              api.deleteLike(res._id)
-                .then((responseData) => {
-                  cardItem.deleteUserLike(responseData)
-                })
-            }
-          }
+          userData.getUserInfo().id
         );
 
         popupAddCardForm.close()
@@ -241,6 +208,11 @@ const popupConfirmButton = new PopupWithConfirmButton({
     api.deleteCard(cardId)
       .then((res) => {
         popupConfirmButton.close()
+        console.log(userCardElement)
+        userCardElement.removeCard()
+      })
+      .then(() => {
+        userCardElement = undefined;
       })
       .catch((err) => {
         console.log('Ошибка при удалении карточки на сервере')

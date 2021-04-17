@@ -5,6 +5,7 @@ export default class Api {
   }) {
     this.address = address;
     this.token = token;
+
   }
 
   _checkingResponse(res) {
