@@ -39,6 +39,7 @@ export default class Card {
 
     this._buttonDeleteElement = this._element.querySelector('.element__buttonDelete')
     this._buttonDeleteElement.addEventListener('click', () => {
+
       this._handlePopupConfirmDelete()
     })
 

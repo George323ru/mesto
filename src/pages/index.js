@@ -58,6 +58,27 @@ api.getUserInfo()
     console.log('Ошибка при получении информации о пользователе')
   })
 
+
+const popupConfirmButton = new PopupWithConfirmButton({
+  popupElement: popupConfirmDeleteCard,
+  handleSubmitButton: (cardId) => {
+
+    api.deleteCard(cardId)
+      .then(() => {
+        userCardElement.removeCard()
+        userCardElement = undefined;
+      })
+      .then(() => {
+        popupConfirmButton.close()
+      })
+      .catch((err) => {
+        console.log('Ошибка при удалении карточки на сервере')
+      })
+  }
+})
+
+
+
 function createCard(item, templateSelector, anyOwnerId) {
 
   const card = new Card(item, templateSelector, anyOwnerId, {
@@ -199,25 +220,6 @@ const popapChangeUserAvatar = new PopupWithForm({
       .finally(() => {
         popapChangeUserAvatar.stopIndicatLoading()
         popupChangeAvatarValid.toggleButtonState()
-      })
-
-  }
-})
-
-const popupConfirmButton = new PopupWithConfirmButton({
-  popupElement: popupConfirmDeleteCard,
-  handleSubmitButton: (cardId) => {
-
-    api.deleteCard(cardId)
-      .then((res) => {
-        popupConfirmButton.close()
-        userCardElement.removeCard()
-      })
-      .then(() => {
-        userCardElement = undefined;
-      })
-      .catch((err) => {
-        console.log('Ошибка при удалении карточки на сервере')
       })
 
   }
