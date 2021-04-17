@@ -177,15 +177,27 @@ const popupAddCardForm = new PopupWithForm({
       .then(res => {
         const cardItem = createCard(res,
           templateEl,
-          userData.getUserInfo().id,
-          () => {
-            popupWithImg.open({
-              name,
-              link
-            })
-          },
-          popupConfirmButton,
-          api
+          userData.getUserInfo().id, {
+            handleCardClick: () => {
+              popupWithImg.open(res)
+            },
+            handlePopupConfirmDelete: () => {
+              popupConfirmButton.open()
+              popupConfirmButton.setEventListeners(res._id)
+            },
+            handlePutLike: () => {
+              api.putLike(res._id)
+                .then((responseData) => {
+                  cardItem.setUserLike(responseData)
+                })
+            },
+            handleDeleteLike: () => {
+              api.deleteLike(res._id)
+                .then((responseData) => {
+                  cardItem.deleteUserLike(responseData)
+                })
+            }
+          }
         );
 
         popupAddCardForm.close()
@@ -237,7 +249,7 @@ const popupConfirmButton = new PopupWithConfirmButton({
   }
 })
 
-// FormValidator
+// FormValidation
 const popupProfileValid = new FormValidator(settingsValidation, popupProfileFormEL);
 popupProfileValid.enableValidation();
 

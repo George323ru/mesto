@@ -53,7 +53,7 @@ export default class Card {
   }
 
   removeCard() {
-    this._element.dataset.id.remove()
+    console.log('hi')
   }
 
   setUserLike(responseData) {

@@ -13,6 +13,10 @@ export default class PopupWithConfirmButton extends Popup {
     super.close()
   }
 
+  removeCard() {
+
+  }
+
   setEventListeners(cardId) {
 
     this._form.addEventListener('submit', (evt) => {
