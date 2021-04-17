@@ -39,7 +39,6 @@ export default class Card {
 
     this._buttonDeleteElement = this._element.querySelector('.element__buttonDelete')
     this._buttonDeleteElement.addEventListener('click', () => {
-
       this._handlePopupConfirmDelete()
     })
 
@@ -69,18 +68,10 @@ export default class Card {
 
   _checkUserLike() {
     this._arrayLikes.forEach((like) => {
-
       if (like._id === this._userId) {
         this._likeButton.classList.add('element__likeButton_active');
       }
     })
-  }
-
-  _handleFindOwnerLike() {
-    if (this._arrayLikes.find((item) =>
-        item._id === this._data.owner._id)) {
-      return true
-    }
   }
 
   _checkOwnerIdDeleteBasket() {

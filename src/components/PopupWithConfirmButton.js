@@ -11,7 +11,6 @@ export default class PopupWithConfirmButton extends Popup {
 
     this._handleSubmitButton = handleSubmitButton;
     super.close()
-
   }
 
   open(cardId) {

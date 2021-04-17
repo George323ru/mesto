@@ -40,10 +40,13 @@ const api = new Api({
 api.getCards()
   .then(cards => {
     listItems.renderItems(cards)
+    console.log(cards)
   })
   .catch(err => {
     console.log('Ошибка при получении карточек с сервера')
   })
+
+
 
 api.getUserInfo()
   .then(info => {
@@ -67,8 +70,6 @@ const popupConfirmButton = new PopupWithConfirmButton({
       .then(() => {
         userCardElement.removeCard()
         userCardElement = undefined;
-      })
-      .then(() => {
         popupConfirmButton.close()
       })
       .catch((err) => {
@@ -76,8 +77,6 @@ const popupConfirmButton = new PopupWithConfirmButton({
       })
   }
 })
-
-
 
 function createCard(item, templateSelector, anyOwnerId) {
 
@@ -87,7 +86,6 @@ function createCard(item, templateSelector, anyOwnerId) {
     },
     handlePopupConfirmDelete: () => {
       userCardElement = card;
-      console.log(item._id)
       popupConfirmButton.open(item._id)
     },
     handlePutLike: () => {
