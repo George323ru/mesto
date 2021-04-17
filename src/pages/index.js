@@ -77,7 +77,7 @@ const popupConfirmButton = new PopupWithConfirmButton({
   }
 })
 
-
+popupConfirmButton.setEventListeners()
 
 function createCard(item, templateSelector, anyOwnerId) {
 
@@ -87,8 +87,8 @@ function createCard(item, templateSelector, anyOwnerId) {
     },
     handlePopupConfirmDelete: () => {
       userCardElement = card;
-      popupConfirmButton.open()
-      popupConfirmButton.setEventListeners(item._id)
+      console.log(item._id)
+      popupConfirmButton.open(item._id)
     },
     handlePutLike: () => {
       api.putLike(item._id)

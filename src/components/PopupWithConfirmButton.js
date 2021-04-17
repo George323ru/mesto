@@ -11,19 +11,19 @@ export default class PopupWithConfirmButton extends Popup {
 
     this._handleSubmitButton = handleSubmitButton;
     super.close()
-    super.setEventListeners()
+
   }
 
-  removeCard() {
-
+  open(cardId) {
+    this._cardId = cardId
+    super.open()
   }
 
   setEventListeners(cardId) {
-
+    super.setEventListeners()
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      console.log(cardId)
-      this._handleSubmitButton(cardId)
+      this._handleSubmitButton(this._cardId)
     })
   }
 }
