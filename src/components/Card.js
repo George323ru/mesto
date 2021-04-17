@@ -1,21 +1,22 @@
 export default class Card {
   constructor(data,
     cardSelector,
-    anyOwnerId,
-    handleCardClick,
-    handlePopupConfirmDelete,
-    apiCard) {
-    this._name = data.name;
-    this._link = data.link;
-    this._arrayLikeLength = data.likes.length;
-    this._ownerId = data.owner._id;
-    this._id = data._id;
+    anyOwnerId, {
+      handleCardClick,
+      handlePopupConfirmDelete,
+      handlePutLike,
+      handleDeleteLike
+    }
+  ) {
+    this._data = data;
     this._cardSelector = cardSelector;
     this._userId = anyOwnerId
     this._handleCardClick = handleCardClick;
     this._handlePopupConfirmDelete = handlePopupConfirmDelete;
-    this._apiCard = apiCard;
+    this._putLike = handlePutLike;
+    this._deleteLike = handleDeleteLike;
     this._arrayLikes = data.likes;
+
   }
 
   _getTemplate() {
@@ -37,19 +38,32 @@ export default class Card {
     })
 
     this._buttonDeleteElement = this._element.querySelector('.element__buttonDelete')
-    this._buttonDeleteElement.addEventListener('click', (event) => {
-      this._handlePopupConfirmOpen(event);
+    this._buttonDeleteElement.addEventListener('click', () => {
+      this._handlePopupConfirmDelete()
     })
 
-    this._element.querySelector('.element__likeButton').addEventListener('click', (event) => {
-      this._handleLikeBtn(event)
+    this._likeButton = this._element.querySelector('.element__likeButton')
+    this._likeButton.addEventListener('click', (event) => {
+      if (event.target.classList.contains('element__likeButton_active')) {
+        this._deleteLike()
+      } else {
+        this._putLike()
+      }
     })
-
   }
 
-  _handlePopupConfirmOpen(event) {
-    this._handlePopupConfirmDelete.open()
-    this._handlePopupConfirmDelete.setEventListeners(event, this._id)
+  removeCard() {
+    this._element.dataset.id.remove()
+  }
+
+  setUserLike(responseData) {
+    this._likeButton.classList.add('element__likeButton_active');
+    this._likeCount.textContent = responseData.likes.length
+  }
+
+  deleteUserLike(responseData) {
+    this._likeButton.classList.remove('element__likeButton_active');
+    this._likeCount.textContent = responseData.likes.length
   }
 
   _checkUserLike() {
@@ -63,33 +77,13 @@ export default class Card {
 
   _handleFindOwnerLike() {
     if (this._arrayLikes.find((item) =>
-        item._id === this._ownerId)) {
+        item._id === this._data.owner._id)) {
       return true
     }
   }
 
-  _handleLikeBtn(event) {
-    this._numberLikes = Number(this._likeCount.textContent)
-    this._containsLikeButtonActive = this._likeButton.classList.contains('element__likeButton_active')
-
-    if ((this._handleFindOwnerLike() || this._containsLikeButtonActive) && this._containsLikeButtonActive) {
-
-      this._apiCard.deleteLike(this._id)
-      const targetRemoveItem = event.target.classList.remove('element__likeButton_active');
-      this._likeCount.textContent = this._numberLikes - 1
-
-    } else {
-
-      this._apiCard.putLike(this._id)
-      const targetItem = event.target.classList.add('element__likeButton_active');
-      this._likeCount.textContent = this._numberLikes + 1
-
-    }
-
-  }
-
   _checkOwnerIdDeleteBasket() {
-    if (this._ownerId !== this._userId) {
+    if (this._data.owner._id !== this._userId) {
       this._buttonDeleteElement.remove()
     }
   }
@@ -99,13 +93,13 @@ export default class Card {
     this._element = this._getTemplate();
     this._setEventListeners();
 
-    this._element.querySelector('.element__title').textContent = this._name;
-    this._imgElement.src = this._link;
-    this._imgElement.alt = this._name;
-    this._element.dataset.id = this._id
+    this._element.querySelector('.element__title').textContent = this._data.name;
+    this._imgElement.src = this._data.link;
+    this._imgElement.alt = this._data.name;
+    this._element.dataset.id = this._data._id
     this._likeButton = this._element.querySelector('.element__likeButton');
     this._likeCount = this._element.querySelector('.element__likeCount');
-    this._likeCount.textContent = this._arrayLikeLength;
+    this._likeCount.textContent = this._data.likes.length;
 
     this._checkOwnerIdDeleteBasket()
     this._checkUserLike()

@@ -13,8 +13,8 @@ export const popupProfile = document.querySelector('.popup_type_profile');
 export const popupProfileOpenBtn = profileElement.querySelector('.profile__editBtn');
 export const popupProfileCloseBtn = popupProfile.querySelector('.popup__closeButton_type_profile');
 export const profileUserAvatar = profileElement.querySelector('.profile__avatar');
-export const profileUserName = profileElement.querySelector('.profile__userName');
-export const profileUserJob = profileElement.querySelector('.profile__userJob');
+export const profileUserName = '.profile__userName';
+export const profileUserJob = '.profile__userJob';
 export const profileAvatarImage = profileElement.querySelector('.profile__avatar')
 export const profileAvatarButton = profileElement.querySelector('.profile__editAvatarButton')
 

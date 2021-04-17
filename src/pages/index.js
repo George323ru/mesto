@@ -22,7 +22,6 @@ import {
   popupConfirmDeleteCard,
   popupChangeAvatar,
   popupChangeAvatarForm,
-  elementListContainer,
   elementListContainerSelector,
   templateEl,
   popupImg,
@@ -40,6 +39,7 @@ const api = new Api({
 api.getCards()
   .then(cards => {
     listItems.renderItems(cards)
+    console.log(cards)
   })
   .catch(err => {
     console.log('Ошибка при получении карточек с сервера')
@@ -48,7 +48,12 @@ api.getCards()
 api.getUserInfo()
   .then(info => {
     profileAvatarImage.src = info.avatar;
-    userData.setUserInfo(info.name, info.about, info._id)
+
+    userData.setUserInfo({
+      name: info.name,
+      job: info.about,
+      id: info._id
+    })
   })
   .catch(err => {
     console.log('Ошибка при получении информации о пользователе')
@@ -56,30 +61,35 @@ api.getUserInfo()
 
 function createCard(item,
   templateSelector,
-  anyOwnerId,
-  handleCardClick,
-  handlePopupConfirmDelete,
-  handlePutCardLike) {
+  anyOwnerId, {
+    handleCardClick,
+    handlePopupConfirmDelete,
+    handlePutLike,
+    handleDeleteLike
+  }
+) {
 
   const card = new Card(item,
     templateSelector,
-    anyOwnerId,
-    handleCardClick,
-    handlePopupConfirmDelete,
-    handlePutCardLike);
+    anyOwnerId, {
+      handleCardClick,
+      handlePopupConfirmDelete,
+      handlePutLike,
+      handleDeleteLike
+    }
+  );
 
   return card;
 
 }
-
 
 const handleOpenPopupProfile = function () {
 
   popupProfileForm.open()
   popupProfileValid.cleanValid()
 
-  popupProfileInputTypeName.value = userData.getUserInfo().name.textContent;
-  popupProfileInputTypeJob.value = userData.getUserInfo().job.textContent;
+  popupProfileInputTypeName.value = userData.getUserInfo().name
+  popupProfileInputTypeJob.value = userData.getUserInfo().job
 }
 
 const userData = new UserInfo({
@@ -95,12 +105,27 @@ const listItems = new Section({
     const cardElement = createCard(
       item,
       templateEl,
-      userData.getUserInfo().id,
-      () => {
-        popupWithImg.open(item)
-      },
-      popupConfirmButton,
-      api
+      userData.getUserInfo().id, {
+        handleCardClick: () => {
+          popupWithImg.open(item)
+        },
+        handlePopupConfirmDelete: () => {
+          popupConfirmButton.open()
+          popupConfirmButton.setEventListeners(item._id)
+        },
+        handlePutLike: () => {
+          api.putLike(item._id)
+            .then((responseData) => {
+              cardElement.setUserLike(responseData)
+            })
+        },
+        handleDeleteLike: () => {
+          api.deleteLike(item._id)
+            .then((responseData) => {
+              cardElement.deleteUserLike(responseData)
+            })
+        }
+      }
     );
 
     listItems.addItem(cardElement.generateCard())
@@ -120,11 +145,11 @@ const popupProfileForm = new PopupWithForm({
       )
       .then(responseUserData => {
 
-        userData.setUserInfo(
-          responseUserData.name,
-          responseUserData.about,
-          responseUserData._id
-        )
+        userData.setUserInfo({
+          name: responseUserData.name,
+          job: responseUserData.about,
+          id: responseUserData._id
+        })
 
         popupProfileForm.close()
       })
@@ -202,7 +227,13 @@ const popupConfirmButton = new PopupWithConfirmButton({
   handleSubmitButton: (cardId) => {
 
     api.deleteCard(cardId)
-    popupConfirmButton.close()
+      .then((res) => {
+        popupConfirmButton.close()
+      })
+      .catch((err) => {
+        console.log('Ошибка при удалении карточки на сервере')
+      })
+
   }
 })
 
