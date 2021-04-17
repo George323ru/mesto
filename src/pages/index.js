@@ -40,7 +40,6 @@ const api = new Api({
 api.getCards()
   .then(cards => {
     listItems.renderItems(cards)
-    console.log(cards)
   })
   .catch(err => {
     console.log('Ошибка при получении карточек с сервера')
@@ -48,11 +47,10 @@ api.getCards()
 
 api.getUserInfo()
   .then(info => {
-    profileAvatarImage.src = info.avatar;
-
     userData.setUserInfo({
       name: info.name,
       job: info.about,
+      avatar: info.avatar,
       id: info._id
     })
   })
@@ -68,7 +66,6 @@ function createCard(item, templateSelector, anyOwnerId) {
     },
     handlePopupConfirmDelete: () => {
       userCardElement = card;
-      console.log(userCardElement)
       popupConfirmButton.open()
       popupConfirmButton.setEventListeners(item._id)
     },
@@ -88,7 +85,6 @@ function createCard(item, templateSelector, anyOwnerId) {
   return card;
 }
 
-
 const handleOpenPopupProfile = function () {
 
   popupProfileForm.open()
@@ -101,6 +97,7 @@ const handleOpenPopupProfile = function () {
 const userData = new UserInfo({
   name: profileUserName,
   job: profileUserJob,
+  avatar: profileAvatarImage,
   id: ownerId
 })
 
@@ -135,7 +132,8 @@ const popupProfileForm = new PopupWithForm({
         userData.setUserInfo({
           name: responseUserData.name,
           job: responseUserData.about,
-          id: responseUserData._id
+          id: responseUserData._id,
+          avatar: responseUserData.avatar
         })
 
         popupProfileForm.close()
@@ -187,7 +185,12 @@ const popapChangeUserAvatar = new PopupWithForm({
     popapChangeUserAvatar.indicatLoading()
     api.patchUpdateUserAvatar(formData.popupChangeAvatarInputTypeLink)
       .then(responseUserAvatar => {
-        profileAvatarImage.src = responseUserAvatar.avatar
+        userData.setUserInfo({
+          name: responseUserAvatar.name,
+          job: responseUserAvatar.about,
+          id: responseUserAvatar._id,
+          avatar: responseUserAvatar.avatar
+        })
         popapChangeUserAvatar.close()
       })
       .catch(err => {
@@ -208,7 +211,6 @@ const popupConfirmButton = new PopupWithConfirmButton({
     api.deleteCard(cardId)
       .then((res) => {
         popupConfirmButton.close()
-        console.log(userCardElement)
         userCardElement.removeCard()
       })
       .then(() => {
