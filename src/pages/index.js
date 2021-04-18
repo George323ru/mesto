@@ -37,30 +37,17 @@ const api = new Api({
   token: '59e52716-d825-43a0-9822-26cced8398ed'
 })
 
-api.getCards()
-  .then(cards => {
-    listItems.renderItems(cards)
-    console.log(cards)
-  })
-  .catch(err => {
-    console.log('Ошибка при получении карточек с сервера')
-  })
-
-
-
-api.getUserInfo()
-  .then(info => {
+Promise.all([api.getUserInfo(), api.getCards()])
+  .then(([userInfo, cards]) => {
     userData.setUserInfo({
-      name: info.name,
-      job: info.about,
-      avatar: info.avatar,
-      id: info._id
+      name: userInfo.name,
+      job: userInfo.about,
+      avatar: userInfo.avatar,
+      id: userInfo._id
     })
+    listItems.renderItems(cards);
   })
-  .catch(err => {
-    console.log('Ошибка при получении информации о пользователе')
-  })
-
+  .catch(err => console.log('Ошибка при получении данных с сервера'));
 
 const popupConfirmButton = new PopupWithConfirmButton({
   popupElement: popupConfirmDeleteCard,
