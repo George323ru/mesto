@@ -5,7 +5,7 @@
 
 ### Локальная установка:
 В командной строке перейдите в папку, где будет развернут проект. После чего скопируйте его с GitHub:
-`$ git clone https://github.com/bmstustudent/mesto.git`
+`https://github.com/George323ru/mesto`
 
 Далее переходим в папку с проектом и устанавливаем компоненты:
 `$ npm install`
